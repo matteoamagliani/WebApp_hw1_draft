@@ -57,6 +57,8 @@ Thumbs.db
 *.fls
 *.synctex.gz
 *.pdf
+# Do not ignore PDFs inside the images folder 
+!images/*.pdf
 
 
 ### OSX ###
