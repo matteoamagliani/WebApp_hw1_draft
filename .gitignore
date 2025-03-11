@@ -52,6 +52,11 @@ Thumbs.db
 *.synctex.gz
 *.bbl
 *.blg
+*.aux
+*.fdb_latexmk
+*.fls
+*.synctex.gz
+*.pdf
 
 
 ### OSX ###
