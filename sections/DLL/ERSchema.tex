@@ -9,5 +9,38 @@
 
 The entity-relationship contains 11 main entities:
 \begin{itemize}
-    \item TODO
+    \item User profile: each user has, as primary key, an ID generated using UUID. For each user we also record
+    a profile picture (of type byte array) with its extension (custom enumeration), a name and a surname which
+    are of type char with variable length (up to 50 characters), a birth date (of type date) and a registration
+    date (of type date). An optional brand name, only available to business users and art galleries, can be added
+     as a char with variable length (up to 50 characters), for all other users it must be null.
+    \item Login credentials: each user must have credentials to log in. This entity uses a foreign primary key 
+    which is the primary key of the User profile and is used we save an email as char with with variable length 
+    and a custom domain, a username as a char with variable length (up to 30 character) and a password as a char
+     with variable length and a custom domain.
+    \item Location: each location has a compound primary key which comprises the country which is a char with 
+    variable length (up to 30 characters), the city which is a char with variable length (up to 30 characters), the
+     address which is a char with variable length (up to 254 characters) and the postal code which is a char with 
+     variable length (up to 10 characters).
+    \item Client profile: is a subclass of the User profile entity which is used to represent generic users and 
+    business users. This entity uses a foreign primary key which is the primary key of the User profile. It has a
+     role (custom enumeration) which is used to discriminate between the two roles.
+    \item Artistic profile: is a subclass of the User profile entity which is used to represent artists and art 
+    galleries. This entity uses a foreign primary key which is the primary key of the User profile. It has a role 
+    (custom enumeration) which is used to discriminate between the two roles, a 
+    a biography (of type text), a follower count, number of sold art pieces, number of sold art pieces, which are
+    all integers with auto-increment and decrement, a last published art piece (of type date) with auto update.
+    \item Art piece: each art piece has, as primary key, and ID generated using UUID. For each art piece we 
+    reference the ID of the author (which must be an artist) using a foreign key and we save the title of type char
+    with variable length (up to 50 characters), a description (of type text), the weight (of type float), the width, 
+    height and length (all of type float) and the publication date (of type date).
+    \item Advertisement: an art piece can have an associated advertisement, which has a foreign primary key which 
+    is the primary key of the art piece. An advertisement contains the price (of type numeric) and the publication
+    date (of type date).
+    \item Event: each event has, as primary key, and ID generated using UUID. For each event we reference the 
+    the ID of the organizer (which must be an art gallery) using a foreign key and we save the start date (of type
+    date), the end date (of type date), the title of type char with variable length (up to 50 characters) and a 
+    description (of type text).
+    \item Tag: each tag has, as primary key, a name which is a custom enum. It also has a cathegory (custom enum) to
+    differentiate bewteen artist tags, art pieces tags and event tags.
 \end{itemize}
