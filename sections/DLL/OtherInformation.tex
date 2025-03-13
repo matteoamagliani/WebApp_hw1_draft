@@ -2,4 +2,23 @@
 
 %if needed write here other details about your Data Logic Layer that cannot be expressed directly through the ER schema
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+There are 5 custom enumerations:
+\begin{itemize}
+    \item userRole: contains a value for each possible role of the users.
+    \item orderStatus: contains a value for each possible order state.
+    \item tagsCathegory: contains a value for each possible cathegory of tag.
+    \item allTags: contains a value for each name of an available tag.
+    \item imageExtension: contains a value for each accepted image extensions.
+\end{itemize}
+The subdivision of client profiles into generic users and business users is used to give the latter more powerful querying
+functionalities in order to search artists using advanced filters (follower count, tags, number of published art pieces, ecc.).\\
+The subdivision of artistic profiles between artist and art galleries is used to manage upload operations. Only artistic 
+profiles with role "artist" can participate to an \textit{Upload} or a \textit{Participates} relationship, while only artistic profiles with role
+"art gallery" can participate to an \textit{Organize} relationship. Also an artistic profile cannot follow itself.\\
+A tag can only participate to:
+\begin{itemize}
+    \item \textit{Has 1} relationship if it has cathegory attribute "artpiece"
+    \item \textit{Has 2} relationship if it has cathegory attribute "event"
+    \item \textit{Has 3} relationship if it has cathegory attribute equal to the role attribute of the artisti profile
+\end{itemize}
+A location must participate to either a \textit{In} or a \textit{Shipment} relationship (or both).\\
