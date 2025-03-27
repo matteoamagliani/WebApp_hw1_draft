@@ -1,20 +1,22 @@
+package it.unipd.dei.webapp.resource;
+
 import java.util.UUID;
 
-public class ArtPieceImage {
-    private final UUID artPieceId;
+public class EventImage {
+    private final UUID eventId;
     private final int imageIndex;
     private final byte[] imageData;
     private final String extension;
 
-    public ArtPieceImage(final UUID artPieceId, final int imageIndex, final byte[] imageData, final String extension) {
-        this.artPieceId = artPieceId;
+    public EventImage(final UUID eventId, final int imageIndex, final byte[] imageData, final String extension) {
+        this.eventId = eventId;
         this.imageIndex = imageIndex;
         this.imageData = imageData;
         this.extension = extension;
     }
 
-    public UUID getArtPieceId() {
-        return artPieceId;
+    public UUID getEventId() {
+        return eventId;
     }
 
     public int getImageIndex() {

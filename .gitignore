@@ -59,10 +59,10 @@ Thumbs.db
 *.pdf
 # Do not ignore PDFs inside the images folder 
 !images/*.pdf
-# Do not ignore PDFs inside the images subfolders
-!images/**/*.pdf
 
 
 ### OSX ###
 .DS_Store
 
+# Ignore target
+PAINT/target

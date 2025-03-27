@@ -1,3 +1,5 @@
+package it.unipd.dei.webapp.resource;
+
 import java.util.UUID;
 
 public class Participates {

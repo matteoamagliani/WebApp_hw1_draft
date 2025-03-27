@@ -1,3 +1,5 @@
+package it.unipd.dei.webapp.resource;
+
 public class Tag {
     private final String name;
     private final String category;
