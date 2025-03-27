@@ -6,7 +6,7 @@ public class EventImage {
     private final byte[] imageData;
     private final String extension;
 
-    public EventImage(UUID eventId, int imageIndex, byte[] imageData, String extension) {
+    public EventImage(final UUID eventId, final int imageIndex, final byte[] imageData, final String extension) {
         this.eventId = eventId;
         this.imageIndex = imageIndex;
         this.imageData = imageData;

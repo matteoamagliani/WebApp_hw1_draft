@@ -4,7 +4,7 @@ public class ClientProfile {
     private final UUID userId;
     private final String role;
 
-    public ClientProfile(UUID userId, String role) {
+    public ClientProfile(final UUID userId, final String role) {
         this.userId = userId;
         this.role = role;
     }

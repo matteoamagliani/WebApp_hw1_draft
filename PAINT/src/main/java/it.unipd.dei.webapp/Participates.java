@@ -4,7 +4,7 @@ public class Participates {
     private final UUID eventId;
     private final UUID artisticUserId;
 
-    public Participates(UUID eventId, UUID artisticUserId) {
+    public Participates(final UUID eventId, final UUID artisticUserId) {
         this.eventId = eventId;
         this.artisticUserId = artisticUserId;
     }

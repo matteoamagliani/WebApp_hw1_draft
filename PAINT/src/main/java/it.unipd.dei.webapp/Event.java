@@ -10,8 +10,8 @@ public class Event {
     private final String description;
     private final LocalDate uploadDate;
 
-    public Event(UUID id, UUID artisticUserIdOrganizer, LocalDate startDate, LocalDate endDate,
-                 String title, String description, LocalDate uploadDate) {
+    public Event(final UUID id, final UUID artisticUserIdOrganizer, final LocalDate startDate, final LocalDate endDate,
+                 final String title, final String description, final LocalDate uploadDate) {
         this.id = id;
         this.artisticUserIdOrganizer = artisticUserIdOrganizer;
         this.startDate = startDate;

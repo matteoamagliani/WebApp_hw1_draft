@@ -16,10 +16,10 @@ public class OrderDetails {
     private final String locationPostalCodeDelivery;
     private final String locationAddressDelivery;
 
-    public OrderDetails(UUID id, double shippingPrice, String status, String note, LocalDate creationDate,
-                        String locationCountryShipment, String locationCityShipment, String locationPostalCodeShipment,
-                        String locationAddressShipment, String locationCountryDelivery, String locationCityDelivery,
-                        String locationPostalCodeDelivery, String locationAddressDelivery) {
+    public OrderDetails(final UUID id, final double shippingPrice, final String status, final String note, final LocalDate creationDate,
+                        final String locationCountryShipment, final String locationCityShipment, final String locationPostalCodeShipment,
+                        final String locationAddressShipment, final String locationCountryDelivery, final String locationCityDelivery,
+                        final String locationPostalCodeDelivery, final String locationAddressDelivery) {
         this.id = id;
         this.shippingPrice = shippingPrice;
         this.status = status;

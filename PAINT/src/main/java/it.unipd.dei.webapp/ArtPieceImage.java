@@ -6,7 +6,7 @@ public class ArtPieceImage {
     private final byte[] imageData;
     private final String extension;
 
-    public ArtPieceImage(UUID artPieceId, int imageIndex, byte[] imageData, String extension) {
+    public ArtPieceImage(final UUID artPieceId, final int imageIndex, final byte[] imageData, final String extension) {
         this.artPieceId = artPieceId;
         this.imageIndex = imageIndex;
         this.imageData = imageData;

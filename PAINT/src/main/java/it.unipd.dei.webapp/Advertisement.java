@@ -6,7 +6,7 @@ public class Advertisement {
     private final double price;
     private final LocalDate publicationDate;
 
-    public Advertisement(UUID artPieceId, double price, LocalDate publicationDate) {
+    public Advertisement(final UUID artPieceId, final double price, final LocalDate publicationDate) {
         this.artPieceId = artPieceId;
         this.price = price;
         this.publicationDate = publicationDate;

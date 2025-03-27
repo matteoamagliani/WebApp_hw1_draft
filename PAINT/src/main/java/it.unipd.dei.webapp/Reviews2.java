@@ -7,7 +7,7 @@ public class Reviews2 {
     private final short score;
     private final LocalDate reviewDate;
 
-    public Reviews2(UUID clientUserId, UUID artPieceId, short score, LocalDate reviewDate) {
+    public Reviews2(final UUID clientUserId, final UUID artPieceId, final short score, final LocalDate reviewDate) {
         this.clientUserId = clientUserId;
         this.artPieceId = artPieceId;
         this.score = score;

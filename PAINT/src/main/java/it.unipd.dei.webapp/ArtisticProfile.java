@@ -10,8 +10,8 @@ public class ArtisticProfile {
     private final int numSoldArtPieces;
     private final LocalDate lastPubDate;
 
-    public ArtisticProfile(UUID userId, String role, String biography, int followerCount,
-                           int numPublishedArtPieces, int numSoldArtPieces, LocalDate lastPubDate) {
+    public ArtisticProfile(final UUID userId, final String role, final String biography, final int followerCount,
+                           final int numPublishedArtPieces, final int numSoldArtPieces, final LocalDate lastPubDate) {
         this.userId = userId;
         this.role = role;
         this.biography = biography;

@@ -6,7 +6,7 @@ public class Credentials {
     private final String password;
     private final String username;
 
-    public Credentials(UUID userId, String email, String password, String username) {
+    public Credentials(final UUID userId, final String email, final String password, final String username) {
         this.userId = userId;
         this.email = email;
         this.password = password;

@@ -13,9 +13,9 @@ public class ArtPiece {
     private final double dimensionLength;
     private final LocalDate uploadDate;
 
-    public ArtPiece(UUID id, UUID artisticUserId, String description, double weight, String title,
-                    LocalDate creationDate, double dimensionWidth, double dimensionHeight,
-                    double dimensionLength, LocalDate uploadDate) {
+    public ArtPiece(final UUID id, final UUID artisticUserId, final String description, final double weight, final String title,
+                    final LocalDate creationDate, final double dimensionWidth, final double dimensionHeight,
+                    final double dimensionLength, final LocalDate uploadDate) {
         this.id = id;
         this.artisticUserId = artisticUserId;
         this.description = description;

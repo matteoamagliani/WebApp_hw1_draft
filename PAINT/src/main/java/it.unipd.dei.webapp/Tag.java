@@ -2,7 +2,7 @@ public class Tag {
     private final String name;
     private final String category;
 
-    public Tag(String name, String category) {
+    public Tag(final String name, final String category) {
         this.name = name;
         this.category = category;
     }

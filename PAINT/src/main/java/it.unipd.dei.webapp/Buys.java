@@ -5,7 +5,7 @@ public class Buys {
     private final UUID orderId;
     private final UUID artPieceId;
 
-    public Buys(UUID clientUserId, UUID orderId, UUID artPieceId) {
+    public Buys(final UUID clientUserId, final UUID orderId, final UUID artPieceId) {
         this.clientUserId = clientUserId;
         this.orderId = orderId;
         this.artPieceId = artPieceId;
