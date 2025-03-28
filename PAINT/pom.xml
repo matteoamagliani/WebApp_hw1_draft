@@ -113,6 +113,24 @@
 				</configuration>
 			</plugin>
     </plugins>
+
+	<resources>
+		<resource>
+			<targetPath>${basedir}/target/${project.artifactId}-${project.version}/html</targetPath>
+			<directory>${basedir}/src/main/webapp/html</directory>
+			<includes>
+				<include>**/*.*</include>
+			</includes>
+		</resource>
+
+		<resource>
+			<targetPath>${basedir}/target/${project.artifactId}-${project.version}/META-INF</targetPath>
+			<directory>${basedir}/src/main/webapp/META-INF</directory>
+			<includes>
+				<include>**/*.*</include>
+			</includes>
+		</resource>
+	</resources>
   </build>
 
   <dependencies>
