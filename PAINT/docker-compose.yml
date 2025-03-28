@@ -1,0 +1,28 @@
+services: 
+    web:
+        image: tomcat:10
+        ports: 
+            - 8080:8080
+        depends_on:
+          db:
+            condition: service_healthy
+        volumes:
+            - ./target/PAINT-1.00.war:/usr/local/tomcat/webapps/PAINT.war
+            - ./logs:/usr/local/tomcat/webapps/my-logs
+
+    db:
+        image: postgres
+        ports:
+            - 5432:5432
+        environment:
+            POSTGRES_USER: user
+            POSTGRES_PASSWORD: password
+        volumes:
+            - ./src/main/database/DDL_creation.sql:/docker-entrypoint-initdb.d/init.sql
+            - ./data/db:/var/lib/postgresql/data
+
+        healthcheck:
+            test: ["CMD-SHELL", "pg_isready", "-U psostgres"]
+            interval: 5s
+            timeout: 10s
+            retries: 50
