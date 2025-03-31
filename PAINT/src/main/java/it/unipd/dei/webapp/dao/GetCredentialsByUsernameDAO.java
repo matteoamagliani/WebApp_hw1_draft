@@ -9,7 +9,7 @@ import java.sql.SQLException;
 import java.util.UUID;
 
 public class GetCredentialsByUsernameDAO {
-    private static final String STATEMENT = "SELECT * FROM PAINT.Credentials WHERE Username = ?";
+    private static final String STATEMENT = "SELECT * FROM paint.Credentials WHERE Username = ?";
 
     private final Connection con;
     private final String username;

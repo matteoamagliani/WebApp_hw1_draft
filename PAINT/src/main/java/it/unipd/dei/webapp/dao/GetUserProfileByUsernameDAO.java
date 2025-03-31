@@ -10,7 +10,7 @@ import java.time.LocalDate;
 import java.util.UUID;
 
 public class GetUserProfileByUsernameDAO {
-    private static final String STATEMENT = "SELECT up.* FROM PAINT.UserProfile up JOIN PAINT.Credentials c ON up.\"id\" = c.UserId WHERE c.Username = ?";
+    private static final String STATEMENT = "SELECT up.* FROM paint.UserProfile up JOIN paint.Credentials c ON up.\"id\" = c.UserId WHERE c.Username = ?";
 
     private final Connection con;
     private final String username;

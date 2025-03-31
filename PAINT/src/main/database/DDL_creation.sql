@@ -1,41 +1,55 @@
 --#############################
---# Database creation ArtBase #
+--# Database creation PAINT #
 --#############################
 
--- Delete any pre-existing instance of the ArtBase database
+-- connect to the default database postgres
 connect postgres -- only psql
 
 -- We used this query in pgAdmin to close active current session
 /*
 SELECT pg_terminate_backend(pid)
 FROM pg_stat_activity
-WHERE datname = 'artbase' AND pid <> pg_backend_pid();
+WHERE datname = 'paint' AND pid <> pg_backend_pid();
 */
 
-DROP DATABASE IF EXISTS ArtBase;
+-- Drop the database if it exists
+DROP DATABASE IF EXISTS paintdb;
+
+-- Create user "PAINT_owner" with superuser privileges
+DROP ROLE IF EXISTS "PAINT_owner";
+
+CREATE ROLE "PAINT_owner" WITH
+  LOGIN
+  SUPERUSER
+  INHERIT
+  CREATEDB
+  CREATEROLE
+  REPLICATION
+  BYPASSRLS
+  ENCRYPTED PASSWORD 'SCRAM-SHA-256$4096:uo7zi43HGr4mcw0FiU8aFQ==$GH9e9RNsrwwzKyFtWgzM/RtA5eUGdr8Bs0jU4aHO1I8=:zBOM/n6Q+EDNk7rWmQBYC957/PHKk7zYCmZQvlmVLhk=';
 
 -- Database Creation
-CREATE DATABASE ArtBase ENCODING 'UTF-8';
+CREATE DATABASE paintdb ENCODING 'UTF-8';
 
 -- Connect to the db
-connect ArtBase --only psql
+connect paintdb --only psql
 
 -- Create new Schema
-DROP SCHEMA IF EXISTS artbase CASCADE;
-CREATE SCHEMA artbase;
+DROP SCHEMA IF EXISTS paint CASCADE;
+CREATE SCHEMA paint;
 
 -- Create new domains:
 
 -- Password domain
-CREATE DOMAIN artbase.password AS VARCHAR(254)
+CREATE DOMAIN paint.password AS VARCHAR(254)
 CONSTRAINT properpassword CHECK (VALUE ~* '^[A-Za-z0-9.%!–,8]+$');
 
 -- Email domain
-CREATE DOMAIN artbase.emailaddress AS VARCHAR(254)
+CREATE DOMAIN paint.emailaddress AS VARCHAR(254)
 CONSTRAINT properemail CHECK (VALUE ~* '^[A-Za-z0-9.%]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$');
 
 -- Score domain for reviews
-CREATE DOMAIN artbase.Reviewscore AS SMALLINT
+CREATE DOMAIN paint.Reviewscore AS SMALLINT
 CONSTRAINT evaluatescore CHECK (VALUE >= 1 AND VALUE <= 5);
 
 -- Generating uuid values requires a plug-in. In Postgres, a plug-in is
@@ -56,7 +70,7 @@ CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 -- Create new data types:
 
 -- User Roles
-CREATE TYPE artbase.userRole AS ENUM (
+CREATE TYPE paint.userRole AS ENUM (
     'artist',
     'artgallery',
     'genericuser',
@@ -64,7 +78,7 @@ CREATE TYPE artbase.userRole AS ENUM (
 );
 
 -- Order Status
-CREATE TYPE artbase.orderStatus AS ENUM (
+CREATE TYPE paint.orderStatus AS ENUM (
     'pending',
     'awaiting payment',
     'awaiting shipment',
@@ -77,10 +91,10 @@ CREATE TYPE artbase.orderStatus AS ENUM (
 );
 
 -- Tags category
-CREATE TYPE artbase.tagsCategory AS ENUM ('artpiece', 'artist', 'artgallery', 'event');
+CREATE TYPE paint.tagsCategory AS ENUM ('artpiece', 'artist', 'artgallery', 'event');
 
 -- Tags
-CREATE TYPE artbase.allTags AS ENUM (
+CREATE TYPE paint.allTags AS ENUM (
     -- Art Piece Tags
     'classic', 'modern', 'abstract', 'realism', 'surrealism',
     'landscape', 'portrait', 'installation', 'digital', 'sculpture',
@@ -96,14 +110,14 @@ CREATE TYPE artbase.allTags AS ENUM (
 );
 
 -- Image extensions
-CREATE TYPE artbase.imageExtension AS ENUM ('jpg', 'jpeg', 'png', 'gif', 'bmp', 'webp');
+CREATE TYPE paint.imageExtension AS ENUM ('jpg', 'jpeg', 'png', 'gif', 'bmp', 'webp');
 
 -- ##############################################
 -- ##			  TABLES CREATION:		        ##
 -- ##############################################
 
 -- 1. Create the LOCATION table
-CREATE TABLE artbase.Location(
+CREATE TABLE paint.Location(
 	Country VARCHAR(30),
 	City VARCHAR(30),
 	PostalCode VARCHAR(10),
@@ -112,10 +126,10 @@ CREATE TABLE artbase.Location(
 );
 
 -- 2. Create the USER PROFILE table
-CREATE TABLE artbase.UserProfile (
+CREATE TABLE paint.UserProfile (
     "id" UUID PRIMARY KEY,
     ProfilePicture BYTEA,
-    PictureExtension artbase.imageExtension,
+    PictureExtension paint.imageExtension,
    	"Name" VARCHAR(50),
     Surname VARCHAR(50),
     BrandName VARCHAR(50),
@@ -126,32 +140,32 @@ CREATE TABLE artbase.UserProfile (
     LocationPostalCode VARCHAR(10),
     LocationAddress VARCHAR(254),
 	FOREIGN KEY (LocationCountry, LocationCity, LocationPostalCode, LocationAddress)
-        REFERENCES artbase.location (Country, City, PostalCode, Address)
+        REFERENCES paint.location (Country, City, PostalCode, Address)
 );
 
 -- 3. Create the LOGIN CREDENTIALS table
-CREATE TABLE artbase.Credentials (
+CREATE TABLE paint.Credentials (
 	UserId UUID PRIMARY KEY,
-	Email artbase.emailaddress NOT NULL UNIQUE,
-	"Password" artbase.password NOT NULL,
+	Email paint.emailaddress NOT NULL UNIQUE,
+	"Password" paint.password NOT NULL,
 	Username VARCHAR(30) NOT NULL UNIQUE,
-	FOREIGN KEY (UserId) REFERENCES artbase.UserProfile ("id")
+	FOREIGN KEY (UserId) REFERENCES paint.UserProfile ("id")
 );
 
 -- 6. Create the ARTISTIC PROFILE table
-CREATE TABLE artbase.ArtisticProfile (
+CREATE TABLE paint.ArtisticProfile (
 	UserId UUID PRIMARY KEY,
-	"Role" artbase.userRole NOT NULL,
+	"Role" paint.userRole NOT NULL,
 	Biography TEXT NOT NULL,
 	FollowerCount INTEGER CHECK (FollowerCount>=0) NOT NULL,
 	NumPublishedArtPieces INTEGER NOT NULL,
 	NumSoldArtPieces INTEGER NOT NULL,
 	LastPubDate DATE,
-	FOREIGN KEY (UserId) REFERENCES artbase.UserProfile("id")
+	FOREIGN KEY (UserId) REFERENCES paint.UserProfile("id")
 );
 
 -- 7. Create the ART PIECE table
-CREATE TABLE artbase.ArtPiece (
+CREATE TABLE paint.ArtPiece (
     "id" UUID PRIMARY KEY,
     ArtisticUserId UUID NOT NULL,
     "Description" TEXT NOT NULL,
@@ -162,84 +176,84 @@ CREATE TABLE artbase.ArtPiece (
     DimensionHeight FLOAT NOT NULL,
     DimensionLength FLOAT NOT NULL,
     UploadDate DATE NOT NULL,
-    FOREIGN KEY (ArtisticUserId) REFERENCES artbase.ArtisticProfile (UserId)
+    FOREIGN KEY (ArtisticUserId) REFERENCES paint.ArtisticProfile (UserId)
 );
 
 -- 8. Create the ART PIECE ALBUM table
-CREATE TABLE artbase.ArtPieceImage (
+CREATE TABLE paint.ArtPieceImage (
     ArtPieceId UUID,
     ImageIndex SMALLINT CHECK (ImageIndex > 0 AND ImageIndex <= 5),
     ImageData BYTEA NOT NULL,
-    Extension artbase.imageExtension NOT NULL,
-    PRIMARY KEY (ArtPieceId, ImageIndex)
-    FOREIGN KEY (ArtPieceId) REFERENCES artbase.ArtPiece ("id")
+    Extension paint.imageExtension NOT NULL,
+    PRIMARY KEY (ArtPieceId, ImageIndex),
+    FOREIGN KEY (ArtPieceId) REFERENCES paint.ArtPiece ("id")
 );
 
 -- 9. Create the ADVERTISEMENT table
-CREATE TABLE artbase.Advertisement (
+CREATE TABLE paint.Advertisement (
     ArtPieceId UUID PRIMARY KEY,
     Price NUMERIC(10, 2) NOT NULL,
     PublicationDate DATE NOT NULL,
-    FOREIGN KEY (ArtPieceId) REFERENCES artbase.ArtPiece ("id")
+    FOREIGN KEY (ArtPieceId) REFERENCES paint.ArtPiece ("id")
 );
 
 -- 10. Create the FOLLOWS table
-CREATE TABLE artbase.Follows (
+CREATE TABLE paint.Follows (
     UserId_Follower UUID,
     ArtisticUserId_Followed UUID,
     FollowDate DATE NOT NULL,
     PRIMARY KEY (UserId_Follower, ArtisticUserId_Followed),
-    FOREIGN KEY (UserId_Follower) REFERENCES artbase.UserProfile ("id"),
-    FOREIGN KEY (ArtisticUserId_Followed) REFERENCES artbase.ArtisticProfile (UserId)
+    FOREIGN KEY (UserId_Follower) REFERENCES paint.UserProfile ("id"),
+    FOREIGN KEY (ArtisticUserId_Followed) REFERENCES paint.ArtisticProfile (UserId)
 );
 
 -- 11. Create the TAG table
-CREATE TABLE artbase.Tag (
-    "Name" artbase.allTags PRIMARY KEY,
-	Category artbase.tagsCategory NOT NULL
+CREATE TABLE paint.Tag (
+    "Name" paint.allTags PRIMARY KEY,
+	Category paint.tagsCategory NOT NULL
 );
 
 -- 12. Create the HAS 1 table
-CREATE TABLE artbase.Has1 (
-    TagName artbase.allTags,
+CREATE TABLE paint.Has1 (
+    TagName paint.allTags,
     ArtPieceId UUID,
     PRIMARY KEY (TagName, ArtPieceId),
-    FOREIGN KEY (TagName) REFERENCES artbase.Tag ("Name"),
-    FOREIGN KEY (ArtPieceId) REFERENCES artbase.ArtPiece ("id")
+    FOREIGN KEY (TagName) REFERENCES paint.Tag ("Name"),
+    FOREIGN KEY (ArtPieceId) REFERENCES paint.ArtPiece ("id")
 );
 
 -- 13. Create the HAS 3 table
-CREATE TABLE artbase.Has3 (
-    TagName artbase.allTags,
+CREATE TABLE paint.Has3 (
+    TagName paint.allTags,
     ArtisticUserId UUID,
     PRIMARY KEY (TagName, ArtisticUserId),
-    FOREIGN KEY (TagName) REFERENCES artbase.Tag ("Name"),
-    FOREIGN KEY (ArtisticUserId) REFERENCES artbase.ArtisticProfile (UserId)
+    FOREIGN KEY (TagName) REFERENCES paint.Tag ("Name"),
+    FOREIGN KEY (ArtisticUserId) REFERENCES paint.ArtisticProfile (UserId)
 );
 
 -- 14. Create the CLIENT PROFILE table
-CREATE TABLE artbase.ClientProfile (
+CREATE TABLE paint.ClientProfile (
 	UserId UUID PRIMARY KEY,
-	"Role" artbase.userRole NOT NULL,
-	FOREIGN KEY (UserId) REFERENCES artbase.UserProfile("id")
+	"Role" paint.userRole NOT NULL,
+	FOREIGN KEY (UserId) REFERENCES paint.UserProfile("id")
 );
 
 -- 15. Create the REVIEWS 2 table
-CREATE TABLE artbase.Reviews2 (
+CREATE TABLE paint.Reviews2 (
     ClientUserId UUID,
     ArtPieceId UUID,
-    Score artbase.Reviewscore NOT NULL,
+    Score paint.Reviewscore NOT NULL,
     ReviewDate DATE NOT NULL,
     PRIMARY KEY (ClientUserId, ArtPieceId),
-    FOREIGN KEY (ClientUserId) REFERENCES artbase.ClientProfile (UserId),
-    FOREIGN KEY (ArtPieceId) REFERENCES artbase.ArtPiece ("id")
+    FOREIGN KEY (ClientUserId) REFERENCES paint.ClientProfile (UserId),
+    FOREIGN KEY (ArtPieceId) REFERENCES paint.ArtPiece ("id")
 );
 
 -- 16. Create the ORDER DETAILS table
-CREATE TABLE artbase.OrderDetails (
+CREATE TABLE paint.OrderDetails (
     "id" UUID PRIMARY KEY,
     ShippingPrice NUMERIC(10, 2) NOT NULL,
-    Status artbase.orderStatus NOT NULL,
+    Status paint.orderStatus NOT NULL,
     Note VARCHAR(254),
     CreationDate DATE NOT NULL,
     LocationCountry_Shipment VARCHAR(30),
@@ -251,24 +265,24 @@ CREATE TABLE artbase.OrderDetails (
     LocationPostalCode_Delivery VARCHAR(10),
     LocationAddress_Delivery VARCHAR(254),
     FOREIGN KEY (LocationCountry_Shipment, LocationCity_Shipment, LocationPostalCode_Shipment, LocationAddress_Shipment)
-		REFERENCES artbase.location (Country, City, PostalCode, Address),
+		REFERENCES paint.location (Country, City, PostalCode, Address),
     FOREIGN KEY (LocationCountry_Delivery, LocationCity_Delivery, LocationPostalCode_Delivery, LocationAddress_Delivery)
-		REFERENCES artbase.location (Country, City, PostalCode, Address)
+		REFERENCES paint.location (Country, City, PostalCode, Address)
 );
 
 -- 17. Create the BUYS table
-CREATE TABLE artbase.Buys (
+CREATE TABLE paint.Buys (
     ClientUserId UUID,
     OrderId UUID,
     ArtPieceId UUID,
     PRIMARY KEY (ClientUserId, OrderId, ArtPieceId),
-    FOREIGN KEY (ClientUserId) REFERENCES artbase.ClientProfile (UserId),
-    FOREIGN KEY (OrderId) REFERENCES artbase.OrderDetails ("id"),
-    FOREIGN KEY (ArtPieceId) REFERENCES artbase.Advertisement (ArtPieceId)
+    FOREIGN KEY (ClientUserId) REFERENCES paint.ClientProfile (UserId),
+    FOREIGN KEY (OrderId) REFERENCES paint.OrderDetails ("id"),
+    FOREIGN KEY (ArtPieceId) REFERENCES paint.Advertisement (ArtPieceId)
 );
 
 -- 21. Create the EVENT table
-CREATE TABLE artbase.Event (
+CREATE TABLE paint.Event (
     "id" UUID PRIMARY KEY,
     ArtisticUserId_Organizer UUID NOT NULL,
     StartDate DATE NOT NULL,
@@ -276,44 +290,44 @@ CREATE TABLE artbase.Event (
     Title VARCHAR(50) NOT NULL,
     Description TEXT NOT NULL,
     UploadDate DATE NOT NULL,
-    FOREIGN KEY (ArtisticUserId_Organizer) REFERENCES artbase.ArtisticProfile (UserId)
+    FOREIGN KEY (ArtisticUserId_Organizer) REFERENCES paint.ArtisticProfile (UserId)
 );
 
 -- 22. Create the PARTICIPATES table
-CREATE TABLE artbase.Participates (
+CREATE TABLE paint.Participates (
     EventId UUID,
     ArtisticUserId UUID,
     PRIMARY KEY (EventId, ArtisticUserId),
-    FOREIGN KEY (EventId) REFERENCES artbase.Event ("id"),
-    FOREIGN KEY (ArtisticUserId) REFERENCES artbase.ArtisticProfile (UserId)
+    FOREIGN KEY (EventId) REFERENCES paint.Event ("id"),
+    FOREIGN KEY (ArtisticUserId) REFERENCES paint.ArtisticProfile (UserId)
 );
 
 -- 23. Create the EVENT ALBUM table
-CREATE TABLE artbase.EventImage (
+CREATE TABLE paint.EventImage (
     EventId UUID,
     ImageIndex SMALLINT CHECK (ImageIndex > 0 AND ImageIndex <= 5),
     ImageData BYTEA NOT NULL,
-    Extension artbase.imageExtension NOT NULL,
-    PRIMARY KEY (EventId, ImageIndex)
-    FOREIGN KEY (EventId) REFERENCES artbase.Event ("id")
+    Extension paint.imageExtension NOT NULL,
+    PRIMARY KEY (EventId, ImageIndex),
+    FOREIGN KEY (EventId) REFERENCES paint.Event ("id")
 );
 
 -- 24. Create the HAS 2 table
-CREATE TABLE artbase.Has2 (
-    TagName artbase.allTags,
+CREATE TABLE paint.Has2 (
+    TagName paint.allTags,
     EventId UUID,
     PRIMARY KEY (TagName, EventId),
-    FOREIGN KEY (TagName) REFERENCES artbase.Tag ("Name"),
-    FOREIGN KEY (EventId) REFERENCES artbase.Event ("id")
+    FOREIGN KEY (TagName) REFERENCES paint.Tag ("Name"),
+    FOREIGN KEY (EventId) REFERENCES paint.Event ("id")
 );
 
 -- 25. Create the REVIEWS 1 table
-CREATE TABLE artbase.Reviews1 (
+CREATE TABLE paint.Reviews1 (
     ClientUserId UUID,
     EventId UUID,
-    Score artbase.Reviewscore NOT NULL,
+    Score paint.Reviewscore NOT NULL,
     ReviewDate DATE NOT NULL,
     PRIMARY KEY (ClientUserId, EventId),
-    FOREIGN KEY (ClientUserId) REFERENCES artbase.ClientProfile (UserId),
-    FOREIGN KEY (EventId) REFERENCES artbase.Event ("id")
+    FOREIGN KEY (ClientUserId) REFERENCES paint.ClientProfile (UserId),
+    FOREIGN KEY (EventId) REFERENCES paint.Event ("id")
 );
