@@ -12,12 +12,12 @@
 
   <servlet>
     <servlet-name>CreateUserProfileAndCredentials</servlet-name>
-    <servlet-class>it.unipd.webapp.servlet.CreateUserProfileAndCredentialsServlet</servlet-class>
+    <servlet-class>it.unipd.webapp.servlet.CreateUserProfileWithCredentialsServlet</servlet-class>
   </servlet>
 
   <servlet-mapping>
     <servlet-name>CreateUserProfileAndCredentials</servlet-name>
-    <url-pattern>create-user</url-pattern>
+    <url-pattern>/create-userprofile</url-pattern>
   </servlet-mapping>
 
   <resource-ref>

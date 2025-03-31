@@ -3,7 +3,7 @@
 --#############################
 
 -- connect to the default database postgres
-connect postgres -- only psql
+-- connect postgres -- only psql
 
 -- We used this query in pgAdmin to close active current session
 /*
@@ -13,10 +13,10 @@ WHERE datname = 'paint' AND pid <> pg_backend_pid();
 */
 
 -- Drop the database if it exists
-DROP DATABASE IF EXISTS paintdb;
+-- DROP DATABASE IF EXISTS paintdb;
 
 -- Create user "PAINT_owner" with superuser privileges
-DROP ROLE IF EXISTS "PAINT_owner";
+--DROP ROLE IF EXISTS "PAINT_owner";
 
 CREATE ROLE "PAINT_owner" WITH
   LOGIN
