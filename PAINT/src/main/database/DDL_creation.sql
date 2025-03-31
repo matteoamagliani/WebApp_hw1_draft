@@ -29,7 +29,7 @@ CREATE ROLE "PAINT_owner" WITH
   PASSWORD 'paint2425';
 
 -- Database Creation
-CREATE DATABASE paintdb ENCODING 'UTF-8';
+CREATE DATABASE paintdb OWNER PAINT_owner ENCODING 'UTF-8';
 
 -- Connect to the db
 connect paintdb --only psql
