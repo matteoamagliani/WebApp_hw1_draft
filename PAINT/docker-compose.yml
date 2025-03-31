@@ -9,6 +9,12 @@ services:
         volumes:
             - ./target/PAINT-1.00.war:/usr/local/tomcat/webapps/PAINT.war
             - ./logs:/usr/local/tomcat/webapps/my-logs
+        environment:
+            - DB_HOST=db
+            - DB_PORT=5432
+            - DB_NAME=paintdb
+            - DB_USER=PAINT_owner
+            - DB_PASSWORD=paint2425
 
     db:
         image: postgres
