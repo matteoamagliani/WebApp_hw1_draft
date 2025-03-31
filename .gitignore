@@ -70,4 +70,4 @@ Thumbs.db
 PAINT/target
 
 # Ignore docker data
-docker/data
+PAINT/data
