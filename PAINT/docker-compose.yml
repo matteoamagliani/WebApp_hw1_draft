@@ -9,20 +9,27 @@ services:
         volumes:
             - ./target/PAINT-1.00.war:/usr/local/tomcat/webapps/PAINT.war
             - ./logs:/usr/local/tomcat/webapps/my-logs
+        environment:
+            - DB_HOST=db
+            - DB_PORT=5432
+            - DB_NAME=paintdb
+            - DB_USER=PAINT_owner
+            - DB_PASSWORD=paint2425
 
     db:
         image: postgres
         ports:
             - 5432:5432
         environment:
-            POSTGRES_USER: user
-            POSTGRES_PASSWORD: password
+            POSTGRES_USER: PAINT_owner
+            POSTGRES_PASSWORD: paint2425
+            POSTGRES_DB: paintdb
         volumes:
             - ./src/main/database/DDL_creation.sql:/docker-entrypoint-initdb.d/init.sql
             - ./data/db:/var/lib/postgresql/data
 
         healthcheck:
-            test: ["CMD-SHELL", "pg_isready", "-U psostgres"]
+            test: ["CMD-SHELL", "pg_isready -U PAINT_owner -d paintdb"]
             interval: 5s
             timeout: 10s
             retries: 50
