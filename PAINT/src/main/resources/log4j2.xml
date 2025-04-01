@@ -1,21 +1,24 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<Configuration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-               xmlns="https://logging.apache.org/xml/ns"
-               xsi:schemaLocation="
-                       https://logging.apache.org/xml/ns
-                       https://logging.apache.org/xml/ns/log4j-config-2.xsd">
-
+<Configuration status="INFO" monitorInterval="0" name="log4j2-config">
   <Appenders>
-    <Console name="CONSOLE">
-      <JsonTemplateLayout/>
+    <RollingRandomAccessFile name="RFILE" fileName="${sys:catalina.base}/webapps/my-logs/paint.log" filePattern="${sys:catalina.base}/webapps/my-logs/$${date:yyyy-MM}/paint-%d{yyyyMMdd}-%i.log.gz">
+      <PatternLayout>
+        <Pattern>%date{DEFAULT} %level [%thread] %class{1}.%method(%file:%line)%n\tIP = %MDC{IP}; USER = %MDC{USER}; ACTION = %MDC{ACTION}; RESOURCE = %MDC{RESOURCE}%n\t%message%n\t%throwable%n</Pattern>
+      </PatternLayout>
+      <Policies>
+        <TimeBasedTriggeringPolicy />
+        <SizeBasedTriggeringPolicy size="250 MB"/>
+      </Policies>
+    </RollingRandomAccessFile>
+    <Console name="STDOUT" target="SYSTEM_OUT">
+      <PatternLayout>
+        <Pattern>%date{DEFAULT} %level [%thread] %class{1}.%method(%file:%line)%n\tIP = %MDC{IP}; USER = %MDC{USER}; ACTION = %MDC{ACTION}; RESOURCE = %MDC{RESOURCE}%n\t%message%n\t%throwable%n</Pattern>
+      </PatternLayout>
     </Console>
   </Appenders>
-
   <Loggers>
-    <Logger name="it.unipd.dei.webapp" level="INFO"/>
-    <Root level="WARN">
-      <AppenderRef ref="CONSOLE"/>
+    <Root level="INFO">
+      <AppenderRef ref="RFILE" level="INFO"/>
+      <AppenderRef ref="STDOUT" level="INFO"/>
     </Root>
   </Loggers>
-
 </Configuration>
