@@ -16,9 +16,9 @@ WHERE datname = 'paint' AND pid <> pg_backend_pid();
 -- DROP DATABASE IF EXISTS paintdb;
 
 -- Create user "PAINT_owner" with superuser privileges
---DROP ROLE IF EXISTS "PAINT_owner";
+DROP ROLE IF EXISTS "PAINT_owner";
 
-/*CREATE ROLE "PAINT_owner" WITH
+CREATE ROLE "PAINT_owner" WITH
   LOGIN
   SUPERUSER
   INHERIT
@@ -27,7 +27,7 @@ WHERE datname = 'paint' AND pid <> pg_backend_pid();
   REPLICATION
   BYPASSRLS
   PASSWORD 'paint2425';
-*/
+
 
 -- Database Creation
 CREATE DATABASE paintdb OWNER PAINT_owner ENCODING 'UTF-8';
