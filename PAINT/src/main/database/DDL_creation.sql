@@ -2,45 +2,53 @@
 --# Database creation PAINT #
 --#############################
 
--- connect to the default database postgres
--- connect postgres -- only psql
+-- Creazione del ruolo PRIMA di tutto
+\echo 'Executing first DO (role creation)'
+DO $$ 
+BEGIN
+    IF NOT EXISTS (SELECT FROM pg_roles WHERE rolname = 'PAINT_owner') THEN
+        RAISE NOTICE 'PAINT_owner role does not exist, creating it...';
+        CREATE ROLE "PAINT_owner" WITH
+            LOGIN
+            SUPERUSER
+            INHERIT
+            CREATEDB
+            CREATEROLE
+            REPLICATION
+            BYPASSRLS
+            PASSWORD 'paint2425';
+    END IF;
+END $$;
 
--- We used this query in pgAdmin to close active current session
-/*
-SELECT pg_terminate_backend(pid)
-FROM pg_stat_activity
-WHERE datname = 'paint' AND pid <> pg_backend_pid();
-*/
+-- Creazione del database
+\echo 'Executing second DO (database creation)'
+DO $$
+BEGIN
+    IF NOT EXISTS (SELECT 1 FROM pg_database WHERE datname = 'paintdb') THEN
+        CREATE DATABASE paintdb OWNER "PAINT_owner" ENCODING 'UTF-8';
+    END IF;
+END
+$$;
 
--- Drop the database if it exists
--- DROP DATABASE IF EXISTS paintdb;
+-- Connettersi al database
+\c paintdb
 
--- Create user "PAINT_owner" with superuser privileges
-DROP ROLE IF EXISTS "PAINT_owner";
+-- Creazione dello schema
+\echo 'Executing third DO (schema creation)'
+DO $$
+BEGIN
+    IF EXISTS (SELECT 1 FROM information_schema.schemata WHERE schema_name = 'paint') THEN
+        RAISE NOTICE 'paint already exists, dropping it...';
+        EXECUTE 'DROP SCHEMA paint CASCADE';
+    END IF;
 
-CREATE ROLE "PAINT_owner" WITH
-  LOGIN
-  SUPERUSER
-  INHERIT
-  CREATEDB
-  CREATEROLE
-  REPLICATION
-  BYPASSRLS
-  PASSWORD 'paint2425';
-
-
--- Database Creation
-CREATE DATABASE paintdb OWNER PAINT_owner ENCODING 'UTF-8';
-
--- Connect to the db
-connect paintdb --only psql
-
--- Create new Schema
-DROP SCHEMA IF EXISTS paint CASCADE;
-CREATE SCHEMA paint;
+    RAISE NOTICE 'Creating schema paint...';
+    EXECUTE 'CREATE SCHEMA paint AUTHORIZATION "PAINT_owner"';
+END $$;
 
 -- Create new domains:
 
+\echo 'Executing domains creation'
 -- Password domain
 CREATE DOMAIN paint.password AS VARCHAR(254)
 CONSTRAINT properpassword CHECK (VALUE ~* '^[A-Za-z0-9.%!–,8]+$');
@@ -70,6 +78,7 @@ CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 
 -- Create new data types:
 
+\echo 'Executing type creation'
 -- User Roles
 CREATE TYPE paint.userRole AS ENUM (
     'artist',
@@ -117,6 +126,7 @@ CREATE TYPE paint.imageExtension AS ENUM ('jpg', 'jpeg', 'png', 'gif', 'bmp', 'w
 -- ##			  TABLES CREATION:		        ##
 -- ##############################################
 
+\echo 'Executing tables creation'
 -- 1. Create the LOCATION table
 CREATE TABLE paint.Location(
 	Country VARCHAR(30),
