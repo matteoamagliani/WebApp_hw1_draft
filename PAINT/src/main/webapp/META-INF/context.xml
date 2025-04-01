@@ -5,7 +5,7 @@
               type="javax.sql.DataSource"
               factory="org.apache.tomcat.jdbc.pool.DataSourceFactory"
               driverClassName="org.postgresql.Driver"
-              url="jdbc:postgresql://localhost:5432/paintdb"
+              url="jdbc:postgresql://db:5432/paintdb"
               username="PAINT_owner"
               password="paint2425"
               testOnBorrow="true"

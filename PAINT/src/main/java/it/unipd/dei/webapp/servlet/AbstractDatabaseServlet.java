@@ -35,7 +35,7 @@ public abstract class AbstractDatabaseServlet extends HttpServlet {
 
         try {
             cxt = new InitialContext();
-            ds = (DataSource) cxt.lookup("java:/comp/env/jdbc/students-webapp");
+            ds = (DataSource) cxt.lookup("java:/comp/env/jdbc/user-webapp");
         } catch (NamingException e) {
             ds = null;
 

@@ -21,7 +21,6 @@ services:
         ports:
             - 5432:5432
         environment:
-            POSTGRES_USER: PAINT_owner
             POSTGRES_PASSWORD: paint2425
             POSTGRES_DB: paintdb
         volumes:
