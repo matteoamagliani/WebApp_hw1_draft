@@ -12,7 +12,7 @@
 
   <servlet>
     <servlet-name>CreateUserProfileAndCredentials</servlet-name>
-    <servlet-class>it.unipd.webapp.servlet.CreateUserProfileWithCredentialsServlet</servlet-class>
+    <servlet-class>it.unipd.dei.webapp.servlet.CreateUserProfileWithCredentialsServlet</servlet-class>
   </servlet>
 
   <servlet-mapping>
