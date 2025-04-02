@@ -12,6 +12,7 @@ import it.unipd.dei.webapp.dao.CreateCredentialsDAO;
 import it.unipd.dei.webapp.dao.CreateUserProfileDAO;
 import it.unipd.dei.webapp.resource.Credentials;
 import it.unipd.dei.webapp.resource.UserProfile;
+import it.util.PasswordUtil; // Importa la classe PasswordUtil
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
@@ -67,11 +68,14 @@ public class CreateUserProfileWithCredentialsServlet extends AbstractDatabaseSer
             id = UUID.randomUUID();
             registrationDate = LocalDate.now();
 
+            // Cripta la password
+            String hashedPassword = PasswordUtil.hashPassword(password);
+
             // Creation of UserProfile in db
             userProfile = new UserProfile(id, profilePicture, pictureExtension, username, surname, brandName, birthDate, registrationDate, locationCountry, locationCity, locationPostalCode, locationAddress);
             new CreateUserProfileDAO(getDataSource().getConnection(), userProfile).createUserProfile();
             // Creation of Credentials in db
-            credentials = new Credentials(id, email, password, username);
+            credentials = new Credentials(id, email, hashedPassword, username);
             new CreateCredentialsDAO(getDataSource().getConnection(), credentials);
 
         } catch (SQLException ex) {
