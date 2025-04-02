@@ -11,14 +11,18 @@
     <title>Title</title>
     <style>
       .sidebar {
-        width: 250px;
+        position: fixed;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        width: 350px;
         background: white;
-        color: black;
+        border-right: 2px solid #dcdcdc;
         padding: 20px;
+        box-sizing: border-box;
+        overflow-y: auto;
         display: flex;
         flex-direction: column;
-        justify-content: space-between;
-        border-right: 2px solid #dcdcdc;
       }
       .sidebar a {
         text-decoration: none;
@@ -36,6 +40,9 @@
         height: 200px;
         margin: auto;
         align-items: center;
+      }
+      .user-info {
+        margin-top: auto;
       }
       .user-info img {
         width: 50px;

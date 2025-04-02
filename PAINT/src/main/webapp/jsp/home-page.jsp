@@ -17,45 +17,63 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>PAINT - Home</title>
   <style>
-    body {
-      font-family: Arial, sans-serif;
+    html, body {
       margin: 0;
       padding: 0;
-      display: flex;
-      height: 100vh;
+      height: 100%;
+      overflow: hidden; /* Evita scroll sull'intera pagina */
+      font-family: Arial, sans-serif;
     }
 
-    .container {
-      display: flex;
-      width: 100%;
-    }
-
-    /* Rimuoviamo gli stili della sidebar, ora definiti in sidebar.jsp */
-    main {
-      flex-grow: 1;
-      padding: 20px;
-      overflow-y: auto;
-    }
-
+    /* Sidebar destra fissa */
     .right-sidebar {
-      width: 250px;
+      position: fixed;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      width: 350px;
       background: white;
-      padding: 20px;
       border-left: 2px solid #dcdcdc;
+      padding: 20px;
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
     }
-
+    /* Area centrale scrollabile */
+    main {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 350px;
+      right: 350px;
+      overflow-y: auto;
+      padding: 20px;
+      box-sizing: border-box;
+    }
+    /* Contenuti interni */
+    #feed .content-item {
+      border-bottom: 1px solid #dcdcdc;
+      padding-bottom: 15px;
+      margin-bottom: 15px;
+    }
+    #feed img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+      margin-top: 10px;
+    }
+    /* Right sidebar: search & recommended artists */
     .search-container {
       display: flex;
       align-items: center;
       margin-bottom: 10px;
     }
-
     .search-bar {
       flex-grow: 1;
       padding: 10px;
-      margin-bottom: 0; /* Rimuove il margine inferiore per allineare con il bottone */
+      margin-bottom: 0;
+      box-sizing: border-box;
     }
-
     .search-button {
       padding: 10px;
       background: #3498db;
@@ -63,38 +81,39 @@
       border: none;
       cursor: pointer;
     }
-
-    #feed .content-item {
-      border-bottom: 1px solid #dcdcdc;
-      padding-bottom: 15px;
-      margin-bottom: 15px;
-    }
-
-    #feed img {
-      max-width: 100%;
-      height: auto;
-      display: block;
+    #top-artists {
+      flex-grow: 1;
+      overflow-y: auto;
       margin-top: 10px;
     }
-
-    #top-artists {
-      display: flex;
-      flex-direction: column;
-    }
-
     .artist {
       display: flex;
       align-items: center;
       margin-bottom: 10px;
     }
-
     .artist img {
       width: 40px;
       height: 40px;
       border-radius: 50%;
       margin-right: 10px;
     }
-
+    /* Footer link: for right sidebar, fissato in basso */
+    .right-footer {
+      text-align: center;
+      font-size: 0.9em;
+      color: gray;
+      padding-top: 10px;
+      border-top: 1px solid #dcdcdc;
+    }
+    .right-footer a {
+      color: gray;
+      text-decoration: none;
+      margin-right: 8px;
+    }
+    .right-footer p {
+      margin-top: 10px;
+    }
+    /* Modal per la ricerca */
     .modal {
       display: none; 
       position: fixed; 
@@ -123,9 +142,9 @@
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-<div class="container">
+  <!-- La sidebar sinistra viene inclusa -->
   <%@ include file="sidebar.jsp" %>
-  <!-- Main Content -->
+  <!-- Area centrale -->
   <main>
     <h1>Home</h1>
     <div id="feed">
@@ -133,34 +152,34 @@
         // Recupera l'ID utente dalla sessione e mostra i contenuti (artpiece ed eventi)
         String userIdStr = (String) session.getAttribute("userID");
         if(userIdStr != null) {
-            UUID userId = UUID.fromString(userIdStr);
-            Homepage dao = new Homepage();
-            List<Content> contents = dao.getUserContent(userId);
-            
-            // Ordina i contenuti in ordine cronologico decrescente
-            Collections.sort(contents, new Comparator<Content>() {
-                public int compare(Content c1, Content c2) {
-                    return c2.getUploadDate().compareTo(c1.getUploadDate());
-                }
-            });
-            
-            for(Content item : contents) {
+          UUID userId = UUID.fromString(userIdStr);
+          Homepage dao = new Homepage();
+          List<Content> contents = dao.getUserContent(userId);
+          
+          // Ordina i contenuti in ordine cronologico decrescente
+          Collections.sort(contents, new Comparator<Content>() {
+              public int compare(Content c1, Content c2) {
+                  return c2.getUploadDate().compareTo(c1.getUploadDate());
+              }
+          });
+          
+          for(Content item : contents) {
       %>
-              <div class="content-item">
-                <h2><%= item.getTitle() %> (<%= item.getType() %>)</h2>
-                <p><%= item.getDescription() %></p>
-                <p>Data: <%= item.getUploadDate() %></p>
-                <%
-                  if(item.getImageData() != null) { 
-                      String base64Image = Base64.getEncoder().encodeToString(item.getImageData());
-                %>
-                    <img src="data:image/<%= item.getExtension() %>;base64,<%= base64Image %>" alt="<%= item.getTitle() %>">
-                <%
-                  }
-                %>
-              </div>
+            <div class="content-item">
+              <h2><%= item.getTitle() %> (<%= item.getType() %>)</h2>
+              <p><%= item.getDescription() %></p>
+              <p>Data: <%= item.getUploadDate() %></p>
+              <%
+                if(item.getImageData() != null) { 
+                  String base64Image = Base64.getEncoder().encodeToString(item.getImageData());
+              %>
+                  <img src="data:image/<%= item.getExtension() %>;base64,<%= base64Image %>" alt="<%= item.getTitle() %>">
+              <%
+                }
+              %>
+            </div>
       <%
-            } // fine for
+          } // fine for
         } else {
       %>
           <p>User session not available.</p>
@@ -169,50 +188,59 @@
       %>
     </div>
   </main>
-  <!-- Right Sidebar -->
+  <!-- Sidebar destra -->
   <aside class="right-sidebar">
-    <div class="search-container">
-      <input type="text" placeholder="Search..." class="search-bar">
-      <button class="search-button">🔍</button>
-    </div>
-    <!-- Modal per i risultati della ricerca -->
-    <div id="search-modal" class="modal">
-      <div class="modal-content">
-        <span id="close-modal">&times;</span>
-        <div id="modal-results"></div>
+    <div style="flex: 1;">
+      <div class="search-container">
+        <input type="text" placeholder="Search..." class="search-bar">
+        <button class="search-button">🔍</button>
       </div>
-    </div>
-    <h3>Recommended artists</h3>
-    <div id="top-artists">
-      <%
-        try {
+      <!-- Modal per i risultati della ricerca -->
+      <div id="search-modal" class="modal">
+        <div class="modal-content">
+          <span id="close-modal">&times;</span>
+          <div id="modal-results"></div>
+        </div>
+      </div>
+      <h3>Recommended artists</h3>
+      <div id="top-artists" style="overflow-y: auto; max-height: calc(100% - 200px);">
+        <%
+          try {
             Homepage dao = new Homepage();
             List<UserProfile> recommendedUsers = dao.getRecommendedUsers();
             for(UserProfile user : recommendedUsers) {
-      %>
+        %>
               <div class="artist">
                 <%
-                  // Converte l'immagine del profilo in base64 se disponibile
                   byte[] profilePic = user.getProfilePicture();
                   String base64Image = (profilePic != null) ? Base64.getEncoder().encodeToString(profilePic) : "";
                 %>
                 <img src="<%= (!base64Image.isEmpty() ? "data:image/" + user.getPictureExtension() + ";base64," + base64Image : "profile_placeholder.jpg") %>" alt="<%= user.getName() %>">
                 <span><%= user.getName() %> <%= user.getSurname() %></span>
               </div>
-      <%
+        <%
             }
-        } catch(Exception ex) {
+          } catch(Exception ex) {
             out.println("<p>Error loading recommended users.</p>");
-        }
-      %>
+          }
+        %>
+      </div>
     </div>
+    <!-- Footer links e la scritta PAINT, Inc., ancorate in fondo -->
+    <footer class="right-footer" style="margin-top: auto; text-align: center; font-size: 0.9em; color: gray; padding-top: 10px; border-top: 1px solid #dcdcdc;">
+      <a href="terms.jsp" style="color:gray; text-decoration:none; margin-right:8px;">Terms & Conditions</a>
+      <a href="privacy.jsp" style="color:gray; text-decoration:none; margin-right:8px;">Privacy</a>
+      <a href="help.jsp" style="color:gray; text-decoration:none; margin-right:8px;">Help</a>
+      <a href="contact.jsp" style="color:gray; text-decoration:none;">Contact</a>
+      <p style="margin-top:10px;">© 2025 PAINT, Inc.</p>
+    </footer>
     <script>
       const searchBar = document.querySelector('.search-bar');
       const searchButton = document.querySelector('.search-button');
       const modal = document.getElementById('search-modal');
       const modalResults = document.getElementById('modal-results');
       const closeModal = document.getElementById('close-modal');
-      
+
       function doSearch() {
           const query = searchBar.value.trim();
           if(query.length < 2) {
@@ -261,7 +289,6 @@
       });
     </script>
   </aside>
-</div>
-<script src="script.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
