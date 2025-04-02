@@ -7,7 +7,7 @@
   <description>The project aims to develop a full-stack web application for a virtual art gallery. Users (artists, galleries, regular users) can interact, create profiles, showcase or buy artwork, and commission pieces. Galleries can invite artists and showcase events. The back-end is built on the previously designed database (“ArtBase” - FDB course).</description>
 
   <welcome-file-list>
-    <welcome-file>index.jsp</welcome-file>
+    <welcome-file>jsp/index.jsp</welcome-file>
   </welcome-file-list>
 
   <servlet>
