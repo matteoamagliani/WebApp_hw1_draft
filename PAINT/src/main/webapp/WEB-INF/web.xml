@@ -20,6 +20,15 @@
     <url-pattern>/create-userprofile</url-pattern>
   </servlet-mapping>
 
+  <servlet>
+    <servlet-name>SearchUserServlet</servlet-name>
+    <servlet-class>it.unipd.dei.webapp.servlet.SearchUserServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>SearchUserServlet</servlet-name>
+    <url-pattern>/search-user</url-pattern>
+  </servlet-mapping>
+
   <resource-ref>
     <description>Connection pool to the database</description>
     <res-ref-name>jdbc/user-webapp</res-ref-name>
