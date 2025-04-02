@@ -15,6 +15,26 @@
     <servlet-class>it.unipd.dei.webapp.servlet.CreateUserProfileWithCredentialsServlet</servlet-class>
   </servlet>
 
+  <servlet>
+    <servlet-name>ProcessSignUpPersonalInformations</servlet-name>
+    <servlet-class>it.unipd.dei.webapp.servlet.SignUpPersonalInformations</servlet-class>
+  </servlet>
+
+ <servlet>
+    <servlet-name>ProcessSignUpAddressInformations</servlet-name>
+    <servlet-class>it.unipd.dei.webapp.servlet.SignUpAddressInformations</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>ProcessSignUpPersonalInformations</servlet-name>
+    <url-pattern>/process_signup_personal_informations</url-pattern>
+  </servlet-mapping>
+
+  <servlet-mapping>
+    <servlet-name>ProcessSignUpAddressInformations</servlet-name>
+    <url-pattern>/process_signup_address_informations</url-pattern>
+  </servlet-mapping>
+
   <servlet-mapping>
     <servlet-name>CreateUserProfileAndCredentials</servlet-name>
     <url-pattern>/create-userprofile</url-pattern>
