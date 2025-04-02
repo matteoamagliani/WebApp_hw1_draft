@@ -6,7 +6,9 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.UUID;
 
-import org.apache.logging.log4j.message.Message;
+import it.unipd.dei.webapp.resource.Actions;
+import it.unipd.dei.webapp.resource.LogContext;
+import it.unipd.dei.webapp.resource.Message;
 
 import it.unipd.dei.webapp.dao.CreateCredentialsDAO;
 import it.unipd.dei.webapp.dao.CreateUserProfileDAO;
@@ -14,12 +16,15 @@ import it.unipd.dei.webapp.resource.Credentials;
 import it.unipd.dei.webapp.resource.UserProfile;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import org.apache.logging.log4j.message.StringFormattedMessage;
 
 public class CreateUserProfileWithCredentialsServlet extends AbstractDatabaseServlet {
 
     public void doPost(HttpServletRequest req, HttpServletResponse res) throws IOException {
         // TODO logger
 
+        LogContext.setIPAddress(req.getRemoteAddr());
+        LogContext.setAction(Actions.CREATE_USERPROFILE);
         // Parameterse for UserProfile
         UUID id = null;
         byte[] profilePicture = null;
@@ -46,6 +51,7 @@ public class CreateUserProfileWithCredentialsServlet extends AbstractDatabaseSer
 
         // HANDLE REQUEST
         try {
+
             // Extracting parameters from the form
             // TODO gestione upload file
             // profilePicture = req.getParameter("profilePicture");
@@ -63,6 +69,9 @@ public class CreateUserProfileWithCredentialsServlet extends AbstractDatabaseSer
             password = req.getParameter("password");
             username = req.getParameter("username");
 
+            //TODO: Set resources for the logger
+            //LogContext.setResource(Integer.toString());
+
             // Generating remaining parameters
             id = UUID.randomUUID();
             registrationDate = LocalDate.now();
@@ -70,18 +79,22 @@ public class CreateUserProfileWithCredentialsServlet extends AbstractDatabaseSer
             // Creation of UserProfile in db
             userProfile = new UserProfile(id, profilePicture, pictureExtension, username, surname, brandName, birthDate, registrationDate, locationCountry, locationCity, locationPostalCode, locationAddress);
             new CreateUserProfileDAO(getDataSource().getConnection(), userProfile).createUserProfile();
+
+            logger.info("New user creation confirmation.");
             // Creation of Credentials in db
             credentials = new Credentials(id, email, password, username);
             new CreateCredentialsDAO(getDataSource().getConnection(), credentials);
 
+            logger.info("New creadential creation confirmation.");
+
         } catch (SQLException ex) {
             // TODO gestire eccezioni decentemente con logger
             if (ex.getSQLState().equals("23505")) {
-                //m = new Message(String.format("Cannot create the user profile: user profile %d already exists.", id), "E300", ex.getMessage());
-                //LOGGER.error(new StringFormattedMessage("Cannot create the user profile: user profile %d already exists.", id), ex);
+                m = new Message(String.format("Cannot create the user profile: user profile %d already exists.", id), "E300", ex.getMessage());
+                logger.error(new StringFormattedMessage("Cannot create the user profile: user profile %d already exists.", id), ex);
             } else {
-                //m = new Message("Cannot create the employee: unexpected error while accessing the database.", "E200", ex.getMessage());
-                //LOGGER.error("Cannot create the employee: unexpected error while accessing the database.", ex);
+                m = new Message("Cannot create the employee: unexpected error while accessing the database.", "E200", ex.getMessage());
+                logger.error("Cannot create the employee: unexpected error while accessing the database.", ex);
             }
         }
         

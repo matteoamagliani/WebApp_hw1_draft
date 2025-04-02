@@ -6,6 +6,11 @@ public class Has1 {
     private final String tagName;
     private final UUID artPieceId;
 
+    public Has1(){
+        this.tagName = null;
+        this.artPieceId = null;
+    }
+
     public Has1(final String tagName, final UUID artPieceId) {
         this.tagName = tagName;
         this.artPieceId = artPieceId;

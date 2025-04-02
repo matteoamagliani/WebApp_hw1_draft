@@ -9,6 +9,13 @@ public class Reviews2 {
     private final short score;
     private final LocalDate reviewDate;
 
+    public Reviews2(){
+        this.clientUserId = null;
+        this.artPieceId = null;
+        this.score = 0;
+        this.reviewDate = null;
+    }
+
     public Reviews2(final UUID clientUserId, final UUID artPieceId, final short score, final LocalDate reviewDate) {
         this.clientUserId = clientUserId;
         this.artPieceId = artPieceId;

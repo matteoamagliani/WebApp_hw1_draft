@@ -6,6 +6,11 @@ public class ClientProfile {
     private final UUID userId;
     private final String role;
 
+    public ClientProfile(){
+        this.userId = null;
+        this.role = null;
+    }
+
     public ClientProfile(final UUID userId, final String role) {
         this.userId = userId;
         this.role = role;

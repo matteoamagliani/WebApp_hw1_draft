@@ -4,6 +4,10 @@ public class Tag {
     private final String name;
     private final String category;
 
+    public Tag(){
+        this.name = null;
+        this.category = null;
+    }
     public Tag(final String name, final String category) {
         this.name = name;
         this.category = category;

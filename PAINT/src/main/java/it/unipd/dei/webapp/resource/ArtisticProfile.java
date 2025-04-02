@@ -12,6 +12,16 @@ public class ArtisticProfile {
     private final int numSoldArtPieces;
     private final LocalDate lastPubDate;
 
+    public ArtisticProfile() {
+        this.userId = null;
+        this.role = null;
+        this.biography = null;
+        this.followerCount = 0;
+        this.numPublishedArtPieces = 0;
+        this.numSoldArtPieces = 0;
+        this.lastPubDate = null;
+    }
+
     public ArtisticProfile(final UUID userId, final String role, final String biography, final int followerCount,
                            final int numPublishedArtPieces, final int numSoldArtPieces, final LocalDate lastPubDate) {
         this.userId = userId;

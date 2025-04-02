@@ -8,6 +8,12 @@ public class Advertisement {
     private final double price;
     private final LocalDate publicationDate;
 
+    public Advertisement() {
+        this.artPieceId = null;
+        this.price = 0;
+        this.publicationDate = null;
+    }
+
     public Advertisement(final UUID artPieceId, final double price, final LocalDate publicationDate) {
         this.artPieceId = artPieceId;
         this.price = price;

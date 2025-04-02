@@ -15,6 +15,20 @@ public class ArtPiece {
     private final double dimensionLength;
     private final LocalDate uploadDate;
 
+    public ArtPiece(){
+        this.id =null;
+        this.artisticUserId = null;
+        this.description = null;
+        this.weight = 0;
+        this.title = null;
+        this.creationDate = null;
+        this.dimensionWidth = 0;
+        this.dimensionHeight = 0;
+        this.dimensionLength = 0;
+        this.uploadDate = null;
+    }
+
+
     public ArtPiece(final UUID id, final UUID artisticUserId, final String description, final double weight, final String title,
                     final LocalDate creationDate, final double dimensionWidth, final double dimensionHeight,
                     final double dimensionLength, final LocalDate uploadDate) {

@@ -6,6 +6,13 @@ public class Location {
     private final String postalCode;
     private final String address;
 
+    public Location(){
+        this.country = null;
+        this.city = null;
+        this.postalCode = null;
+        this.address = null;
+    }
+
     public Location(final String country, final String city, final String postalCode, final String address) {
         this.country = country;
         this.city = city;

@@ -12,6 +12,16 @@ public class Event {
     private final String description;
     private final LocalDate uploadDate;
 
+    public Event(){
+        this.id = null;
+        this.artisticUserIdOrganizer = null;
+        this.startDate = null;
+        this.endDate = null;
+        this.title = null;
+        this.description = null;
+        this.uploadDate = null;
+    }
+
     public Event(final UUID id, final UUID artisticUserIdOrganizer, final LocalDate startDate, final LocalDate endDate,
                  final String title, final String description, final LocalDate uploadDate) {
         this.id = id;

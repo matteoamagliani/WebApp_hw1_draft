@@ -8,6 +8,13 @@ public class EventImage {
     private final byte[] imageData;
     private final String extension;
 
+    public EventImage() {
+        this.eventId = null;
+        this.imageIndex = 0;
+        this.imageData = null;
+        this.extension = null;
+    }
+
     public EventImage(final UUID eventId, final int imageIndex, final byte[] imageData, final String extension) {
         this.eventId = eventId;
         this.imageIndex = imageIndex;

@@ -7,6 +7,12 @@ public class Buys {
     private final UUID orderId;
     private final UUID artPieceId;
 
+    public Buys(){
+        this.clientUserId = null;
+        this.orderId = null;
+        this.artPieceId = null;
+    }
+
     public Buys(final UUID clientUserId, final UUID orderId, final UUID artPieceId) {
         this.clientUserId = clientUserId;
         this.orderId = orderId;
