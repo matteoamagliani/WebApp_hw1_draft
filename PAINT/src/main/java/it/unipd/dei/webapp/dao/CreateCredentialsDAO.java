@@ -7,7 +7,7 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 public final class CreateCredentialsDAO {
-    private static final String STATEMENT = "INSERT INTO paint.Credentials (UserId, Email, Password, Username) VALUES (?, ?, ?, ?)";
+    private static final String STATEMENT = "INSERT INTO paint.Credentials (UserId, Email, \"Password\", Username) VALUES (?, ?, ?, ?)";
 
     private final Connection con;
     private final Credentials credentials;
