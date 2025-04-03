@@ -89,7 +89,7 @@
 			</configuration>
 		</plugin>
 
-		<!-- javadoc plugin: output in the javadoc folder -->¬
+		<!-- javadoc plugin: output in the javadoc folder -->
 		<plugin>
 			<groupId>org.apache.maven.plugins</groupId>
 			<artifactId>maven-javadoc-plugin</artifactId>
