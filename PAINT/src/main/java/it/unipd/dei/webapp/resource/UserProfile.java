@@ -1,9 +1,16 @@
 package it.unipd.dei.webapp.resource;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
-import java.time.LocalDate;
 
-public class UserProfile {
+import it.unipd.dei.webapp.validation.Validatable;
+import it.unipd.dei.webapp.validation.Validator;
+
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
+
+public class UserProfile implements Validatable {
 
     public static final String TABLE_NAME = "UserProfile";
     public static final String ID_NAME = "id";
@@ -22,21 +29,14 @@ public class UserProfile {
     private final UUID id;
     private final byte[] profilePicture;
     private final ImageExtensions pictureExtension;
-    // Validate (0)
     private final String name;
-    // Validate (1)
     private final String surname;
-    // Validate (2)
     private final String brandName;
-    // Validate (3)
     private final LocalDate birthDate;
     private final LocalDate registrationDate;
-    // Validate (4)
     private final String locationCountry;
     private final String locationCity;
-    // Validate (5)
     private final String locationPostalCode;
-    // Validate (6)
     private final String locationAddress;
 
 
@@ -103,5 +103,43 @@ public class UserProfile {
 
     public final String getLocationAddress() {
         return locationAddress;
+    }
+
+    public Map<String, String> validateFields() {
+        Map<String, String> output = new HashMap<String, String>();
+        // Name validation
+        String result = Validator.validateString(name, 50);
+        output.put(NAME_NAME, result);
+        // Surname validation
+        result = Validator.validateString(surname, 50);
+        output.put(SURNAME_NAME, result);
+        // BirthDate validation
+        result = "";
+        if(birthDate == null) {
+            result += "Is null";
+        } else {
+            if(ChronoUnit.YEARS.between(birthDate, registrationDate) < 18) {
+                result += "Not adult (<18)";
+            } else {
+                result += "Valid";
+            }
+        }
+        output.put(BIRTH_DATE_NAME, result);
+        // RegistrationDate validation
+        result = Validator.validateObject(registrationDate);
+        output.put(REGISTRATION_DATE_NAME, result);
+        // LocationCountry validation
+        result = Validator.validateString(locationCountry, 30);
+        output.put(LOCATION_COUNTRY_NAME, result);
+        // LocationCity validation
+        result = Validator.validateObject(locationCity);
+        output.put(LOCATION_CITY_NAME, result);
+        // LocationPostalCode validation
+        result = Validator.validateString(locationPostalCode, 10);
+        output.put(LOCATION_POSTAL_CODE_NAME, result);
+        // LocationAddress validation
+        result = Validator.validateString(locationAddress, 254);
+        output.put(LOCATION_ADDRESS_NAME, result);
+        return output;
     }
 }

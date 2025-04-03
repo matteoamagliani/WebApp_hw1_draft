@@ -5,5 +5,5 @@ import java.util.Map;
 public interface Validatable {
 
     // Validation method
-    Map<String, String> validateFields();
+    public Map<String, String> validateFields();
 }
