@@ -1,5 +1,6 @@
 package it.unipd.dei.webapp.dao;
 
+import it.unipd.dei.webapp.resource.ImageExtensions;
 import it.unipd.dei.webapp.resource.UserProfile;
 
 import java.sql.Connection;
@@ -34,7 +35,7 @@ public class GetUserProfileByEmailDAO {
             if(rs.next()){
                 UUID id = rs.getObject("id", UUID.class);
                 byte[] profilePicture = rs.getBytes("ProfilePicture");
-                String pictureExtension = rs.getString("PictureExtension");
+                ImageExtensions pictureExtension = ImageExtensions.fromString(rs.getString("PictureExtension"));
                 String name = rs.getString("Name");
                 String surname = rs.getString("Surname");
                 String brandName = rs.getString("BrandName");

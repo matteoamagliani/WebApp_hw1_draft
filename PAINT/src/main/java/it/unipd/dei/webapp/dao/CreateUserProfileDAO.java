@@ -45,7 +45,7 @@ public final class CreateUserProfileDAO {
             stmnt = con.prepareStatement(STATEMENT);
             stmnt.setObject(1, userProfile.getId());
             stmnt.setBytes(2, userProfile.getProfilePicture());
-            stmnt.setString(3, userProfile.getPictureExtension());
+            stmnt.setString(3, userProfile.getPictureExtension().toString());
             stmnt.setString(4, userProfile.getName());
             stmnt.setString(5, userProfile.getSurname());
             stmnt.setString(6, userProfile.getBrandName());
@@ -59,6 +59,12 @@ public final class CreateUserProfileDAO {
             stmnt.setString(11, userProfile.getLocationPostalCode());
             stmnt.setString(12, userProfile.getLocationAddress());
 
+            System.out.println("Country: " + userProfile.getLocationCountry());
+            System.out.println("City: " + userProfile.getLocationCity());
+            System.out.println("Postal Code: " + userProfile.getLocationPostalCode());
+            System.out.println("Address: " + userProfile.getLocationAddress());
+            
+            
             int rs = stmnt.executeUpdate();
             if(rs == 1){
                 return 1;
