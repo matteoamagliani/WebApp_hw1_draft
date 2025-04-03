@@ -87,11 +87,7 @@ public class CreateUserProfileWithCredentialsServlet extends AbstractDatabaseSer
                 String fileName = filePart.getSubmittedFileName();
                 if (fileName.contains(".")) {
                     String extension = fileName.substring(fileName.lastIndexOf(".") + 1);
-                    try {
-                        pictureExtension = ImageExtensions.fromString(extension);
-                    } catch (IllegalArgumentException e) {
-                        throw new ServletException("Invalid image extension: " + extension);
-                    }                 
+                    pictureExtension = ImageExtensions.fromString(extension);
                 }
                 // Convert file to byteArray
                 try (InputStream fileContent = filePart.getInputStream();
@@ -107,9 +103,6 @@ public class CreateUserProfileWithCredentialsServlet extends AbstractDatabaseSer
             }
         } catch (ServletException e) {
             // TODO logger errore (il form non contiene un campo per l'upload dell'immagine)
-            // Log:error
-            e.printStackTrace();
-            throw new IOException("Error processing the uploaded image", e);
         }
 
         // Get parameters from session
@@ -121,19 +114,7 @@ public class CreateUserProfileWithCredentialsServlet extends AbstractDatabaseSer
         city = (String) session.getAttribute(ID.CITY_ID);
         postalCode = (String) session.getAttribute(ID.POSTAL_CODE_ID);
         address = (String) session.getAttribute(ID.ADDRESS_ID);
-
-        // TODO: DA RIMUOVERE Log per verificare i valori
-        System.out.println("Prima" );
-        System.out.println("Country: " + country);
-        System.out.println("City: " + city);
-        System.out.println("Postal Code: " + postalCode);
-        System.out.println("Address: " + address);
         session.invalidate();
-        
-        System.out.println("Country: " + country);
-        System.out.println("City: " + city);
-        System.out.println("Postal Code: " + postalCode);
-        System.out.println("Address: " + address);
 
         // Generate remaining parameters
         id = UUID.randomUUID();
@@ -148,11 +129,7 @@ public class CreateUserProfileWithCredentialsServlet extends AbstractDatabaseSer
                 new CreateLocationDAO(getDataSource().getConnection(), location).createLocation();
             }
             // Creation of UserProfile in db
-<<<<<<< HEAD
-            userProfile = new UserProfile(id, profilePicture, pictureExtension, name, surname, brandName, birthDate, registrationDate, locationCountry, locationCity, locationPostalCode, locationAddress);
-=======
             userProfile = new UserProfile(id, profilePicture, pictureExtension, name, surname, brandName, birthDate, registrationDate, country, city, postalCode, address);
->>>>>>> feature/encryption
             new CreateUserProfileDAO(getDataSource().getConnection(), userProfile).createUserProfile();
 
             // Check the selected role and create corresponding profile (Client or Artistic)
@@ -197,8 +174,8 @@ public class CreateUserProfileWithCredentialsServlet extends AbstractDatabaseSer
             out.println("<h3>Personal Information</h3>");
             out.println("<p>Name: " + name + " " + surname + "</p>");
             out.println("<p>Birth Date: " + birthDate + "</p>");
-            out.println("<p>Country: " + country + ", City: " + city + "</p>");
-            out.println("<p>Address: " + address + ", Postal Code: " + postalCode + "</p>");
+            out.println("<p>Country: " + locationCountry + ", City: " + locationCity + "</p>");
+            out.println("<p>Address: " + locationAddress + ", Postal Code: " + locationPostalCode + "</p>");
 
             out.println("</body></html>");
 
