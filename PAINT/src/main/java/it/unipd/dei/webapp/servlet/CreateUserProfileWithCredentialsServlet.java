@@ -11,9 +11,6 @@ import java.util.UUID;
 import it.unipd.dei.webapp.dao.CreateCredentialsDAO;
 import it.unipd.dei.webapp.dao.CreateLocationDAO;
 import it.unipd.dei.webapp.dao.CreateUserProfileDAO;
-// TODO da rimuovere
-//import it.unipd.dei.webapp.dao.LocationDAO;
-
 import it.unipd.dei.webapp.dao.GetLocationDAO;
 import it.unipd.dei.webapp.ID;
 import it.unipd.dei.webapp.resource.Credentials;
@@ -42,10 +39,6 @@ public class CreateUserProfileWithCredentialsServlet extends AbstractDatabaseSer
         String brandName = null;
         LocalDate birthDate = null;
         LocalDate registrationDate;
-        String locationCountry = null;
-        String locationCity = null;
-        String locationPostalCode = null;
-        String locationAddress = null;
 
         // Parameters for Credentials
         String email = null;
