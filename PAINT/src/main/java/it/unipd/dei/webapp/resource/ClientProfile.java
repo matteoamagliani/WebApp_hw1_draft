@@ -9,9 +9,9 @@ public class ClientProfile {
     public static final String ROLE_NAME = "role";
 
     private final UUID userId;
-    private final String role;
+    private final UserRole role;
 
-    public ClientProfile(final UUID userId, final String role) {
+    public ClientProfile(final UUID userId, final UserRole role) {
         this.userId = userId;
         this.role = role;
     }
@@ -20,7 +20,7 @@ public class ClientProfile {
         return userId;
     }
 
-    public String getRole() {
+    public UserRole getRole() {
         return role;
     }
 }

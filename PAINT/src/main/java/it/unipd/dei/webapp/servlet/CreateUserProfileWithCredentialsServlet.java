@@ -8,17 +8,20 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.UUID;
 
+import it.unipd.dei.webapp.dao.CreateArtisticProfileDAO;
+import it.unipd.dei.webapp.dao.CreateClientProfileDAO;
 import it.unipd.dei.webapp.dao.CreateCredentialsDAO;
 import it.unipd.dei.webapp.dao.CreateLocationDAO;
 import it.unipd.dei.webapp.dao.CreateUserProfileDAO;
-// TODO da rimuovere
-//import it.unipd.dei.webapp.dao.LocationDAO;
 
 import it.unipd.dei.webapp.dao.GetLocationDAO;
 import it.unipd.dei.webapp.ID;
+import it.unipd.dei.webapp.resource.ArtisticProfile;
+import it.unipd.dei.webapp.resource.ClientProfile;
 import it.unipd.dei.webapp.resource.Credentials;
 import it.unipd.dei.webapp.resource.Location;
 import it.unipd.dei.webapp.resource.UserProfile;
+import it.unipd.dei.webapp.resource.UserRole;
 import it.util.PasswordUtil;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -57,10 +60,15 @@ public class CreateUserProfileWithCredentialsServlet extends AbstractDatabaseSer
         String AUcode = null;
         String address = null;
 
+        //Parameters for ClientProfile/ArtisticProfile
+        UserRole role;
+
         // Model
         UserProfile userProfile;
         Credentials credentials;
         Location location;
+        ClientProfile clientProfile;
+        ArtisticProfile artisticProfile;
 
         // HANDLE REQUEST
 
@@ -68,8 +76,7 @@ public class CreateUserProfileWithCredentialsServlet extends AbstractDatabaseSer
         username = req.getParameter(ID.USERNAME_ID);
         email = req.getParameter(ID.EMAIL_ID);
         password = req.getParameter(ID.PASSWORD_ID);
-        // TODO handle role
-        // role = req.getParameter(ID.ROLE_ID);
+        role = UserRole.fromString(req.getParameter(ID.ROLE_ID));
         brandName = req.getParameter(ID.BRAND_NAME_ID);
         // Handle image
         try {
@@ -125,6 +132,27 @@ public class CreateUserProfileWithCredentialsServlet extends AbstractDatabaseSer
             // Creation of UserProfile in db
             userProfile = new UserProfile(id, profilePicture, pictureExtension, username, surname, brandName, birthDate, registrationDate, locationCountry, locationCity, locationPostalCode, locationAddress);
             new CreateUserProfileDAO(getDataSource().getConnection(), userProfile).createUserProfile();
+
+            // Check the selected role and create corresponding profile (Client or Artistic)
+            switch (role) {
+                case artist:
+                    artisticProfile = new ArtisticProfile(id, role);
+                    new CreateArtisticProfileDAO(getDataSource().getConnection(), artisticProfile).createArtisticProfile();
+                    break;
+                case artgallery:
+                    artisticProfile = new ArtisticProfile(id, role);
+                    new CreateArtisticProfileDAO(getDataSource().getConnection(), artisticProfile).createArtisticProfile();
+                    break;
+                case genericuser:
+                    clientProfile = new ClientProfile(id, role);
+                    new CreateClientProfileDAO(getDataSource().getConnection(), clientProfile).createClientProfile();
+                    break;
+                case businessuser:
+                    clientProfile = new ClientProfile(id, role);
+                    new CreateClientProfileDAO(getDataSource().getConnection(), clientProfile).createClientProfile();
+                    break;
+            }
+
             // Creation of Credentials in db
             credentials = new Credentials(id, email, hashedPassword, username);
             new CreateCredentialsDAO(getDataSource().getConnection(), credentials).createCredentials();

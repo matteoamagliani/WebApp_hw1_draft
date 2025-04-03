@@ -15,14 +15,14 @@ public class ArtisticProfile {
     public static final String LAST_PUB_DATE_NAME = "lastPubDate"; 
     
     private final UUID userId;
-    private final String role;
+    private final UserRole role;
     private final String biography;
     private final int followerCount;
     private final int numPublishedArtPieces;
     private final int numSoldArtPieces;
     private final LocalDate lastPubDate;
 
-    public ArtisticProfile(final UUID userId, final String role, final String biography, final int followerCount,
+    public ArtisticProfile(final UUID userId, final UserRole role, final String biography, final int followerCount,
                            final int numPublishedArtPieces, final int numSoldArtPieces, final LocalDate lastPubDate) {
         this.userId = userId;
         this.role = role;
@@ -33,11 +33,21 @@ public class ArtisticProfile {
         this.lastPubDate = lastPubDate;
     }
 
+    public ArtisticProfile(final UUID userId, final UserRole role) {
+        this.userId = userId;
+        this.role = role;
+        this.biography = null;
+        this.followerCount = 0;
+        this.numPublishedArtPieces = 0;
+        this.numSoldArtPieces = 0;
+        this.lastPubDate = null;
+    }
+
     public UUID getUserId() {
         return userId;
     }
 
-    public String getRole() {
+    public UserRole getRole() {
         return role;
     }
 

@@ -1,7 +1,7 @@
 package it.unipd.dei.webapp.resource;
 
 public enum UserRole {
-    artis,
+    artist,
     artgallery,
     genericuser,
     businessuser;
