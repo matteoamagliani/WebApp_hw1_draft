@@ -50,8 +50,7 @@ END $$;
 
 \echo 'Executing domains creation'
 -- Password domain
-CREATE DOMAIN paint.password AS VARCHAR(254)
-CONSTRAINT properpassword CHECK (VALUE ~* '^[A-Za-z0-9.%!–,8]+$');
+CREATE DOMAIN paint.password AS VARCHAR(254);
 
 -- Email domain
 CREATE DOMAIN paint.emailaddress AS VARCHAR(254)
