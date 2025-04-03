@@ -8,6 +8,7 @@ public class Credentials {
     public static final String USER_ID_NAME = "UserId";
     public static final String EMAIL_NAME = "Email";
     public static final String PASSWORD_NAME = "\"Password\"";
+    public static final String PASSWORD_NAME_CLEAN = "Password";
     public static final String USERNAME_NAME = "Username";
 
     private final UUID userId;

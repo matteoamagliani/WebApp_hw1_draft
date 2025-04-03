@@ -44,8 +44,14 @@ public class CreateArtisticProfileDAO {
             stmnt.setInt(4, artisticProfile.getFollowerCount());
             stmnt.setInt(5, artisticProfile.getNumPublishedArtPieces());
             stmnt.setInt(6, artisticProfile.getNumSoldArtPieces());
+            // Convert LocalDate to java.sql.Date
             LocalDate lastPublishedDate = artisticProfile.getLastPubDate();
-            stmnt.setObject(7, Date.valueOf(lastPublishedDate));
+            if(lastPublishedDate == null) {
+                stmnt.setNull(7, java.sql.Types.DATE);
+            }
+            else{
+                stmnt.setDate(7, Date.valueOf(lastPublishedDate));
+            }
 
             int rs = stmnt.executeUpdate();
             if(rs == 1){

@@ -1,4 +1,6 @@
-<%@ page import="it.unipd.dei.webapp.ID" %>
+<%@ page import="it.unipd.dei.webapp.resource.Credentials" %>
+<%@ page import="it.unipd.dei.webapp.resource.ArtisticProfile" %>
+<%@ page import="it.unipd.dei.webapp.resource.UserProfile" %>
 <%@ page import="it.unipd.dei.webapp.resource.ImageExtensions" %>
 
 <!DOCTYPE html>
@@ -10,19 +12,19 @@
 <body>
     <h2>Account Information</h2>
     <form method="POST" action="../create_userprofile" enctype="multipart/form-data">
-        <label>Username* <input type="text" name="<%= ID.USERNAME_ID %>" required></label><br>
-        <label>Email* <input type="email" name="<%= ID.EMAIL_ID %>" required></label><br>
-        <label>Password* <input type="password" name="<%= ID.PASSWORD_ID %>" required></label><br>
+        <label>Username* <input type="text" name="<%= Credentials.USERNAME_NAME %>" required></label><br>
+        <label>Email* <input type="email" name="<%= Credentials.EMAIL_NAME %>" required></label><br>
+        <label>Password* <input type="password" name="<%= Credentials.PASSWORD_NAME_CLEAN %>" required></label><br>
         <label for="role">Role*</label>
-        <select name="<%= ID.ROLE_ID %>" id="role" required>
+        <select name="<%= ArtisticProfile.ROLE_NAME %>" id="role" required>
             <option value="" disabled selected>Select your role</option>
             <option value="artist">Artist</option>
             <option value="artgallery">Art Gallery</option>
             <option value="genericuser">Generic User</option>
             <option value="businessuser">Business User</option>
         </select>
-        <label>Brand Name <input type="text" name="<%= ID.BRAND_NAME_ID %>"></label><br>
-        <label>Profile Image <input type="file" name="<%= ID.PROFILE_IMAGE_ID %>" accept="<%= ImageExtensions.getAcceptAttribute() %>"></label><br>
+        <label>Brand Name <input type="text" name="<%= UserProfile.BRAND_NAME_NAME %>"></label><br>
+        <label>Profile Image <input type="file" name="<%= UserProfile.PROFILE_PICTURE_NAME %>" accept="<%= ImageExtensions.getAcceptAttribute() %>"></label><br>
         <button type="submit">Sign Up</button>
     </form>
 </body>
