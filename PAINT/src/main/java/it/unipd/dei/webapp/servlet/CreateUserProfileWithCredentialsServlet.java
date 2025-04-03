@@ -44,10 +44,6 @@ public class CreateUserProfileWithCredentialsServlet extends AbstractDatabaseSer
         String brandName = null;
         LocalDate birthDate = null;
         LocalDate registrationDate;
-        String locationCountry = null;
-        String locationCity = null;
-        String locationPostalCode = null;
-        String locationAddress = null;
 
         // Parameters for Credentials
         String email = null;
