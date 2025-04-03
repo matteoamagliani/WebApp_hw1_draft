@@ -36,7 +36,15 @@ public class GetCredentialsByEmailDAO {
                 String password = rs.getString("Password");
                 String username = rs.getString("Username");
 
+                // TODO: remove this print statement in production code
+                System.out.println("DAO GetCredentialsByEmailDAO");
+                System.out.println("ID: " + id);
+                System.out.println("Email: " + email);
+                System.out.println("Password hash recuperata: " + password);
                 new_credentials = new Credentials(id, email, password, username);
+                // TODO: remove this print statement in production code
+                System.out.println("Email: " + email);
+                System.out.println("Password hash recuperata: " + password);
             }
             return new_credentials;
         } finally {

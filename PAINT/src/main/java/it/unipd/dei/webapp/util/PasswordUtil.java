@@ -13,5 +13,6 @@ public class PasswordUtil {
     public static boolean verifyPassword(String password, String hashedPassword) {
         BCrypt.Result result = BCrypt.verifyer().verify(password.toCharArray(), hashedPassword);
         return result.verified;
+        
     }
 }
