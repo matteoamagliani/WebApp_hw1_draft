@@ -1,6 +1,13 @@
 package it.unipd.dei.webapp.resource;
 
 public class Location {
+
+    public static final String TABLE_NAME = "Location";
+    public static final String COUNTRY_NAME = "Country";
+    public static final String CITY_NAME = "City";
+    public static final String POSTAL_CODE_NAME = "PostalCode";
+    public static final String ADDRESS_NAME = "Address";
+
     private final String country;
     private final String city;
     private final String postalCode;
