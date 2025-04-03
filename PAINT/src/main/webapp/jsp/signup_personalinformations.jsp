@@ -1,4 +1,3 @@
-<!-- personal_info.html -->
 <%@ page import="it.unipd.dei.webapp.ID" %>
 
 <!DOCTYPE html>

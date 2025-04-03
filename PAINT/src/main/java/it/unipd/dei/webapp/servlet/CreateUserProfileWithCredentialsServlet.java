@@ -130,7 +130,7 @@ public class CreateUserProfileWithCredentialsServlet extends AbstractDatabaseSer
                 new CreateLocationDAO(getDataSource().getConnection(), location).createLocation();
             }
             // Creation of UserProfile in db
-            userProfile = new UserProfile(id, profilePicture, pictureExtension, username, surname, brandName, birthDate, registrationDate, locationCountry, locationCity, locationPostalCode, locationAddress);
+            userProfile = new UserProfile(id, profilePicture, pictureExtension, name, surname, brandName, birthDate, registrationDate, locationCountry, locationCity, locationPostalCode, locationAddress);
             new CreateUserProfileDAO(getDataSource().getConnection(), userProfile).createUserProfile();
 
             // Check the selected role and create corresponding profile (Client or Artistic)

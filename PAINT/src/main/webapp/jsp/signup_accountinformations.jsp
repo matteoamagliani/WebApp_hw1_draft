@@ -1,4 +1,3 @@
-<!-- account_info.html -->
 <%@ page import="it.unipd.dei.webapp.ID" %>
 <%@ page import="it.unipd.dei.webapp.resource.ImageExtensions" %>
 
