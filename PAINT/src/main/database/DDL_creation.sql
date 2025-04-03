@@ -120,7 +120,7 @@ CREATE TYPE paint.allTags AS ENUM (
 );
 
 -- Image extensions
-CREATE TYPE paint.imageExtension AS ENUM ('jpg', 'jpeg', 'png', 'gif', 'bmp', 'webp');
+CREATE TYPE paint.imageExtension AS ENUM ('jpg', 'jpeg', 'png', 'bmp');
 
 -- ##############################################
 -- ##			  TABLES CREATION:		        ##

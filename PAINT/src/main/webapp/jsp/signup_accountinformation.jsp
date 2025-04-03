@@ -22,7 +22,7 @@
             <option value="businessuser">Business User</option>
         </select>
         <label>Brand Name <input type="text" name="<%= ID.BRAND_NAME_ID %>"></label><br>
-        <label>Profile Image <input type="file" name="<%= ID.PROFILE_IMAGE_ID %>"></label><br>
+        <label>Profile Image <input type="file" name="<%= ID.PROFILE_IMAGE_ID %>" accept="${acceptExtensions}"></label><br>
         <button type="submit">Sign Up</button>
     </form>
 </body>

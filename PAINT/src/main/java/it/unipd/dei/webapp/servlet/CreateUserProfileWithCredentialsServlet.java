@@ -99,7 +99,7 @@ public class CreateUserProfileWithCredentialsServlet extends AbstractDatabaseSer
         birthDate = (LocalDate) session.getAttribute(ID.BIRTHDATE_ID);
         country = (String) session.getAttribute(ID.COUNTRY_ID);
         city = (String) session.getAttribute(ID.CITY_ID);
-        AUcode = (String) session.getAttribute(ID.AU_CODE_ID);
+        AUcode = (String) session.getAttribute(ID.POSTAL_CODE_ID);
         address = (String) session.getAttribute(ID.ADDRESS_ID);
         session.invalidate();
 
