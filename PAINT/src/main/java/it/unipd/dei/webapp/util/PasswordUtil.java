@@ -1,4 +1,4 @@
-package it.util;
+package it.unipd.dei.webapp.util;
 
 import at.favre.lib.crypto.bcrypt.BCrypt;
 

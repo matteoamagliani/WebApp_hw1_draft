@@ -143,7 +143,7 @@ CREATE TABLE paint.UserProfile (
    	"Name" VARCHAR(50),
     Surname VARCHAR(50),
     BrandName VARCHAR(50),
-    BirthDate DATE NOT NULL, --FORSE
+    BirthDate DATE NOT NULL,
     RegistrationDate DATE NOT NULL,
     LocationCountry VARCHAR(30),
     LocationCity TEXT,

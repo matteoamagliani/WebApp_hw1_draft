@@ -21,15 +21,22 @@ public class UserProfile {
 
     private final UUID id;
     private final byte[] profilePicture;
-    private final ImageExtensions pictureExtension; 
+    private final ImageExtensions pictureExtension;
+    // Validate (0)
     private final String name;
+    // Validate (1)
     private final String surname;
+    // Validate (2)
     private final String brandName;
+    // Validate (3)
     private final LocalDate birthDate;
     private final LocalDate registrationDate;
+    // Validate (4)
     private final String locationCountry;
     private final String locationCity;
+    // Validate (5)
     private final String locationPostalCode;
+    // Validate (6)
     private final String locationAddress;
 
 

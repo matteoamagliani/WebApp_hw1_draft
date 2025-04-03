@@ -23,7 +23,7 @@ import it.unipd.dei.webapp.resource.ImageExtensions;
 import it.unipd.dei.webapp.resource.Location;
 import it.unipd.dei.webapp.resource.UserProfile;
 import it.unipd.dei.webapp.resource.UserRole;
-import it.util.PasswordUtil;
+import it.unipd.dei.webapp.util.PasswordUtil;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
