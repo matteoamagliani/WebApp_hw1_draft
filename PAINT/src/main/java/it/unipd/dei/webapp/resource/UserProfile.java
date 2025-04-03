@@ -32,6 +32,7 @@ public class UserProfile {
     private final String locationPostalCode;
     private final String locationAddress;
 
+
     public UserProfile(final UUID id, final byte[] profilePicture, ImageExtensions pictureExtension, final String name, final String surname,
                        final String brandName, final LocalDate birthDate, final LocalDate registrationDate,
                        final String locationCountry, final String locationCity, final String locationPostalCode, final String locationAddress) {
@@ -47,6 +48,12 @@ public class UserProfile {
         this.locationCity = locationCity;
         this.locationPostalCode = locationPostalCode;
         this.locationAddress = locationAddress;
+
+        System.out.println("USER PROFILE");
+        System.out.println("Country: " + locationCountry);
+        System.out.println("City: " + locationCity);
+        System.out.println("Postal Code: " + locationPostalCode);
+        System.out.println("Address: " + locationAddress);
     }
 
     public final UUID getId() {

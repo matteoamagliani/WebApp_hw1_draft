@@ -55,7 +55,7 @@ public class CreateUserProfileWithCredentialsServlet extends AbstractDatabaseSer
         // Parameters for Location
         String country = null;
         String city = null;
-        String AUcode = null;
+        String postalCode = null;
         String address = null;
 
         // Model
@@ -112,9 +112,21 @@ public class CreateUserProfileWithCredentialsServlet extends AbstractDatabaseSer
         birthDate = (LocalDate) session.getAttribute(ID.BIRTHDATE_ID);
         country = (String) session.getAttribute(ID.COUNTRY_ID);
         city = (String) session.getAttribute(ID.CITY_ID);
-        AUcode = (String) session.getAttribute(ID.POSTAL_CODE_ID);
+        postalCode = (String) session.getAttribute(ID.POSTAL_CODE_ID);
         address = (String) session.getAttribute(ID.ADDRESS_ID);
+
+        // TODO: DA RIMUOVERE Log per verificare i valori
+        System.out.println("Prima" );
+        System.out.println("Country: " + country);
+        System.out.println("City: " + city);
+        System.out.println("Postal Code: " + postalCode);
+        System.out.println("Address: " + address);
         session.invalidate();
+        
+        System.out.println("Country: " + country);
+        System.out.println("City: " + city);
+        System.out.println("Postal Code: " + postalCode);
+        System.out.println("Address: " + address);
 
         // Generate remaining parameters
         id = UUID.randomUUID();
@@ -122,14 +134,14 @@ public class CreateUserProfileWithCredentialsServlet extends AbstractDatabaseSer
         String hashedPassword = PasswordUtil.hashPassword(password);
 
         try {
-            location = new Location(country, city, AUcode, address);
+            location = new Location(country, city, postalCode, address);
             // Test if location exists
             if(new GetLocationDAO(getDataSource().getConnection(), location).getLocation() == null) {
                 // Creation of Location in db
                 new CreateLocationDAO(getDataSource().getConnection(), location).createLocation();
             }
             // Creation of UserProfile in db
-            userProfile = new UserProfile(id, profilePicture, pictureExtension, username, surname, brandName, birthDate, registrationDate, locationCountry, locationCity, locationPostalCode, locationAddress);
+            userProfile = new UserProfile(id, profilePicture, pictureExtension, name, surname, brandName, birthDate, registrationDate, country, city, postalCode, address);
             new CreateUserProfileDAO(getDataSource().getConnection(), userProfile).createUserProfile();
             // Creation of Credentials in db
             credentials = new Credentials(id, email, hashedPassword, username);
@@ -153,8 +165,8 @@ public class CreateUserProfileWithCredentialsServlet extends AbstractDatabaseSer
             out.println("<h3>Personal Information</h3>");
             out.println("<p>Name: " + name + " " + surname + "</p>");
             out.println("<p>Birth Date: " + birthDate + "</p>");
-            out.println("<p>Country: " + locationCountry + ", City: " + locationCity + "</p>");
-            out.println("<p>Address: " + locationAddress + ", Postal Code: " + locationPostalCode + "</p>");
+            out.println("<p>Country: " + country + ", City: " + city + "</p>");
+            out.println("<p>Address: " + address + ", Postal Code: " + postalCode + "</p>");
 
             out.println("</body></html>");
 

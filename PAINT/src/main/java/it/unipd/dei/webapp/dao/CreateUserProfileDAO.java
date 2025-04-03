@@ -59,6 +59,12 @@ public final class CreateUserProfileDAO {
             stmnt.setString(11, userProfile.getLocationPostalCode());
             stmnt.setString(12, userProfile.getLocationAddress());
 
+            System.out.println("Country: " + userProfile.getLocationCountry());
+            System.out.println("City: " + userProfile.getLocationCity());
+            System.out.println("Postal Code: " + userProfile.getLocationPostalCode());
+            System.out.println("Address: " + userProfile.getLocationAddress());
+            
+            
             int rs = stmnt.executeUpdate();
             if(rs == 1){
                 return 1;
