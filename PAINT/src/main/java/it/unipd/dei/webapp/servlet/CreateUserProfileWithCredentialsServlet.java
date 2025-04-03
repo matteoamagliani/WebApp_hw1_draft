@@ -15,7 +15,6 @@ import it.unipd.dei.webapp.dao.CreateLocationDAO;
 import it.unipd.dei.webapp.dao.CreateUserProfileDAO;
 
 import it.unipd.dei.webapp.dao.GetLocationDAO;
-import it.unipd.dei.webapp.ID;
 import it.unipd.dei.webapp.resource.ArtisticProfile;
 import it.unipd.dei.webapp.resource.ClientProfile;
 import it.unipd.dei.webapp.resource.Credentials;
@@ -74,14 +73,14 @@ public class CreateUserProfileWithCredentialsServlet extends AbstractDatabaseSer
         // HANDLE REQUEST
 
         // Get parameters from form in "/signup_accountinformations"
-        username = req.getParameter(ID.USERNAME_ID);
-        email = req.getParameter(ID.EMAIL_ID);
-        password = req.getParameter(ID.PASSWORD_ID);
-        role = UserRole.fromString(req.getParameter(ID.ROLE_ID));
-        brandName = req.getParameter(ID.BRAND_NAME_ID);
+        username = req.getParameter(Credentials.USERNAME_NAME);
+        email = req.getParameter(Credentials.EMAIL_NAME);
+        password = req.getParameter(Credentials.PASSWORD_NAME_CLEAN);
+        role = UserRole.fromString(req.getParameter(ArtisticProfile.ROLE_NAME));
+        brandName = req.getParameter(UserProfile.BRAND_NAME_NAME);
         // Handle image
         try {
-            Part filePart = req.getPart(ID.PROFILE_IMAGE_ID);
+            Part filePart = req.getPart(UserProfile.PROFILE_PICTURE_NAME);
             if (filePart != null && filePart.getSize() > 0) {
                 // Extract extension
                 String fileName = filePart.getSubmittedFileName();
@@ -107,13 +106,13 @@ public class CreateUserProfileWithCredentialsServlet extends AbstractDatabaseSer
 
         // Get parameters from session
         HttpSession session = req.getSession();
-        name = (String) session.getAttribute(ID.NAME_ID);
-        surname = (String) session.getAttribute(ID.SURNAME_ID);
-        birthDate = (LocalDate) session.getAttribute(ID.BIRTHDATE_ID);
-        country = (String) session.getAttribute(ID.COUNTRY_ID);
-        city = (String) session.getAttribute(ID.CITY_ID);
-        postalCode = (String) session.getAttribute(ID.POSTAL_CODE_ID);
-        address = (String) session.getAttribute(ID.ADDRESS_ID);
+        name = (String) session.getAttribute(UserProfile.NAME_NAME);
+        surname = (String) session.getAttribute(UserProfile.SURNAME_NAME);
+        birthDate = (LocalDate) session.getAttribute(UserProfile.BIRTH_DATE_NAME);
+        country = (String) session.getAttribute(Location.COUNTRY_NAME);
+        city = (String) session.getAttribute(Location.CITY_NAME);
+        postalCode = (String) session.getAttribute(Location.POSTAL_CODE_NAME);
+        address = (String) session.getAttribute(Location.ADDRESS_NAME);
         session.invalidate();
 
         // Generate remaining parameters

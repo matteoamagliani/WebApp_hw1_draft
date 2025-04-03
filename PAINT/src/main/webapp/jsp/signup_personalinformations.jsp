@@ -1,4 +1,4 @@
-<%@ page import="it.unipd.dei.webapp.ID" %>
+<%@ page import="it.unipd.dei.webapp.resource.UserProfile" %>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -9,9 +9,9 @@
 <body>
     <h2>Personal Information</h2>
     <form method="POST" action="../process_signup_personal_informations">
-        <label>Name* <input type="text" name="<%= ID.NAME_ID %>" required></label><br>
-        <label>Surname* <input type="text" name="<%= ID.SURNAME_ID %>" required></label><br>
-        <label>Birth Date* <input type="date" name="<%= ID.BIRTHDATE_ID %>" required></label><br>
+        <label>Name* <input type="text" name="<%= UserProfile.NAME_NAME %>" required></label><br>
+        <label>Surname* <input type="text" name="<%= UserProfile.SURNAME_NAME %>" required></label><br>
+        <label>Birth Date* <input type="date" name="<%= UserProfile.BIRTH_DATE_NAME %>" required></label><br>
         <button type="submit">Next</button>
     </form>
 </body>
