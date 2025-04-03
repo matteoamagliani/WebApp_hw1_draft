@@ -7,7 +7,8 @@ public class ArtisticProfile {
 
     public static final String TABLE_NAME = "ArtisticProfile";
     public static final String USER_ID_NAME = "userId";
-    public static final String ROLE_NAME = "role";
+    public static final String ROLE_NAME = "\"Role\"";
+    public static final String ROLE_NAME_CLEAN = "Role";
     public static final String BIOGRAPHY_NAME = "biography";
     public static final String FOLLOWER_COUNT_NAME = "followerCount";
     public static final String NUM_PUBLISHED_ART_PIECES_NAME = "numPublishedArtPieces";

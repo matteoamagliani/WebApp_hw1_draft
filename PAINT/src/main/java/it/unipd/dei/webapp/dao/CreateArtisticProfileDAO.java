@@ -10,7 +10,7 @@ import it.unipd.dei.webapp.resource.ArtisticProfile;
 
 public class CreateArtisticProfileDAO {
     private static final String STATEMENT = String.format(
-        "INSERT INTO paint.%s (%s, %s, %s, %s, %s, %s, %s) VALUES (?, ?, ?, ?, ?, ?, ?)",
+        "INSERT INTO paint.%s (%s, %s, %s, %s, %s, %s, %s) VALUES (?, ?::paint.userRole, ?, ?, ?, ?, ?)",
         ArtisticProfile.TABLE_NAME,
         ArtisticProfile.USER_ID_NAME,
         ArtisticProfile.ROLE_NAME,

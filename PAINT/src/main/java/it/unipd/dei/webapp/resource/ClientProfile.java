@@ -6,7 +6,8 @@ public class ClientProfile {
 
     public static final String TABLE_NAME = "ClientProfile";
     public static final String USER_ID_NAME = "userId";
-    public static final String ROLE_NAME = "role";
+    public static final String ROLE_NAME = "\"Role\"";
+    public static final String ROLE_NAME_CLEAN = "Role";
 
     private final UUID userId;
     private final UserRole role;

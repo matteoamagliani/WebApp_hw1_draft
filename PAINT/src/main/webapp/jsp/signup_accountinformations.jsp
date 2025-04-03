@@ -16,7 +16,7 @@
         <label>Email* <input type="email" name="<%= Credentials.EMAIL_NAME %>" required></label><br>
         <label>Password* <input type="password" name="<%= Credentials.PASSWORD_NAME_CLEAN %>" required></label><br>
         <label for="role">Role*</label>
-        <select name="<%= ArtisticProfile.ROLE_NAME %>" id="role" required>
+        <select name="<%= ArtisticProfile.ROLE_NAME_CLEAN %>" id="role" required>
             <option value="" disabled selected>Select your role</option>
             <option value="artist">Artist</option>
             <option value="artgallery">Art Gallery</option>

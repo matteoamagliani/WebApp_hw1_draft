@@ -8,7 +8,7 @@ import it.unipd.dei.webapp.resource.ClientProfile;
 
 public class CreateClientProfileDAO {
     private static final String STATEMENT = String.format(
-        "INSERT INTO paint.%s (%s, %s) VALUES (?, ?)",
+        "INSERT INTO paint.%s (%s, %s) VALUES (?, ?::paint.userRole)",
         ClientProfile.TABLE_NAME,
         ClientProfile.USER_ID_NAME,
         ClientProfile.ROLE_NAME

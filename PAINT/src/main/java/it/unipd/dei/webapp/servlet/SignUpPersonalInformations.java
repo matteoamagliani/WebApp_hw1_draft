@@ -14,14 +14,14 @@ public class SignUpPersonalInformations extends AbstractServlet {
         // TODO logger
 
         // Get parameters from form in "/signup_personalinformations"
-        String name = req.getParameter(UserProfile.NAME_NAME);
+        String name = req.getParameter(UserProfile.NAME_NAME_CLEAN);
         String surname = req.getParameter(UserProfile.SURNAME_NAME);
         String birthDateString = req.getParameter(UserProfile.BIRTH_DATE_NAME);
         LocalDate birthDate = LocalDate.parse(birthDateString);
 
         // Get http session and save parameters
         HttpSession session = req.getSession();
-        session.setAttribute(UserProfile.NAME_NAME, name);
+        session.setAttribute(UserProfile.NAME_NAME_CLEAN, name);
         session.setAttribute(UserProfile.SURNAME_NAME, surname);
         session.setAttribute(UserProfile.BIRTH_DATE_NAME, birthDate);
 

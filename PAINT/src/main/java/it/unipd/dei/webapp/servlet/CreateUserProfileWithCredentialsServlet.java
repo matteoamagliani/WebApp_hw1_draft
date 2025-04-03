@@ -76,7 +76,7 @@ public class CreateUserProfileWithCredentialsServlet extends AbstractDatabaseSer
         username = req.getParameter(Credentials.USERNAME_NAME);
         email = req.getParameter(Credentials.EMAIL_NAME);
         password = req.getParameter(Credentials.PASSWORD_NAME_CLEAN);
-        role = UserRole.fromString(req.getParameter(ArtisticProfile.ROLE_NAME));
+        role = UserRole.fromString(req.getParameter(ArtisticProfile.ROLE_NAME_CLEAN));
         brandName = req.getParameter(UserProfile.BRAND_NAME_NAME);
         // Handle image
         try {
@@ -106,7 +106,7 @@ public class CreateUserProfileWithCredentialsServlet extends AbstractDatabaseSer
 
         // Get parameters from session
         HttpSession session = req.getSession();
-        name = (String) session.getAttribute(UserProfile.NAME_NAME);
+        name = (String) session.getAttribute(UserProfile.NAME_NAME_CLEAN);
         surname = (String) session.getAttribute(UserProfile.SURNAME_NAME);
         birthDate = (LocalDate) session.getAttribute(UserProfile.BIRTH_DATE_NAME);
         country = (String) session.getAttribute(Location.COUNTRY_NAME);
@@ -173,8 +173,8 @@ public class CreateUserProfileWithCredentialsServlet extends AbstractDatabaseSer
             out.println("<h3>Personal Information</h3>");
             out.println("<p>Name: " + name + " " + surname + "</p>");
             out.println("<p>Birth Date: " + birthDate + "</p>");
-            out.println("<p>Country: " + locationCountry + ", City: " + locationCity + "</p>");
-            out.println("<p>Address: " + locationAddress + ", Postal Code: " + locationPostalCode + "</p>");
+            out.println("<p>Country: " + country + ", City: " + city + "</p>");
+            out.println("<p>Address: " + address + ", Postal Code: " + postalCode + "</p>");
 
             out.println("</body></html>");
 
