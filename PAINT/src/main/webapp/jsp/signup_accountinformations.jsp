@@ -1,5 +1,6 @@
 <!-- account_info.html -->
 <%@ page import="it.unipd.dei.webapp.ID" %>
+<%@ page import="it.unipd.dei.webapp.resource.ImageExtensions" %>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -9,7 +10,7 @@
 </head>
 <body>
     <h2>Account Information</h2>
-    <form method="POST" action="../create_userprofile">
+    <form method="POST" action="../create_userprofile" enctype="multipart/form-data">
         <label>Username* <input type="text" name="<%= ID.USERNAME_ID %>" required></label><br>
         <label>Email* <input type="email" name="<%= ID.EMAIL_ID %>" required></label><br>
         <label>Password* <input type="password" name="<%= ID.PASSWORD_ID %>" required></label><br>
@@ -22,7 +23,7 @@
             <option value="businessuser">Business User</option>
         </select>
         <label>Brand Name <input type="text" name="<%= ID.BRAND_NAME_ID %>"></label><br>
-        <label>Profile Image <input type="file" name="<%= ID.PROFILE_IMAGE_ID %>" accept="${acceptExtensions}"></label><br>
+        <label>Profile Image <input type="file" name="<%= ID.PROFILE_IMAGE_ID %>" accept="<%= ImageExtensions.getAcceptAttribute() %>"></label><br>
         <button type="submit">Sign Up</button>
     </form>
 </body>

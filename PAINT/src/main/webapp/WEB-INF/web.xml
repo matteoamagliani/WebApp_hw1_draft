@@ -13,6 +13,11 @@
   <servlet>
     <servlet-name>CreateUserProfileAndCredentials</servlet-name>
     <servlet-class>it.unipd.dei.webapp.servlet.CreateUserProfileWithCredentialsServlet</servlet-class>
+    <multipart-config>
+        <max-file-size>10485760</max-file-size> <!-- 10 MB -->
+        <max-request-size>20971520</max-request-size> <!-- 20 MB -->
+        <file-size-threshold>0</file-size-threshold> <!-- Attiva il caricamento in memoria -->
+    </multipart-config>
   </servlet>
 
   <servlet>
@@ -37,7 +42,7 @@
 
   <servlet-mapping>
     <servlet-name>CreateUserProfileAndCredentials</servlet-name>
-    <url-pattern>/create-userprofile</url-pattern>
+    <url-pattern>/create_userprofile</url-pattern>
   </servlet-mapping>
 
   <resource-ref>
