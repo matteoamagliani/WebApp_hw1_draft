@@ -10,7 +10,7 @@ import java.time.LocalDate;
 
 public final class CreateUserProfileDAO {
     private static final String STATEMENT = String.format(
-        "INSERT INTO paint.%s (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+        "INSERT INTO paint.%s (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s) VALUES (?, ?, ?::paint.imageExtension, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
         UserProfile.TABLE_NAME, 
         UserProfile.ID_NAME, 
         UserProfile.PROFILE_PICTURE_NAME, 
