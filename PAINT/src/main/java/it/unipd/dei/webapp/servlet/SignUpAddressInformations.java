@@ -3,8 +3,6 @@ package it.unipd.dei.webapp.servlet;
 import java.io.IOException;
 
 import it.unipd.dei.webapp.ID;
-import it.unipd.dei.webapp.resource.ImageExtensions;
-import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
@@ -27,11 +25,6 @@ public class SignUpAddressInformations extends AbstractServlet {
         session.setAttribute(ID.ADDRESS_ID, address);
 
         // Redirect to next form
-        req.setAttribute("acceptExtensions", ImageExtensions.getAcceptAttribute());
-        try {
-            req.getRequestDispatcher("jsp/signup_accountinformations.jsp").forward(req, res);
-        } catch (ServletException e) {
-            // TODO logger
-        }
+        res.sendRedirect("jsp/signup_accountinformations.jsp");
     }
 }
