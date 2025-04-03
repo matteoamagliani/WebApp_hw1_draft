@@ -27,9 +27,15 @@
       .sidebar a {
         text-decoration: none;
         color: black;
-        display: block;
+        display: flex;
+        align-items: center;
         padding: 10px;
         margin: 5px 0;
+      }
+      .sidebar a img {
+        width: 24px;
+        height: 24px;
+        margin-right: 8px;
       }
       .logo {
         display: flex;
@@ -57,9 +63,15 @@
     <img src="../media/PAINT.png" alt="Logo">
   </div>
   <nav>
-    <a href="home-page.jsp">🏠 Home</a>
-    <a href="notifications.html">🔔 Notifications</a>
-    <a href="settings.html">⚙️ Settings</a>
+    <a href="home-page.jsp">
+      <img src="../media/home_icon.png" alt="Home"> Home
+    </a>
+    <a href="notifications.html">
+      <img src="../media/notifications_icon.png" alt="Notifications"> Notifications
+    </a>
+    <a href="settings.html">
+      <img src="../media/settings_icon.png" alt="Settings"> Settings
+    </a>
   </nav>
   <div class="user-info">
     <a href="user-profile.jsp?userId=<%= session.getAttribute("userID") %>" style="text-decoration: none; color: inherit;">
