@@ -25,9 +25,14 @@
     <servlet-class>it.unipd.dei.webapp.servlet.SignUpPersonalInformations</servlet-class>
   </servlet>
 
- <servlet>
+  <servlet>
     <servlet-name>ProcessSignUpAddressInformations</servlet-name>
     <servlet-class>it.unipd.dei.webapp.servlet.SignUpAddressInformations</servlet-class>
+  </servlet>
+  
+  <servlet>
+    <servlet-name>LoginServlet</servlet-name>
+    <servlet-class>it.unipd.dei.webapp.servlet.LoginServlet</servlet-class>
   </servlet>
 
   <servlet-mapping>
@@ -43,6 +48,11 @@
   <servlet-mapping>
     <servlet-name>CreateUserProfileAndCredentials</servlet-name>
     <url-pattern>/create_userprofile</url-pattern>
+  </servlet-mapping>
+
+  <servlet-mapping>
+    <servlet-name>LoginServlet</servlet-name>
+    <url-pattern>/loginServlet</url-pattern>
   </servlet-mapping>
 
   <resource-ref>
