@@ -4,6 +4,21 @@ import java.util.UUID;
 import java.time.LocalDate;
 
 public class UserProfile {
+
+    public static final String TABLE_NAME = "UserProfile";
+    public static final String ID_NAME = "id";
+    public static final String PROFILE_PICTURE_NAME = "ProfilePicture";
+    public static final String PICTURE_EXTENSION_NAME = "PictureExtentions";
+    public static final String NAME_NAME = "Name";
+    public static final String SURNAME_NAME = "Surname";
+    public static final String BRAND_NAME_NAME = "BrandName";
+    public static final String BIRTH_DATE_NAME = "BirthDate";
+    public static final String REGISTRATION_DATE_NAME = "RegistrationDate";
+    public static final String LOCATION_COUNTRY_NAME = "LocationCountry";
+    public static final String LOCATION_CITY_NAME = "LocationCity";
+    public static final String LOCATION_POSTAL_CODE_NAME = "LocationPostalCode";
+    public static final String LOCATION_ADDRESS_NAME = "LocationAddress";
+
     private final UUID id;
     private final byte[] profilePicture;
     private final String pictureExtension;
