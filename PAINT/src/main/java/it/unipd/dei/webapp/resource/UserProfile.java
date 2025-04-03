@@ -21,7 +21,7 @@ public class UserProfile {
 
     private final UUID id;
     private final byte[] profilePicture;
-    private final String pictureExtension;
+    private final ImageExtensions pictureExtension; 
     private final String name;
     private final String surname;
     private final String brandName;
@@ -32,7 +32,7 @@ public class UserProfile {
     private final String locationPostalCode;
     private final String locationAddress;
 
-    public UserProfile(final UUID id, final byte[] profilePicture, final String pictureExtension, final String name, final String surname,
+    public UserProfile(final UUID id, final byte[] profilePicture, ImageExtensions pictureExtension, final String name, final String surname,
                        final String brandName, final LocalDate birthDate, final LocalDate registrationDate,
                        final String locationCountry, final String locationCity, final String locationPostalCode, final String locationAddress) {
         this.id = id;
@@ -57,7 +57,7 @@ public class UserProfile {
         return profilePicture;
     }
 
-    public final String getPictureExtension() {
+    public final ImageExtensions getPictureExtension() {
         return pictureExtension;
     }
 

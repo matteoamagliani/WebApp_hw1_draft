@@ -45,7 +45,7 @@ public final class CreateUserProfileDAO {
             stmnt = con.prepareStatement(STATEMENT);
             stmnt.setObject(1, userProfile.getId());
             stmnt.setBytes(2, userProfile.getProfilePicture());
-            stmnt.setString(3, userProfile.getPictureExtension());
+            stmnt.setString(3, userProfile.getPictureExtension().toString());
             stmnt.setString(4, userProfile.getName());
             stmnt.setString(5, userProfile.getSurname());
             stmnt.setString(6, userProfile.getBrandName());

@@ -17,6 +17,7 @@ import it.unipd.dei.webapp.dao.CreateUserProfileDAO;
 import it.unipd.dei.webapp.dao.GetLocationDAO;
 import it.unipd.dei.webapp.ID;
 import it.unipd.dei.webapp.resource.Credentials;
+import it.unipd.dei.webapp.resource.ImageExtensions;
 import it.unipd.dei.webapp.resource.Location;
 import it.unipd.dei.webapp.resource.UserProfile;
 import it.util.PasswordUtil;
@@ -35,7 +36,7 @@ public class CreateUserProfileWithCredentialsServlet extends AbstractDatabaseSer
         // Parameters for UserProfile
         UUID id;
         byte[] profilePicture = null;
-        String pictureExtension = null;
+        ImageExtensions pictureExtension = null;
         String name = null;
         String surname = null;
         String brandName = null;
@@ -73,15 +74,17 @@ public class CreateUserProfileWithCredentialsServlet extends AbstractDatabaseSer
         brandName = req.getParameter(ID.BRAND_NAME_ID);
         // Handle image
         try {
-                // TODO: da rimuovere alla fine, aggiunti per testare il servlet senza upload del file
-                //profilePicture = new byte[0]; // Default empty byte array
-                //pictureExtension = "jpg"; // Default extension
             Part filePart = req.getPart(ID.PROFILE_IMAGE_ID);
             if (filePart != null && filePart.getSize() > 0) {
                 // Extract extension
                 String fileName = filePart.getSubmittedFileName();
                 if (fileName.contains(".")) {
-                    pictureExtension = fileName.substring(fileName.lastIndexOf(".") + 1);
+                    String extension = fileName.substring(fileName.lastIndexOf(".") + 1);
+                    try {
+                        pictureExtension = ImageExtensions.fromString(extension);
+                    } catch (IllegalArgumentException e) {
+                        throw new ServletException("Invalid image extension: " + extension);
+                    }                 
                 }
                 // Convert file to byteArray
                 try (InputStream fileContent = filePart.getInputStream();
@@ -97,6 +100,9 @@ public class CreateUserProfileWithCredentialsServlet extends AbstractDatabaseSer
             }
         } catch (ServletException e) {
             // TODO logger errore (il form non contiene un campo per l'upload dell'immagine)
+            // Log:error
+            e.printStackTrace();
+            throw new IOException("Error processing the uploaded image", e);
         }
 
         // Get parameters from session
