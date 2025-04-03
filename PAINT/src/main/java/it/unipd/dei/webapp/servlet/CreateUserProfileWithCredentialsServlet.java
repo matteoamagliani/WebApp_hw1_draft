@@ -11,11 +11,15 @@ import java.util.UUID;
 import it.unipd.dei.webapp.dao.CreateCredentialsDAO;
 import it.unipd.dei.webapp.dao.CreateLocationDAO;
 import it.unipd.dei.webapp.dao.CreateUserProfileDAO;
+// TODO da rimuovere
+//import it.unipd.dei.webapp.dao.LocationDAO;
+
 import it.unipd.dei.webapp.dao.GetLocationDAO;
 import it.unipd.dei.webapp.ID;
 import it.unipd.dei.webapp.resource.Credentials;
 import it.unipd.dei.webapp.resource.Location;
 import it.unipd.dei.webapp.resource.UserProfile;
+import it.util.PasswordUtil;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -69,6 +73,9 @@ public class CreateUserProfileWithCredentialsServlet extends AbstractDatabaseSer
         brandName = req.getParameter(ID.BRAND_NAME_ID);
         // Handle image
         try {
+                // TODO: da rimuovere alla fine, aggiunti per testare il servlet senza upload del file
+                //profilePicture = new byte[0]; // Default empty byte array
+                //pictureExtension = "jpg"; // Default extension
             Part filePart = req.getPart(ID.PROFILE_IMAGE_ID);
             if (filePart != null && filePart.getSize() > 0) {
                 // Extract extension
@@ -106,6 +113,7 @@ public class CreateUserProfileWithCredentialsServlet extends AbstractDatabaseSer
         // Generate remaining parameters
         id = UUID.randomUUID();
         registrationDate = LocalDate.now();
+        String hashedPassword = PasswordUtil.hashPassword(password);
 
         try {
             location = new Location(country, city, AUcode, address);
@@ -118,7 +126,7 @@ public class CreateUserProfileWithCredentialsServlet extends AbstractDatabaseSer
             userProfile = new UserProfile(id, profilePicture, pictureExtension, username, surname, brandName, birthDate, registrationDate, locationCountry, locationCity, locationPostalCode, locationAddress);
             new CreateUserProfileDAO(getDataSource().getConnection(), userProfile).createUserProfile();
             // Creation of Credentials in db
-            credentials = new Credentials(id, email, password, username);
+            credentials = new Credentials(id, email, hashedPassword, username);
             new CreateCredentialsDAO(getDataSource().getConnection(), credentials).createCredentials();
         } catch (SQLException e) {
             // TODO gestire errore del database

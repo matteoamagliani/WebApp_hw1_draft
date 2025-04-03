@@ -9,7 +9,7 @@ public class UserProfile {
     public static final String ID_NAME = "id";
     public static final String PROFILE_PICTURE_NAME = "ProfilePicture";
     public static final String PICTURE_EXTENSION_NAME = "PictureExtension";
-    public static final String NAME_NAME = "Name";
+    public static final String NAME_NAME = "\"Name\"";
     public static final String SURNAME_NAME = "Surname";
     public static final String BRAND_NAME_NAME = "BrandName";
     public static final String BIRTH_DATE_NAME = "BirthDate";

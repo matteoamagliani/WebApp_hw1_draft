@@ -49,14 +49,23 @@
 		</license>
 	</licenses>
 
-  <properties>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <java.version>20</java.version>
-    <log4j.version>2.20.0</log4j.version>
-  </properties>
+	<organization>
+		<name>Department of Information Engineering (DEI), University of Padua, Italy</name>
+		<url>http://www.dei.unipd.it/en/</url>
+	</organization>
 
-  <build>
-    <defaultGoal>compile</defaultGoal>
+	<!-- Build settings -->
+
+	<!-- Specifies the encoding to be used for project source files -->
+  	<properties>
+    	<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    	<java.version>20</java.version>
+    	<log4j.version>2.20.0</log4j.version>
+  	</properties>
+
+	<!-- Configuration of the default build lifecycle -->
+  	<build>
+    	<defaultGoal>compile</defaultGoal>
 		
 		<!-- source code folder -->
 		<sourceDirectory>${basedir}/src/main/java</sourceDirectory>
@@ -67,51 +76,52 @@
 		<!-- name of the generated package -->
 		<finalName>${project.artifactId}-${project.version}</finalName>
 
+	<!-- configuration of the plugins for the different goals -->
     <plugins>
-      <!-- compiler plugin -->
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.11.0</version>
-				<configuration>
-					<source>${java.version}</source>
-					<target>${java.version}</target>
-				</configuration>
-			</plugin>
+    	<!-- compiler plugin -->
+		<plugin>
+			<groupId>org.apache.maven.plugins</groupId>
+			<artifactId>maven-compiler-plugin</artifactId>
+			<version>3.11.0</version>
+			<configuration>
+				<source>${java.version}</source>
+				<target>${java.version}</target>
+			</configuration>
+		</plugin>
 
-      <!-- javadoc plugin -->
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-javadoc-plugin</artifactId>
-				<version>3.5.0</version>
-				<configuration>
-					<reportOutputDirectory>${basedir}/javadoc</reportOutputDirectory>
-					<author>true</author>
-					<nosince>false</nosince>
-					<show>protected</show>
-					<source>${java.version}</source>
-					<doctitle>${project.name} ${project.version}</doctitle>
-					<windowtitle>${project.artifactId} ${project.version}</windowtitle>
-					<bottom>Copyright &#169; ${project.inceptionYear}&#x2013;{currentYear}
-						<![CDATA[<a href="https://www.unipd.it/en/" target="_blank">University of Padua</a>, Italy. All rights reserved.]]>
-						<![CDATA[<i>Web Applications</i> is a course of the <a href="https://degrees.dei.unipd.it/master-degrees/computer-engineering/" target="_blank">Master Degree in Computer Engineering</a> of the <a href="https://www.dei.unipd.it/en/" target="_blank">Department of Information Engineering</a>.]]>
-						<![CDATA[<i>Web Applications</i> is part of the teaching activities of the <a href="http://iiia.dei.unipd.it/" target="_blank">Intelligent Interactive Information Access (IIIA) Hub</a>.]]>
-					</bottom>
-					<detectJavaApiLink>true</detectJavaApiLink>
-					<detectLinks>true</detectLinks>
-					<validateLinks>true</validateLinks>
-				</configuration>
-			</plugin>
+		<!-- javadoc plugin: output in the javadoc folder -->
+		<plugin>
+			<groupId>org.apache.maven.plugins</groupId>
+			<artifactId>maven-javadoc-plugin</artifactId>
+			<version>3.5.0</version>
+			<configuration>
+				<reportOutputDirectory>${basedir}/javadoc</reportOutputDirectory>
+				<author>true</author>
+				<nosince>false</nosince>
+				<show>protected</show>
+				<source>${java.version}</source>
+				<doctitle>${project.name} ${project.version}</doctitle>
+				<windowtitle>${project.artifactId} ${project.version}</windowtitle>
+				<bottom>Copyright &#169; ${project.inceptionYear}&#x2013;{currentYear}
+					<![CDATA[<a href="https://www.unipd.it/en/" target="_blank">University of Padua</a>, Italy. All rights reserved.]]>
+					<![CDATA[<i>Web Applications</i> is a course of the <a href="https://degrees.dei.unipd.it/master-degrees/computer-engineering/" target="_blank">Master Degree in Computer Engineering</a> of the <a href="https://www.dei.unipd.it/en/" target="_blank">Department of Information Engineering</a>.]]>
+					<![CDATA[<i>Web Applications</i> is part of the teaching activities of the <a href="http://iiia.dei.unipd.it/" target="_blank">Intelligent Interactive Information Access (IIIA) Hub</a>.]]>
+				</bottom>
+				<detectJavaApiLink>true</detectJavaApiLink>
+				<detectLinks>true</detectLinks>
+				<validateLinks>true</validateLinks>
+			</configuration>
+		</plugin>
 
-      <!-- packager plugin -->
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-war-plugin</artifactId>
-				<version>3.3.2</version>
-				<configuration>
-					<webXml>${basedir}/src/main/webapp/WEB-INF/web.xml</webXml>
-				</configuration>
-			</plugin>
+		<!-- packager plugin: create a WAR file to be deployed -->
+		<plugin>
+			<groupId>org.apache.maven.plugins</groupId>
+			<artifactId>maven-war-plugin</artifactId>
+			<version>3.3.2</version>
+			<configuration>
+				<webXml>${basedir}/src/main/webapp/WEB-INF/web.xml</webXml>
+			</configuration>
+		</plugin>
     </plugins>
 
 	<resources>
@@ -189,5 +199,12 @@
 			<artifactId>jakarta.servlet.jsp.jstl</artifactId>
 			<version>3.0.1</version>
 		</dependency>
+
+		<dependency>
+    		<groupId>at.favre.lib</groupId>
+    		<artifactId>bcrypt</artifactId>
+    		<version>0.10.2</version>
+		</dependency>
+
   </dependencies>
 </project>
