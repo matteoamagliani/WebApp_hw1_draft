@@ -9,7 +9,22 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 
 public final class CreateUserProfileDAO {
-    private static final String STATEMENT = "INSERT INTO paint.UserProfile (id, ProfilePicture, PictureExtension, \"Name\", Surname, BrandName, BirthDate, RegistrationDate, LocationCountry, LocationCity, LocationPostalCode, LocationAddress) VALUES (?, ?, ?::paint.imageExtension, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    private static final String STATEMENT = String.format(
+        "INSERT INTO paint.%s (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+        UserProfile.TABLE_NAME, 
+        UserProfile.ID_NAME, 
+        UserProfile.PROFILE_PICTURE_NAME, 
+        UserProfile.PICTURE_EXTENSION_NAME, 
+        UserProfile.NAME_NAME,
+        UserProfile.SURNAME_NAME,
+        UserProfile.BRAND_NAME_NAME,
+        UserProfile.BIRTH_DATE_NAME,
+        UserProfile.REGISTRATION_DATE_NAME,
+        UserProfile.LOCATION_COUNTRY_NAME,
+        UserProfile.LOCATION_CITY_NAME,
+        UserProfile.LOCATION_POSTAL_CODE_NAME,
+        UserProfile.LOCATION_ADDRESS_NAME
+    );
 
     private final Connection con;
     private final UserProfile userProfile;

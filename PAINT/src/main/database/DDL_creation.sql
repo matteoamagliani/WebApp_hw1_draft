@@ -119,7 +119,7 @@ CREATE TYPE paint.allTags AS ENUM (
 );
 
 -- Image extensions
-CREATE TYPE paint.imageExtension AS ENUM ('jpg', 'jpeg', 'png', 'gif', 'bmp', 'webp');
+CREATE TYPE paint.imageExtension AS ENUM ('jpg', 'jpeg', 'png', 'bmp');
 
 -- ##############################################
 -- ##			  TABLES CREATION:		        ##
@@ -150,7 +150,7 @@ CREATE TABLE paint.UserProfile (
     LocationPostalCode VARCHAR(10),
     LocationAddress VARCHAR(254),
 	FOREIGN KEY (LocationCountry, LocationCity, LocationPostalCode, LocationAddress)
-        REFERENCES paint.location (Country, City, PostalCode, Address)
+        REFERENCES paint.Location (Country, City, PostalCode, Address)
 );
 
 -- 3. Create the LOGIN CREDENTIALS table
