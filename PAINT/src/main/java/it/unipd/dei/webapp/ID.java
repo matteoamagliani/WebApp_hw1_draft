@@ -6,7 +6,7 @@ public class ID {
     public static final String BIRTHDATE_ID = "birthdate";
     public static final String COUNTRY_ID = "country";
     public static final String CITY_ID = "city";
-    public static final String AU_CODE_ID = "aucode";
+    public static final String POSTAL_CODE_ID = "postalcode";
     public static final String ADDRESS_ID = "address";
     public static final String USERNAME_ID = "username";
     public static final String EMAIL_ID = "email";

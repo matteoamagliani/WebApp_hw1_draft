@@ -14,14 +14,14 @@ public class SignUpAddressInformations extends AbstractServlet {
         // Get parameters from form in "/signup_addressinformations"
         String country = req.getParameter(ID.COUNTRY_ID);
         String city = req.getParameter(ID.CITY_ID);
-        String AUcode = req.getParameter(ID.AU_CODE_ID);
+        String postalCode = req.getParameter(ID.POSTAL_CODE_ID);
         String address = req.getParameter(ID.ADDRESS_ID);
 
         // Get http session and save parameters
         HttpSession session = req.getSession();
         session.setAttribute(ID.COUNTRY_ID, country);
         session.setAttribute(ID.CITY_ID, city);
-        session.setAttribute(ID.AU_CODE_ID, AUcode);
+        session.setAttribute(ID.POSTAL_CODE_ID, postalCode);
         session.setAttribute(ID.ADDRESS_ID, address);
 
         // Redirect to next form
