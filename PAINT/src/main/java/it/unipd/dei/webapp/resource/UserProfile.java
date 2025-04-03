@@ -8,7 +8,7 @@ public class UserProfile {
     public static final String TABLE_NAME = "UserProfile";
     public static final String ID_NAME = "id";
     public static final String PROFILE_PICTURE_NAME = "ProfilePicture";
-    public static final String PICTURE_EXTENSION_NAME = "PictureExtentions";
+    public static final String PICTURE_EXTENSION_NAME = "PictureExtention";
     public static final String NAME_NAME = "Name";
     public static final String SURNAME_NAME = "Surname";
     public static final String BRAND_NAME_NAME = "BrandName";

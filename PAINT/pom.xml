@@ -50,8 +50,8 @@
 	</licenses>
 
 	<organization>
-		<name>Department of Information Engineering (DEI), University of Padua, Italy</name>¬
-		<url>http://www.dei.unipd.it/en/</url>¬
+		<name>Department of Information Engineering (DEI), University of Padua, Italy</name>
+		<url>http://www.dei.unipd.it/en/</url>
 	</organization>
 
 	<!-- Build settings -->
@@ -63,7 +63,7 @@
     	<log4j.version>2.20.0</log4j.version>
   	</properties>
 
-	<!-- Configuration of the default build lifecycle -->¬
+	<!-- Configuration of the default build lifecycle -->
   	<build>
     	<defaultGoal>compile</defaultGoal>
 		
