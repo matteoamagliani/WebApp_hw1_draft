@@ -3,6 +3,12 @@ package it.unipd.dei.webapp.resource;
 import java.util.UUID;
 
 public class Buys {
+
+    public static final String TABLE_NAME = "Buys";
+    public static final String CLIENT_USER_ID_NAME = "clientUserId";
+    public static final String ORDER_ID_NAME = "orderId";
+    public static final String ART_PIECE_ID_NAME = "artPieceId";
+
     private final UUID clientUserId;
     private final UUID orderId;
     private final UUID artPieceId;

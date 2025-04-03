@@ -4,6 +4,12 @@ import java.util.UUID;
 import java.time.LocalDate;
 
 public class Follows {
+
+    public static final String TABLE_NAME = "Follows";
+    public static final String USER_ID_FOLLOWER_NAME = "userIdFollower";
+    public static final String ARTISTIC_USER_ID_FOLLOWED_NAME = "artisticUserIdFollowed";
+    public static final String FOLLOW_DATE_NAME = "followDate"; 
+
     private final UUID userIdFollower;
     private final UUID artisticUserIdFollowed;
     private final LocalDate followDate;

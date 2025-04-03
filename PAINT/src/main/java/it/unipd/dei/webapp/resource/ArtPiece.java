@@ -4,6 +4,20 @@ import java.util.UUID;
 import java.time.LocalDate;
 
 public class ArtPiece {
+
+    public static final String TABLE_NAME = "ArtPiece";
+    public static final String ID_NAME = "id";
+    public static final String ARTISTIC_USER_ID_NAME = "artisticUserId";
+    public static final String DESCRIPTION_NAME = "description";
+    public static final String WEIGHT_NAME = "weight";
+    public static final String TITLE_NAME = "title";
+    public static final String CREATION_DATE_NAME = "creationDate";
+    public static final String DIMENSION_WIDTH_NAME = "dimensionWidth";
+    public static final String DIMENSION_HEIGHT_NAME = "dimensionHeight";
+    public static final String DIMENSION_LENGTH_NAME = "dimensionLength";
+    public static final String UPLOAD_DATE_NAME = "uploadDate";
+    
+
     private final UUID id;
     private final UUID artisticUserId;
     private final String description;

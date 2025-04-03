@@ -4,6 +4,22 @@ import java.util.UUID;
 import java.time.LocalDate;
 
 public class OrderDetails {
+    
+    public static final String TABLE_NAME = "OrderDetails";
+    public static final String ID_NAME = "id";
+    public static final String SHIPPING_PRICE_NAME = "shippingPrice";
+    public static final String STATUS_NAME = "status";
+    public static final String NOTE_NAME = "note";
+    public static final String CREATION_DATE_NAME = "creationDate";
+    public static final String LOCATION_COUNTRY_SHIPMENT_NAME = "locationCountryShipment";
+    public static final String LOCATION_CITY_SHIPMENT_NAME = "locationCityShipment";
+    public static final String LOCATION_POSTAL_CODE_SHIPMENT_NAME = "locationPostalCodeShipment";
+    public static final String LOCATION_ADDRESS_SHIPMENT_NAME = "locationAddressShipment";
+    public static final String LOCATION_COUNTRY_DELIVERY_NAME = "locationCountryDelivery";
+    public static final String LOCATION_CITY_DELIVERY_NAME = "locationCityDelivery";
+    public static final String LOCATION_POSTAL_CODE_DELIVERY_NAME = "locationPostalCodeDelivery";
+    public static final String LOCATION_ADDRESS_DELIVERY_NAME = "locationAddressDelivery";
+
     private final UUID id;
     private final double shippingPrice;
     private final String status;

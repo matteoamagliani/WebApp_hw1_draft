@@ -4,6 +4,12 @@ import java.util.UUID;
 import java.time.LocalDate;
 
 public class Advertisement {
+
+    public static final String TABLE_NAME = "Advertisement";
+    public static final String ART_PIECE_ID_NAME = "artPieceId";
+    public static final String PRICE_NAME = "price";
+    public static final String PUBLICATION_DATE_NAME = "publicationDate";
+
     private final UUID artPieceId;
     private final double price;
     private final LocalDate publicationDate;

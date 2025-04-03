@@ -3,6 +3,11 @@ package it.unipd.dei.webapp.resource;
 import java.util.UUID;
 
 public class Participates {
+
+    public static final String TABLE_NAME = "Participates";
+    public static final String EVENT_ID_NAME = "eventId";
+    public static final String ARTISTIC_USER_ID_NAME = "artisticUserId"; 
+
     private final UUID eventId;
     private final UUID artisticUserId;
 

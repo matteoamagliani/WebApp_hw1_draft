@@ -4,6 +4,13 @@ import java.util.UUID;
 import java.time.LocalDate;
 
 public class Reviews1 {
+
+    public static final String TABLE_NAME = "Reviews1";
+    public static final String CLIENT_USER_ID_NAME = "clientUserId"; 
+    public static final String EVENT_ID_NAME = "eventId"; 
+    public static final String SCORE_NAME = "score"; 
+    public static final String REVIEW_DATE_NAME = "reviewDate"; 
+
     private final UUID clientUserId;
     private final UUID eventId;
     private final short score;

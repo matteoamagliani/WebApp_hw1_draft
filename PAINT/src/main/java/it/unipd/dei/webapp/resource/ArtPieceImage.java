@@ -3,6 +3,13 @@ package it.unipd.dei.webapp.resource;
 import java.util.UUID;
 
 public class ArtPieceImage {
+
+    public static final String TABLE_NAME = "ArtPieceImage";
+    public static final String ART_PIECE_ID_NAME = "artPieceId";
+    public static final String IMAGE_INDEX_NAME = "imageIndex";
+    public static final String IMAGE_DATA_NAME = "imageData";
+    public static final String EXTENSION_NAME = "extension";
+
     private final UUID artPieceId;
     private final int imageIndex;
     private final byte[] imageData;

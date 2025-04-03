@@ -3,6 +3,13 @@ package it.unipd.dei.webapp.resource;
 import java.util.UUID;
 
 public class EventImage {
+    
+    public static final String TABLE_NAME = "EventImage";
+    public static final String EVENT_ID_NAME = "eventId";
+    public static final String IMAGE_INDEX_NAME = "imageIndex";
+    public static final String IMAGE_DATA_NAME = "imageData";
+    public static final String EXTENSION_NAME = "extension";
+
     private final UUID eventId;
     private final int imageIndex;
     private final byte[] imageData;

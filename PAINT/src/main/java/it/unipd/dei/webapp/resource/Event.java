@@ -4,6 +4,16 @@ import java.util.UUID;
 import java.time.LocalDate;
 
 public class Event {
+
+    public static final String TABLE_NAME = "Event";
+    public static final String ID_NAME = "id";
+    public static final String ARTISTIC_USER_ID_ORGANIZER_NAME = "artisticUserIdOrganizer";
+    public static final String START_DATE_NAME = "startDate";
+    public static final String END_DATE_NAME = "endDate";
+    public static final String TITLE_NAME = "title";
+    public static final String DESCRIPTION_NAME = "description";
+    public static final String UPLOAD_DATE_NAME = "uploadDate";    
+
     private final UUID id;
     private final UUID artisticUserIdOrganizer;
     private final LocalDate startDate;
