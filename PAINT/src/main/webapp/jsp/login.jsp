@@ -15,15 +15,15 @@
         <table border="1" cellpadding="10" cellspacing="0">
             <tr>
                 <td>
-                    <form action="../login" method="post">
+                    <form method="POST" action="../login" >
                         <table>
                             <tr>
                                 <td><label for="email">Email/Username:</label></td>
-                                <td><input type="text" id="<%= Credentials.EMAIL_NAME %>" name="email" required></td>
+                                <td><input type="text" name="<%= Credentials.EMAIL_NAME %>" id="email" required></td>
                             </tr>
                             <tr>
                                 <td><label for="password">Password:</label></td>
-                                <td><input type="password" id="<%= Credentials.PASSWORD_NAME_CLEAN %>" name="password" required></td>
+                                <td><input type="password" name="<%= Credentials.PASSWORD_NAME_CLEAN %>" id="password" required></td>
                             </tr>
                             <tr>
                                 <td colspan="2" align="center">

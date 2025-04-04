@@ -35,10 +35,10 @@ public class GetCredentialsByUsernameDAO {
             
             Credentials new_credentials = null;
             if(rs.next()){
-                UUID id = rs.getObject("id", UUID.class);
-                String email = rs.getString("Email");
-                String password = rs.getString("Password");
-                String username = rs.getString("Username");
+                UUID id = rs.getObject(Credentials.USER_ID_NAME, UUID.class);
+                String email = rs.getString(Credentials.EMAIL_NAME);
+                String password = rs.getString(Credentials.PASSWORD_NAME_CLEAN);
+                String username = rs.getString(Credentials.USERNAME_NAME);
 
                 new_credentials = new Credentials(id, email, password, username);
             }

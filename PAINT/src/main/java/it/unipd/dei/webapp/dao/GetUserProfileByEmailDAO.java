@@ -41,18 +41,18 @@ public class GetUserProfileByEmailDAO {
             
             UserProfile new_userProfile = null;
             if(rs.next()){
-                UUID id = rs.getObject("id", UUID.class);
-                byte[] profilePicture = rs.getBytes("ProfilePicture");
-                ImageExtensions pictureExtension = ImageExtensions.fromString(rs.getString("PictureExtension"));
-                String name = rs.getString("Name");
-                String surname = rs.getString("Surname");
-                String brandName = rs.getString("BrandName");
-                LocalDate birthDate = rs.getDate("BirthDate").toLocalDate();
-                LocalDate registrationDate = rs.getDate("RegistrationDate").toLocalDate();
-                String locationCountry = rs.getString("LocationCountry");
-                String locationCity = rs.getString("LocationCity");
-                String locationPostalCode = rs.getString("LocationPostalCode");
-                String locationAddress = rs.getString("LocationAddress");
+                UUID id = rs.getObject(UserProfile.ID_NAME, UUID.class);
+                byte[] profilePicture = rs.getBytes(UserProfile.PROFILE_PICTURE_NAME);
+                ImageExtensions pictureExtension = ImageExtensions.fromString(rs.getString(UserProfile.PICTURE_EXTENSION_NAME));
+                String name = rs.getString(UserProfile.NAME_NAME_CLEAN);
+                String surname = rs.getString(UserProfile.SURNAME_NAME);
+                String brandName = rs.getString(UserProfile.BRAND_NAME_NAME);
+                LocalDate birthDate = rs.getDate(UserProfile.BIRTH_DATE_NAME).toLocalDate();
+                LocalDate registrationDate = rs.getDate(UserProfile.REGISTRATION_DATE_NAME).toLocalDate();
+                String locationCountry = rs.getString(UserProfile.LOCATION_COUNTRY_NAME);
+                String locationCity = rs.getString(UserProfile.LOCATION_CITY_NAME);
+                String locationPostalCode = rs.getString(UserProfile.LOCATION_POSTAL_CODE_NAME);
+                String locationAddress = rs.getString(UserProfile.LOCATION_ADDRESS_NAME);
 
                 new_userProfile = new UserProfile(id, profilePicture, pictureExtension, name, surname, brandName, birthDate, registrationDate, locationCountry, locationCity, locationPostalCode, locationAddress);
             }
