@@ -1,10 +1,9 @@
 package it.unipd.dei.webapp.resource;
 
-import java.util.HashMap;
-import java.util.Map;
 import java.util.UUID;
 
 import it.unipd.dei.webapp.validation.Validatable;
+import it.unipd.dei.webapp.validation.ValidationHashMap;
 import it.unipd.dei.webapp.validation.Validator;
 
 import java.time.LocalDate;
@@ -106,8 +105,8 @@ public class UserProfile implements Validatable {
         return locationAddress;
     }
 
-    public Map<String, String> validateFields() {
-        Map<String, String> output = new HashMap<String, String>();
+    public ValidationHashMap validateFields() {
+        ValidationHashMap output = new ValidationHashMap();
         // Name validation
         String result = Validator.validateString(name, 50);
         output.put(NAME_NAME, result);
