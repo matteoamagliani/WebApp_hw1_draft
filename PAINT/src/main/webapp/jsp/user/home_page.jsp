@@ -1,15 +1,11 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: nicolostefani
-  Date: 02/04/25
-  Time: 15:51
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="java.util.*, java.sql.*, java.util.UUID" %>
+<%@ page import="it.unipd.dei.webapp.dao.GetRecommendedUserProfileDAO" %>
+<%@ page import="it.unipd.dei.webapp.dao.HomepageDAO" %>
 <%@ page import="it.unipd.dei.webapp.dao.HomepageDAO" %>
 <%@ page import="it.unipd.dei.webapp.resource.Content" %>
 <%@ page import="it.unipd.dei.webapp.resource.UserProfile" %>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
