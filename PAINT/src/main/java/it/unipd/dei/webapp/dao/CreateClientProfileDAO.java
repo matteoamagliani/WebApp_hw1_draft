@@ -7,9 +7,10 @@ import java.sql.SQLException;
 import it.unipd.dei.webapp.resource.ClientProfile;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.message.StringFormatterMessageFactory;
 
 public class CreateClientProfileDAO {
-    private final static Logger logger = LogManager.getLogger(CreateClientProfileDAO.class);
+    private final static Logger logger = LogManager.getLogger(CreateClientProfileDAO.class, StringFormatterMessageFactory.INSTANCE);
 
     private static final String STATEMENT = String.format(
         "INSERT INTO paint.%s (%s, %s) VALUES (?, ?::paint.userRole)",

@@ -1,6 +1,9 @@
 package it.unipd.dei.webapp.dao;
 
 import it.unipd.dei.webapp.resource.Location;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.message.StringFormatterMessageFactory;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -8,6 +11,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class GetLocationDAO {
+    private static final Logger logger = LogManager.getLogger(GetLocationDAO.class, StringFormatterMessageFactory.INSTANCE );
+
     private static final String STATEMENT = String.format(
         "SELECT * FROM paint.%s WHERE %s = ? AND %s = ? AND %s = ? AND %s = ?",
         Location.TABLE_NAME, 
@@ -46,6 +51,7 @@ public class GetLocationDAO {
                 String address = rs.getString(Location.ADDRESS_NAME);
 
                 new_location = new Location(country, city, postalCode, address);
+                logger.info("Location found.");
             }
             return new_location;
         } finally {

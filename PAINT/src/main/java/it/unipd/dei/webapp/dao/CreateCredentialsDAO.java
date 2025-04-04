@@ -3,13 +3,14 @@ package it.unipd.dei.webapp.dao;
 import it.unipd.dei.webapp.resource.Credentials;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.message.StringFormatterMessageFactory;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 public final class CreateCredentialsDAO {
-    private final static Logger logger = LogManager.getLogger(CreateCredentialsDAO.class);
+    private final static Logger logger = LogManager.getLogger(CreateCredentialsDAO.class, StringFormatterMessageFactory.INSTANCE);
 
     private static final String STATEMENT = String.format(
         "INSERT INTO paint.%s (%s, %s, %s, %s) VALUES (?, ?, ?, ?)",

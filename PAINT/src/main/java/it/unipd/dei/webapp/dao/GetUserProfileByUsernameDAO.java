@@ -2,6 +2,9 @@ package it.unipd.dei.webapp.dao;
 
 import it.unipd.dei.webapp.resource.ImageExtensions;
 import it.unipd.dei.webapp.resource.UserProfile;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.message.StringFormatterMessageFactory;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -11,6 +14,8 @@ import java.time.LocalDate;
 import java.util.UUID;
 
 public class GetUserProfileByUsernameDAO {
+
+    private static final Logger logger = LogManager.getLogger(GetUserProfileByUsernameDAO.class, StringFormatterMessageFactory.INSTANCE);
     private static final String STATEMENT = "SELECT up.* FROM paint.UserProfile up JOIN paint.Credentials c ON up.\"id\" = c.UserId WHERE c.Username = ?";
 
     private final Connection con;
@@ -47,6 +52,7 @@ public class GetUserProfileByUsernameDAO {
                 String locationAddress = rs.getString("LocationAddress");
 
                 new_userProfile = new UserProfile(id, profilePicture, pictureExtension, name, surname, brandName, birthDate, registrationDate, locationCountry, locationCity, locationPostalCode, locationAddress);
+                logger.info("User profile found for the user.");
             }
             return new_userProfile;
         } finally {

@@ -3,6 +3,7 @@ package it.unipd.dei.webapp.dao;
 import it.unipd.dei.webapp.resource.UserProfile;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.message.StringFormatterMessageFactory;
 
 import java.sql.Connection;
 import java.sql.Date;
@@ -11,7 +12,7 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 
 public final class CreateUserProfileDAO {
-    private final static Logger logger = LogManager.getLogger(CreateUserProfileDAO.class);
+    private final static Logger logger = LogManager.getLogger(CreateUserProfileDAO.class, StringFormatterMessageFactory.INSTANCE);
 
     private static final String STATEMENT = String.format(
         "INSERT INTO paint.%s (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s) VALUES (?, ?, ?::paint.imageExtension, ?, ?, ?, ?, ?, ?, ?, ?, ?)",

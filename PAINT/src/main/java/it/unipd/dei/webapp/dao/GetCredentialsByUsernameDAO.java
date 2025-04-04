@@ -1,6 +1,9 @@
 package it.unipd.dei.webapp.dao;
 
 import it.unipd.dei.webapp.resource.Credentials;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.message.StringFormatterMessageFactory;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -9,6 +12,7 @@ import java.sql.SQLException;
 import java.util.UUID;
 
 public class GetCredentialsByUsernameDAO {
+    private final static Logger logger = LogManager.getLogger(GetCredentialsByUsernameDAO.class, StringFormatterMessageFactory.INSTANCE);
     private static final String STATEMENT = "SELECT * FROM paint.Credentials WHERE Username = ?";
 
     private final Connection con;
@@ -37,6 +41,8 @@ public class GetCredentialsByUsernameDAO {
                 String username = rs.getString("Username");
 
                 new_credentials = new Credentials(id, email, password, username);
+
+                logger.info("Credentials found for the user.");
             }
             return new_credentials;
         } finally {
