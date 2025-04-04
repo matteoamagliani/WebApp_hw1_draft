@@ -58,19 +58,20 @@
   </style>
 </head>
 <body>
+<!-- TODO:come se mettono i maledetti path??-->
 <aside class="sidebar">
   <div class="logo">
-    <img src="../media/PAINT.png" alt="Logo">
+    <img src=".../media/PAINT.png" alt="Logo">
   </div>
   <nav>
     <a href="home-page.jsp">
-      <img src="../media/home_icon.png" alt="Home"> Home
+      <img src=".../media/home_icon.png" alt="Home"> Home
     </a>
     <a href="notifications.html">
-      <img src="../media/notifications_icon.png" alt="Notifications"> Notifications
+      <img src=".../media/notifications_icon.png" alt="Notifications"> Notifications
     </a>
     <a href="settings.html">
-      <img src="../media/settings_icon.png" alt="Settings"> Settings
+      <img src=".../media/settings_icon.png" alt="Settings"> Settings
     </a>
   </nav>
   <div class="user-info">

@@ -10,7 +10,7 @@ import it.unipd.dei.webapp.resource.UserProfile;
 import it.unipd.dei.webapp.resource.Content;
 
 //TODO: cambia tutto con UserProfile.
-public class Homepage{
+public class HomepageDAO {
     private final String url = "jdbc:postgresql://localhost:5432/paintdb";
     private final String user = "PAINT_owner";
     private final String password = "paint2425";
@@ -31,18 +31,18 @@ public class Homepage{
             try (ResultSet rs = stmt.executeQuery()) {
                 if (rs.next()) {
                     return new UserProfile(
-                            rs.getObject("id", UUID.class),
+                            rs.getObject(UserProfile.ID_NAME, UUID.class),
                             rs.getBytes(UserProfile.PROFILE_PICTURE_NAME),
-                            rs.getObject("PictureExtension", ImageExtensions.class),
-                            rs.getString("Name"),
-                            rs.getString("Surname"),
-                            rs.getString("BrandName"),
-                            rs.getDate("BirthDate").toLocalDate(),
-                            rs.getDate("RegistrationDate").toLocalDate(),
-                            rs.getString("LocationCountry"),
-                            rs.getString("LocationCity"),
-                            rs.getString("LocationPostalCode"),
-                            rs.getString("LocationAddress")
+                            rs.getObject(UserProfile.PICTURE_EXTENSION_NAME, ImageExtensions.class),
+                            rs.getString(UserProfile.NAME_NAME),
+                            rs.getString(UserProfile.SURNAME_NAME),
+                            rs.getString(UserProfile.BRAND_NAME_NAME),
+                            rs.getDate(UserProfile.BIRTH_DATE_NAME).toLocalDate(),
+                            rs.getDate(UserProfile.REGISTRATION_DATE_NAME).toLocalDate(),
+                            rs.getString(UserProfile.LOCATION_COUNTRY_NAME),
+                            rs.getString(UserProfile.LOCATION_CITY_NAME),
+                            rs.getString(UserProfile.LOCATION_POSTAL_CODE_NAME),
+                            rs.getString(UserProfile.LOCATION_ADDRESS_NAME)
                     );
                 }
             }
@@ -69,7 +69,7 @@ public class Homepage{
                 while (rs.next()) {
                     contents.add(new Content(
                             rs.getString("Type"),
-                            rs.getObject("id", UUID.class),
+                            rs.getObject(UserProfile.ID_NAME, UUID.class),
                             rs.getString("Title"),
                             rs.getString("Description"),
                             rs.getDate("UploadDate").toLocalDate(),
@@ -99,7 +99,7 @@ public class Homepage{
                 recommended.add(new UserProfile(
                         rs.getObject("id", UUID.class),
                         rs.getBytes("ProfilePicture"),
-                        rs.getString("PictureExtension"),
+                        rs.getObject(UserProfile.PICTURE_EXTENSION_NAME, ImageExtensions.class),
                         rs.getString("Name"),
                         rs.getString("Surname"),
                         null,          // BrandName non disponibile
@@ -131,7 +131,7 @@ public class Homepage{
                     users.add(new UserProfile(
                             rs.getObject("id", UUID.class),
                             rs.getBytes("ProfilePicture"),
-                            rs.getString("PictureExtension"),
+                            rs.getObject(UserProfile.PICTURE_EXTENSION_NAME, ImageExtensions.class),
                             rs.getString("Name"),
                             rs.getString("Surname"),
                             null,          // BrandName non disponibile
