@@ -19,37 +19,6 @@ public class HomepageDAO {
         return DriverManager.getConnection(url, user, password);
     }
 
-    // Ottiene informazioni complete dell'utente
-    public UserProfile getUserProfile(UUID userId) throws SQLException {
-        String sql = "SELECT u.id, u.ProfilePicture, u.PictureExtension, u.Name, u.Surname, u.BrandName, " +
-                "u.BirthDate, u.RegistrationDate, u.LocationCountry, u.LocationCity, u.LocationPostalCode, u.LocationAddress " +
-                "FROM paint.UserProfile u WHERE u.id = ?";
-
-        try (Connection conn = connect();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
-            stmt.setObject(1, userId);
-            try (ResultSet rs = stmt.executeQuery()) {
-                if (rs.next()) {
-                    return new UserProfile(
-                            rs.getObject(UserProfile.ID_NAME, UUID.class),
-                            rs.getBytes(UserProfile.PROFILE_PICTURE_NAME),
-                            rs.getObject(UserProfile.PICTURE_EXTENSION_NAME, ImageExtensions.class),
-                            rs.getString(UserProfile.NAME_NAME),
-                            rs.getString(UserProfile.SURNAME_NAME),
-                            rs.getString(UserProfile.BRAND_NAME_NAME),
-                            rs.getDate(UserProfile.BIRTH_DATE_NAME).toLocalDate(),
-                            rs.getDate(UserProfile.REGISTRATION_DATE_NAME).toLocalDate(),
-                            rs.getString(UserProfile.LOCATION_COUNTRY_NAME),
-                            rs.getString(UserProfile.LOCATION_CITY_NAME),
-                            rs.getString(UserProfile.LOCATION_POSTAL_CODE_NAME),
-                            rs.getString(UserProfile.LOCATION_ADDRESS_NAME)
-                    );
-                }
-            }
-        }
-        return null;
-    }
-
     // Ottiene ArtPieces ed Eventi dell'utente
     public List<Content> getUserContent(UUID userId) throws SQLException {
         List<Content> contents = new ArrayList<>();
