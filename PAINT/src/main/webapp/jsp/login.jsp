@@ -15,7 +15,7 @@
         <table border="1" cellpadding="10" cellspacing="0">
             <tr>
                 <td>
-                    <form action="../loginServlet" method="post">
+                    <form action="../login" method="post">
                         <table>
                             <tr>
                                 <td><label for="email">Email/Username:</label></td>
