@@ -65,7 +65,7 @@
   </div>
   <nav>
     <a href="home-page.jsp">
-      <img src=".../media/home_icon.png" alt="Home"> Home
+      <img src="../..//media/home_icon.png" alt="Home"> Home
     </a>
     <a href="notifications.html">
       <img src=".../media/notifications_icon.png" alt="Notifications"> Notifications
