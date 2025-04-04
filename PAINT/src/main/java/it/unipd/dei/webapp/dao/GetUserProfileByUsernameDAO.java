@@ -1,5 +1,6 @@
 package it.unipd.dei.webapp.dao;
 
+import it.unipd.dei.webapp.resource.Credentials;
 import it.unipd.dei.webapp.resource.ImageExtensions;
 import it.unipd.dei.webapp.resource.UserProfile;
 
@@ -11,7 +12,14 @@ import java.time.LocalDate;
 import java.util.UUID;
 
 public class GetUserProfileByUsernameDAO {
-    private static final String STATEMENT = "SELECT up.* FROM paint.UserProfile up JOIN paint.Credentials c ON up.\"id\" = c.UserId WHERE c.Username = ?";
+    private static final String STATEMENT = String.format(
+        "SELECT up.* FROM paint.%s up JOIN paint.%s c ON up.%s = c.%s WHERE c.%s = ?",
+        UserProfile.TABLE_NAME,
+        Credentials.TABLE_NAME,
+        UserProfile.ID_NAME,
+        Credentials.USER_ID_NAME,
+        Credentials.USERNAME_NAME
+    );
 
     private final Connection con;
     private final String username;
