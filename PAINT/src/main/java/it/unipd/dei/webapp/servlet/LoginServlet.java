@@ -61,7 +61,6 @@ public class LoginServlet extends AbstractDatabaseServlet {
                 res.sendRedirect("jsp/user/home_page.jsp");
             } else {
                 // Redirect back to login if the Credentials are not correct
-                System.out.println("Wrong credentials");
                 req.setAttribute("loginFailed", true);
                 req.getRequestDispatcher("jsp/login.jsp").forward(req, res);
                 return;
