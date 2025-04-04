@@ -5,8 +5,12 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 import it.unipd.dei.webapp.resource.ClientProfile;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class CreateClientProfileDAO {
+    private final static Logger logger = LogManager.getLogger(CreateClientProfileDAO.class);
+
     private static final String STATEMENT = String.format(
         "INSERT INTO paint.%s (%s, %s) VALUES (?, ?::paint.userRole)",
         ClientProfile.TABLE_NAME,
@@ -20,6 +24,7 @@ public class CreateClientProfileDAO {
     public CreateClientProfileDAO(Connection con, ClientProfile clientProfile) {
         if(clientProfile == null) {
             // TODO Logger
+            logger.error("Client profile is null");
             throw new NullPointerException("The client profile cannot be null");
         }
         this.con = con;

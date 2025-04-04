@@ -1,12 +1,16 @@
 package it.unipd.dei.webapp.dao;
 
 import it.unipd.dei.webapp.resource.Credentials;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 public final class CreateCredentialsDAO {
+    private final static Logger logger = LogManager.getLogger(CreateCredentialsDAO.class);
+
     private static final String STATEMENT = String.format(
         "INSERT INTO paint.%s (%s, %s, %s, %s) VALUES (?, ?, ?, ?)",
         Credentials.TABLE_NAME, 
@@ -22,6 +26,7 @@ public final class CreateCredentialsDAO {
     public CreateCredentialsDAO(Connection con, Credentials credentials) {
         if(credentials == null) {
             // TODO Logger
+            logger.error("Credentials is null");
             throw new NullPointerException("The credentials cannot be null");
         }
         this.con = con;

@@ -15,13 +15,7 @@ import it.unipd.dei.webapp.dao.CreateLocationDAO;
 import it.unipd.dei.webapp.dao.CreateUserProfileDAO;
 
 import it.unipd.dei.webapp.dao.GetLocationDAO;
-import it.unipd.dei.webapp.resource.ArtisticProfile;
-import it.unipd.dei.webapp.resource.ClientProfile;
-import it.unipd.dei.webapp.resource.Credentials;
-import it.unipd.dei.webapp.resource.ImageExtensions;
-import it.unipd.dei.webapp.resource.Location;
-import it.unipd.dei.webapp.resource.UserProfile;
-import it.unipd.dei.webapp.resource.UserRole;
+import it.unipd.dei.webapp.resource.*;
 import it.unipd.dei.webapp.util.PasswordUtil;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -34,7 +28,8 @@ public class CreateUserProfileWithCredentialsServlet extends AbstractDatabaseSer
 
     public void doPost(HttpServletRequest req, HttpServletResponse res) throws IOException {
         // TODO logger
-
+        LogContext.setIPAddress(req.getRemoteAddr());
+        LogContext.setAction(Actions.CREATE_USERPROFILE);
         // Parameters for UserProfile
         UUID id;
         byte[] profilePicture = null;
@@ -98,6 +93,7 @@ public class CreateUserProfileWithCredentialsServlet extends AbstractDatabaseSer
             }
         } catch (ServletException e) {
             // TODO logger errore (il form non contiene un campo per l'upload dell'immagine)
+            logger.error("Wrong form type.", e);
         }
 
         // Get parameters from session
@@ -152,6 +148,7 @@ public class CreateUserProfileWithCredentialsServlet extends AbstractDatabaseSer
             new CreateCredentialsDAO(getDataSource().getConnection(), credentials).createCredentials();
         } catch (SQLException e) {
             // TODO gestire errore del database
+            logger.error("Database error", e);
         }
         
 
@@ -178,6 +175,8 @@ public class CreateUserProfileWithCredentialsServlet extends AbstractDatabaseSer
             out.close();
         } finally {
             // TODO non so che fare qui ma serve un finally per ora
+            //questo è messo qui come fermabuco
+            logger.info("User creation process completed.");
         }
     }
     

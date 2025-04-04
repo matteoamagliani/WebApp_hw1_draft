@@ -1,6 +1,8 @@
 package it.unipd.dei.webapp.dao;
 
 import it.unipd.dei.webapp.resource.UserProfile;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.sql.Connection;
 import java.sql.Date;
@@ -9,6 +11,8 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 
 public final class CreateUserProfileDAO {
+    private final static Logger logger = LogManager.getLogger(CreateUserProfileDAO.class);
+
     private static final String STATEMENT = String.format(
         "INSERT INTO paint.%s (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s) VALUES (?, ?, ?::paint.imageExtension, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
         UserProfile.TABLE_NAME, 
@@ -32,6 +36,7 @@ public final class CreateUserProfileDAO {
     public CreateUserProfileDAO(Connection con, UserProfile userProfile) {
         if(userProfile == null) {
             // TODO Logger
+            logger.error("UserProfile is null");
             throw new NullPointerException("The user profile cannot be null");
         }
         this.con = con;

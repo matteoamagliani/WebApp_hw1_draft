@@ -7,8 +7,13 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 
 import it.unipd.dei.webapp.resource.ArtisticProfile;
+import it.unipd.dei.webapp.resource.LogContext;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class CreateArtisticProfileDAO {
+    private static final Logger logger = LogManager.getLogger(CreateArtisticProfileDAO.class);
+
     private static final String STATEMENT = String.format(
         "INSERT INTO paint.%s (%s, %s, %s, %s, %s, %s, %s) VALUES (?, ?::paint.userRole, ?, ?, ?, ?, ?)",
         ArtisticProfile.TABLE_NAME,
@@ -27,6 +32,7 @@ public class CreateArtisticProfileDAO {
     public CreateArtisticProfileDAO(Connection con, ArtisticProfile artisticProfile) {
         if(artisticProfile == null) {
             // TODO Logger
+            logger.error("ArtisticProfile is null");
             throw new NullPointerException("The artistic profile cannot be null");
         }
         this.con = con;
