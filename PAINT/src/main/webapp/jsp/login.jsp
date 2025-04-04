@@ -11,11 +11,11 @@
 </head>
 <body>
     <div align="center">
-        <img src="../media/PAINT.png" alt="Logo">
+        <img src="<c:url value='/media/PAINT.png' />" alt="Logo">
         <table border="1" cellpadding="10" cellspacing="0">
             <tr>
                 <td>
-                    <form method="POST" action="../login" >
+                    <form method="POST" action="<c:url value='/login' />" >
                         <table>
                             <tr>
                                 <td><label for="email">Email/Username:</label></td>
@@ -33,6 +33,9 @@
                             </tr>
                         </table>
                     </form>
+                    <c:if test="${loginFailed}">
+                        <p>Incorrect credentials. Please try again.</p>
+                    </c:if>
                     <p><a href="forgotPassword.jsp">Forgot password?</a></p>
                 </td>
             </tr>
