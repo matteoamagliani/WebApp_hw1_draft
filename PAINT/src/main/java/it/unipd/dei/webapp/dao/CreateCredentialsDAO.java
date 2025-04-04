@@ -1,6 +1,7 @@
 package it.unipd.dei.webapp.dao;
 
 import it.unipd.dei.webapp.resource.Credentials;
+import it.unipd.dei.webapp.validation.ValidationHashMap;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -27,10 +28,26 @@ public final class CreateCredentialsDAO {
         this.con = con;
         this.credentials = credentials;
     }
-
+    
+    // TODO: CHECK VALIDATION delle credenziali prima della insert nel db
+    /*public ValidationHashMap validateCredentials() {
+        return credentials.validateFields();
+    }*/
+    
     public int createCredentials() throws SQLException {
         PreparedStatement stmnt = null;
-
+        
+        //TODO: printare ERRORI DI VALIDAZIONE se NON SONO NULLI
+        /*
+        ValidationHashMap validationResult = validateCredentials();
+        if (!validationResult.isEmpty()) {
+            // Log validation errors
+            System.out.println("Validation errors for credentials:");
+            System.out.println(validationResult.toString());
+            throw new IllegalArgumentException("Invalid credentials: " + validationResult.toString());
+        }
+        */
+        
         try {
             stmnt = con.prepareStatement(STATEMENT);
             stmnt.setObject(1, credentials.getUserId());

@@ -2,7 +2,11 @@ package it.unipd.dei.webapp.resource;
 
 import java.util.UUID;
 
-public class Credentials {
+import it.unipd.dei.webapp.validation.Validatable;
+import it.unipd.dei.webapp.validation.ValidationHashMap;
+import it.unipd.dei.webapp.validation.Validator;
+
+public class Credentials implements Validatable {
 
     public static final String TABLE_NAME = "Credentials";
     public static final String USER_ID_NAME = "UserId";
@@ -37,5 +41,26 @@ public class Credentials {
 
     public String getUsername() {
         return username;
+    }
+
+    public ValidationHashMap validateFields() {
+        ValidationHashMap output = new ValidationHashMap();
+
+        // Email validation //TODO: check if email is UNIQIUE in the database
+        String result = Validator.validateEmail(email);
+        output.put(EMAIL_NAME, result);
+
+        // Password validation
+        result = Validator.validatePassword(password);
+        if (password.length() < 8) {
+            result = "Password too short (minimum 8 characters)";
+        }
+        output.put(PASSWORD_NAME_CLEAN, result);
+
+        // Username validation
+        result = Validator.validateString(username, 30);
+        output.put(USERNAME_NAME, result);
+
+        return output;
     }
 }
