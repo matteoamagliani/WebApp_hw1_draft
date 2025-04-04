@@ -12,7 +12,7 @@
 
   <servlet>
     <servlet-name>CreateUserProfileAndCredentials</servlet-name>
-    <servlet-class>it.unipd.dei.webapp.servlet.CreateUserProfileWithCredentialsServlet</servlet-class>
+    <servlet-class>it.unipd.dei.webapp.servlet.CreateUserProfileServlet</servlet-class>
     <multipart-config>
         <max-file-size>10485760</max-file-size> <!-- 10 MB -->
         <max-request-size>20971520</max-request-size> <!-- 20 MB -->
