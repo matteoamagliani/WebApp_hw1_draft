@@ -7,7 +7,8 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="java.util.*, java.sql.*, java.util.UUID" %>
-<%@ page import="it.unipd.dei.webapp.dao.HomepageDAO" %>
+<%@ page import="it.unipd.dei.webapp.dao.GetUserContentDAO" %>
+<%@ page import="it.unipd.dei.webapp.dao.GetRecommendedUsersDAO" %>
 <%@ page import="it.unipd.dei.webapp.resource.Content" %>
 <%@ page import="it.unipd.dei.webapp.resource.UserProfile" %>
 <!DOCTYPE html>
@@ -153,8 +154,8 @@
       String userIdStr = (String) session.getAttribute("userID");
       if(userIdStr != null) {
         UUID userId = UUID.fromString(userIdStr);
-        HomepageDAO dao = new HomepageDAO();
-        List<Content> contents = dao.getUserContent(userId);
+        GetUserContentDAO dao = new GetUserContentDAO(con, userId);
+        List<Content> contents = dao.getUserContent();
 
         // Ordina i contenuti in ordine cronologico decrescente
         Collections.sort(contents, new Comparator<Content>() {
@@ -206,7 +207,7 @@
     <div id="top-artists" style="overflow-y: auto; max-height: calc(100% - 200px);">
       <%
         try {
-          HomepageDAO dao = new HomepageDAO();
+          GetRecommendedUsersDAO dao = new GetRecommendedUsersDAO();
           List<UserProfile> recommendedUsers = dao.getRecommendedUsers();
           for(UserProfile user : recommendedUsers) {
       %>
