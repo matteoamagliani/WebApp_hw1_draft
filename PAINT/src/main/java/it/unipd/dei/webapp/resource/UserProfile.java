@@ -9,6 +9,15 @@ import it.unipd.dei.webapp.validation.Validator;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 
+/**
+ * Represents a user profile, containing personal and location information as well as validation rules for the fields.
+ * <p>
+ * This class stores details such as the user's name, surname, birthdate, registration date, location, and profile picture.
+ * It also includes methods for validating the user profile fields to ensure they meet specific criteria.
+ * </p>
+ *
+ */
+
 public class UserProfile implements Validatable {
 
     public static final String TABLE_NAME = "UserProfile";

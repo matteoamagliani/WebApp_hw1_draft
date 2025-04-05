@@ -2,7 +2,15 @@ package it.unipd.dei.webapp.resource;
 
 import java.util.UUID;
 
-public class Buys {
+/**
+ * Represents a purchase made by a client for an art piece.
+ * <p>
+ * The {@link Buys} class holds information about the purchase, including the client user ID,
+ * the order ID, and the art piece ID.
+ * </p>
+ *
+ */
+ public class Buys {
 
     public static final String TABLE_NAME = "Buys";
     public static final String CLIENT_USER_ID_NAME = "clientUserId";

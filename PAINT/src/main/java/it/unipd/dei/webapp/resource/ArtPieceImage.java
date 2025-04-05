@@ -2,7 +2,16 @@ package it.unipd.dei.webapp.resource;
 
 import java.util.UUID;
 
-public class ArtPieceImage {
+/**
+ * Represents an image associated with an art piece.
+ * <p>
+ * The {@link ArtPieceImage} class holds the details of an image, including the art piece ID,
+ * image index, image data, and the file extension of the image.
+ * </p>
+ *
+ */
+
+ public class ArtPieceImage {
 
     public static final String TABLE_NAME = "ArtPieceImage";
     public static final String ART_PIECE_ID_NAME = "artPieceId";

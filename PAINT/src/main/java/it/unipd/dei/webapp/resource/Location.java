@@ -3,8 +3,15 @@ package it.unipd.dei.webapp.resource;
 import it.unipd.dei.webapp.validation.Validatable;
 import it.unipd.dei.webapp.validation.ValidationHashMap;
 import it.unipd.dei.webapp.validation.Validator;
-
-public class Location implements Validatable {
+/**
+ * Represents a location consisting of a country, city, postal code, and address.
+ * <p>
+ * This class is used to store and validate location data. It implements the {@link Validatable} interface,
+ * providing a method to validate its fields.
+ * </p>
+ *
+ */
+ public class Location implements Validatable {
 
     public static final String TABLE_NAME = "Location";
     public static final String COUNTRY_NAME = "Country";

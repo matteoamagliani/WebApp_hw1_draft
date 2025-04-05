@@ -2,7 +2,14 @@ package it.unipd.dei.webapp.resource;
 
 import java.util.UUID;
 import java.time.LocalDate;
-
+/**
+ * Represents the details of an order, including information about shipping and delivery locations,
+ * shipping price, status, and any additional notes.
+ * <p>
+ * This class provides a structure for storing order-related details in a database.
+ * It includes the order's unique identifier, shipping and delivery locations, and other order-related information.
+ * </p>
+ */
 public class OrderDetails {
     
     public static final String TABLE_NAME = "OrderDetails";

@@ -8,8 +8,16 @@ import java.util.UUID;
 import it.unipd.dei.webapp.resource.ImageExtensions;
 import it.unipd.dei.webapp.resource.UserProfile;
 import it.unipd.dei.webapp.resource.Content;
-
-//TODO: cambia tutto con UserProfile.
+/**
+ * Provides data access methods for the homepage content, such as user art pieces, events,
+ * recommended users, and user profile search.
+ * <p>
+ * This class interacts with the PostgreSQL database to retrieve various user-related content,
+ * including their art pieces and events, as well as recommended users based on the most new followers.
+ * </p>
+ *
+ */
+//TODO: select the correct data using UserProfile
 public class HomepageDAO {
     private final String url = "jdbc:postgresql://localhost:5432/paintdb";
     private final String user = "PAINT_owner";
@@ -71,6 +79,13 @@ public class HomepageDAO {
                         rs.getObject(UserProfile.PICTURE_EXTENSION_NAME, ImageExtensions.class),
                         rs.getString("Name"),
                         rs.getString("Surname"),
+                        /*
+                        rs.getObject(UserProfile.ID_NAME, UUID.class),
+                        rs.getBytes(UserProfile.PROFILE_PICTURE_NAME),
+                        rs.getObject(UserProfile.PICTURE_EXTENSION_NAME, ImageExtensions.class),
+                        rs.getString(UserProfile.NAME_NAME),
+                        rs.getString(UserProfile.SURNAME_NAME),
+                         */
                         null,          // BrandName non disponibile
                         null,          // BirthDate non disponibile
                         null,          // RegistrationDate non disponibile
@@ -103,6 +118,13 @@ public class HomepageDAO {
                             rs.getObject(UserProfile.PICTURE_EXTENSION_NAME, ImageExtensions.class),
                             rs.getString("Name"),
                             rs.getString("Surname"),
+                            /*
+                                rs.getObject(UserProfile.ID_NAME, UUID.class),
+                                rs.getBytes(UserProfile.PROFILE_PICTURE_NAME),
+                                rs.getObject(UserProfile.PICTURE_EXTENSION_NAME, ImageExtensions.class),
+                                rs.getString(UserProfile.NAME_NAME),
+                                rs.getString(UserProfile.SURNAME_NAME),
+                            */
                             null,          // BrandName non disponibile
                             null,          // BirthDate non disponibile
                             null,          // RegistrationDate non disponibile

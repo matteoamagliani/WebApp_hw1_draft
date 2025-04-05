@@ -7,8 +7,21 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 
 import it.unipd.dei.webapp.resource.ArtisticProfile;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.message.StringFormatterMessageFactory;
 
+/**
+ * Creates a new {@link ArtisticProfile} in the database.
+ * <p>
+ * This DAO is responsible for inserting a new artistic profile into the
+ * {@code paint.artisticProfile} table. It uses the values provided in the {@link ArtisticProfile}
+ * resource object.
+ * </p>
+ *
+ */
 public class CreateArtisticProfileDAO {
+    private static final Logger logger = LogManager.getLogger(CreateArtisticProfileDAO.class, StringFormatterMessageFactory.INSTANCE);
     private static final String STATEMENT = String.format(
         "INSERT INTO paint.%s (%s, %s, %s, %s, %s, %s, %s) VALUES (?, ?::paint.userRole, ?, ?, ?, ?, ?)",
         ArtisticProfile.TABLE_NAME,
@@ -26,7 +39,7 @@ public class CreateArtisticProfileDAO {
 
     public CreateArtisticProfileDAO(Connection con, ArtisticProfile artisticProfile) {
         if(artisticProfile == null) {
-            // TODO Logger
+            logger.error("ArtisticProfile is null");
             throw new NullPointerException("The artistic profile cannot be null");
         }
         this.con = con;

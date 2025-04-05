@@ -13,6 +13,15 @@ import it.unipd.dei.webapp.resource.Follows;
 import it.unipd.dei.webapp.resource.ImageExtensions;
 import it.unipd.dei.webapp.resource.UserProfile;
 
+/**
+ * Retrieves a list of recommended user profiles based on the number of followers they have acquired in the past 7 days.
+ * <p>
+ * This DAO uses a JOIN between the {@code paint.user_profile} table and the {@code paint.follows} table to find users
+ * with the most followers in the last 7 days. It then returns the top 4 user profiles.
+ * </p>
+ *
+ * <p>The recommended users are those with the highest follower count during the past week.</p>
+ */
 public class GetRecommendedUserProfileDAO {
     private static final String STATEMENT = String.format(
         "SELECT u.* FROM paint.%s u JOIN (SELECT f.%s AS user_id, COUNT(*) AS follower_count FROM paint.%s f WHERE f.%s >= CURRENT_DATE - INTERVAL '7 days' GROUP BY f.%s ORDER BY follower_count DESC LIMIT 4) AS top_users ON u.%s = top_users.user_id",

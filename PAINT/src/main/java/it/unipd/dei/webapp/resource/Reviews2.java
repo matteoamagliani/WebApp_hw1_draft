@@ -2,8 +2,14 @@ package it.unipd.dei.webapp.resource;
 
 import java.util.UUID;
 import java.time.LocalDate;
-
-public class Reviews2 {
+/**
+ * Represents a review for an art piece given by a client user.
+ * <p>
+ * This class is used to store information about a review written by a client user for a specific art piece,
+ * including the score, the art piece being reviewed, and the review date.
+ * </p>
+ */
+ public class Reviews2 {
 
     public static final String TABLE_NAME = "Reviews2";
     public static final String CLIENT_USER_ID_NAME = "clientUserId";

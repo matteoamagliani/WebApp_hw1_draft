@@ -12,8 +12,22 @@ import java.util.UUID;
 import it.unipd.dei.webapp.resource.Credentials;
 import it.unipd.dei.webapp.resource.ImageExtensions;
 import it.unipd.dei.webapp.resource.UserProfile;
-
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.message.StringFormatterMessageFactory;
+/**
+ * Retrieves a list of user profiles whose username partially matches the given input.
+ * <p>
+ * This DAO queries the {@code paint.user_profile} table and joins it with the {@code paint.credentials} table
+ * to find the user profiles whose usernames are similar to the input (using the ILIKE operator for case-insensitive matching).
+ * </p>
+ *
+ * <p>The result is a list of {@link UserProfile} objects containing the user's profile details.</p>
+ *
+ */
 public class GetUserProfileLikeIdDAO {
+    private static final Logger logger = LogManager.getLogger(GetUserProfileLikeIdDAO.class, StringFormatterMessageFactory.INSTANCE);
+
     private static final String STATEMENT = String.format(
         "SELECT up.*, c.%s FROM paint.%s up JOIN paint.%s c ON up.%s = c.%s WHERE c.%s ILIKE ? ORDER BY c.%s",
         Credentials.USERNAME_NAME,
@@ -74,6 +88,7 @@ public class GetUserProfileLikeIdDAO {
                 );
 
                 userProfiles.add(profile);
+                logger.info("User profile found.");
             }
 
             return userProfiles;

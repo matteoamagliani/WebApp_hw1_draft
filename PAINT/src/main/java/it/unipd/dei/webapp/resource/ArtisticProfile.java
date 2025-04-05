@@ -6,8 +6,15 @@ import java.time.LocalDate;
 import it.unipd.dei.webapp.validation.Validatable;
 import it.unipd.dei.webapp.validation.ValidationHashMap;
 import it.unipd.dei.webapp.validation.Validator;
+/**
+ * Represents an artistic profile associated with a user.
+ * <p>
+ * The {@link ArtisticProfile} class holds the details of an artist's profile, including the role,
+ * biography, follower count, the number of published and sold art pieces, and the date of the last publication.
+ * </p>
+ */
 
-public class ArtisticProfile implements Validatable {
+ public class ArtisticProfile implements Validatable {
 
     public static final String TABLE_NAME = "ArtisticProfile";
     public static final String USER_ID_NAME = "userId";

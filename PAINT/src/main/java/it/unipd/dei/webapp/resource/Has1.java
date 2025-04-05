@@ -1,8 +1,15 @@
 package it.unipd.dei.webapp.resource;
 
 import java.util.UUID;
-
-public class Has1 {
+/**
+ * Represents a relationship where an art piece is associated with a specific tag.
+ * <p>
+ * The {@link Has1} class encapsulates the relationship between an art piece and a tag.
+ * Each tag is associated with a unique art piece.
+ * </p>
+ *
+ */
+ public class Has1 {
 
     public static final String TABLE_NAME = "Has1";
     public static final String TAG_NAME_NAME = "tagName"; 

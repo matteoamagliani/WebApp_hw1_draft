@@ -10,7 +10,14 @@ import java.util.List;
 import java.util.UUID;
 
 import it.unipd.dei.webapp.resource.ArtPiece;
-
+/**
+ * Retrieves all {@link ArtPiece} objects uploaded by a specific artistic user, identified by user ID.
+ * <p>
+ * The DAO performs a SELECT query on the {@code paint.art_piece} table,
+ * ordering the results by upload date in descending order.
+ * </p>
+ *
+ */
 public class GetArtPieceByUserIdDAO {
     private static final String STATEMENT = String.format(
         "SELECT * FROM paint.%s WHERE %s = ? ORDER BY %s DESC",

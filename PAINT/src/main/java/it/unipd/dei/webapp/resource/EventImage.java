@@ -1,6 +1,14 @@
 package it.unipd.dei.webapp.resource;
 
 import java.util.UUID;
+/**
+ * Represents an image associated with an event.
+ * <p>
+ * The {@link EventImage} class encapsulates information about an image related to an event, including
+ * the event's ID, the image index, the image data, and the file extension of the image.
+ * </p>
+ *
+ */
 
 public class EventImage {
     

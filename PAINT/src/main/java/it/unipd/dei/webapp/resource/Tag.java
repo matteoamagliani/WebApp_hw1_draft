@@ -1,4 +1,13 @@
 package it.unipd.dei.webapp.resource;
+package it.unipd.dei.webapp.resource;
+
+/**
+ * Represents a tag used for categorizing or labeling resources such as events, art pieces, etc.
+ * <p>
+ * This class stores information about a tag, including its name and category, which can be used to
+ * organize or filter resources in a system.
+ * </p>
+ */
 
 public class Tag {
     

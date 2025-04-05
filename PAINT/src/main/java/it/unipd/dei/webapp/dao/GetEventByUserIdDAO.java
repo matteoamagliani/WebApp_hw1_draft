@@ -11,6 +11,15 @@ import java.util.UUID;
 
 import it.unipd.dei.webapp.resource.Event;
 
+/**
+ * Retrieves a list of {@link Event} objects from the database based on the provided user ID (organizer).
+ * <p>
+ * This DAO performs a SELECT query on the {@code paint.event} table.
+ * </p>
+ *
+ * <p>Events are retrieved ordered by their upload date in descending order.</p>
+ *
+ */
 public class GetEventByUserIdDAO {
     private static final String STATEMENT = String.format(
         "SELECT * FROM paint.%s WHERE %s = ? ORDER BY %s DESC",

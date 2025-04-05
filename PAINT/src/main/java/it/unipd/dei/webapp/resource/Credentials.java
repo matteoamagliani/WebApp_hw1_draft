@@ -5,8 +5,16 @@ import java.util.UUID;
 import it.unipd.dei.webapp.validation.Validatable;
 import it.unipd.dei.webapp.validation.ValidationHashMap;
 import it.unipd.dei.webapp.validation.Validator;
+/**
+ * Represents the credentials of a user, including their user ID, email, password, and username.
+ * <p>
+ * The {@link Credentials} class encapsulates the information necessary for user authentication and account management.
+ * It provides methods for retrieving user credentials and validating fields such as email, password, and username.
+ * </p>
+ *
+ */
 
-public class Credentials implements Validatable {
+ public class Credentials implements Validatable {
 
     public static final String TABLE_NAME = "Credentials";
     public static final String USER_ID_NAME = "UserId";

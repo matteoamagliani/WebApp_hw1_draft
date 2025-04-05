@@ -3,6 +3,9 @@ package it.unipd.dei.webapp.dao;
 import it.unipd.dei.webapp.resource.Credentials;
 import it.unipd.dei.webapp.resource.ImageExtensions;
 import it.unipd.dei.webapp.resource.UserProfile;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.message.StringFormatterMessageFactory;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -10,8 +13,19 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.UUID;
-
+/**
+ * Retrieves a user's profile based on the provided email address.
+ * <p>
+ * This DAO queries the {@code paint.user_profile} table and joins it with the {@code paint.credentials} table
+ * to find the profile associated with a specific email.
+ * </p>
+ *
+ * <p>The result is a {@link UserProfile} object containing the user's profile details.</p>
+ *
+ */
 public class GetUserProfileByEmailDAO {
+    private static final Logger logger = LogManager.getLogger(GetUserProfileByEmailDAO.class, StringFormatterMessageFactory.INSTANCE);
+
     private static final String STATEMENT = String.format(
         "SELECT up.* FROM paint.%s up JOIN paint.%s c ON up.%s = c.%s WHERE c.%s = ?",
         UserProfile.TABLE_NAME,
@@ -55,6 +69,7 @@ public class GetUserProfileByEmailDAO {
                 String locationAddress = rs.getString(UserProfile.LOCATION_ADDRESS_NAME);
 
                 new_userProfile = new UserProfile(id, profilePicture, pictureExtension, name, surname, brandName, birthDate, registrationDate, locationCountry, locationCity, locationPostalCode, locationAddress);
+                logger.info("User profile found for the user given the email.");
             }
             return new_userProfile;
         } finally {

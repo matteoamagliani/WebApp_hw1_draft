@@ -1,10 +1,23 @@
 package it.unipd.dei.webapp.dao;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.message.StringFormatterMessageFactory;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
+/**
+ * Provides data access methods for handling location-related operations in the database.
+ * <p>
+ * This class contains methods for inserting a new location into the database only if it doesn't already exist.
+ * </p>
+ *
+ */
 public class LocationDAO {
+    private static final Logger logger = LogManager.getLogger(LocationDAO.class, StringFormatterMessageFactory.INSTANCE);
+
     private static final String INSERT_LOCATION_IF_NOT_EXISTS = 
         "INSERT INTO paint.Location (Country, City, PostalCode, Address) " +
         "SELECT ?, ?, ?, ? " +
@@ -34,6 +47,7 @@ public class LocationDAO {
             stmnt.setString(8, address);
 
             stmnt.executeUpdate();
+            //TODO:add logger?
         } finally {
             if (stmnt != null) {
                 stmnt.close();
