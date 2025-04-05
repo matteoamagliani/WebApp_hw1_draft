@@ -1,16 +1,15 @@
 package it.unipd.dei.webapp.servlet;
 
-import it.unipd.dei.webapp.dao.SearchUserProfilesDAO;
+import it.unipd.dei.webapp.dao.SearchArtistsAndGalleriesDAO;
 import it.unipd.dei.webapp.resource.UserProfile;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import org.json.JSONArray;
-import org.json.JSONObject;
 
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class SearchUserServlet extends AbstractDatabaseServlet {
@@ -18,31 +17,30 @@ public class SearchUserServlet extends AbstractDatabaseServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String query = request.getParameter("query");
-        List<UserProfile> users = null;
         
-        try {
-            try (Connection con = getDataSource().getConnection()) {
-                SearchUserProfilesDAO dao = new SearchUserProfilesDAO(con, query);
-                users = dao.searchUserProfiles();
-            }
+        String query = request.getParameter("query");
+        
+        if (query == null || query.trim().isEmpty()) {
+            response.sendRedirect(request.getContextPath() + "/jsp/user/home-page.jsp");
+            return;
+        }
+        
+        List<UserProfile> users = new ArrayList<>();
+        
+        try (Connection con = getDataSource().getConnection()) {
+            SearchArtistsAndGalleriesDAO dao = new SearchArtistsAndGalleriesDAO(con, query);
+            users = dao.searchUsers();
             
-            // Genera la risposta JSON
-            JSONArray jsonArray = new JSONArray();
-            if (users != null) {
-                for (UserProfile user : users) {
-                    JSONObject jsonObj = new JSONObject();
-                    jsonObj.put("id", user.getId().toString());
-                    jsonObj.put("name", user.getName());
-                    jsonObj.put("surname", user.getSurname());
-                    jsonArray.put(jsonObj);
-                }
-            }
+            request.setAttribute("users", users);
+            request.setAttribute("query", query);
             
-            response.setContentType("application/json");
-            response.getWriter().write(jsonArray.toString());
+            request.getRequestDispatcher("/jsp/user/search-results.jsp").forward(request, response);
+            
         } catch (SQLException e) {
-            throw new ServletException("Error searching users", e);
+            logger.error("Database error during search", e);
+            
+            request.setAttribute("error", "Error during search: " + e.getMessage());
+            request.getRequestDispatcher("/jsp/user/search-results.jsp").forward(request, response);
         }
     }
 }

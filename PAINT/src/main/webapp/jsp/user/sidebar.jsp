@@ -58,24 +58,23 @@
   </style>
 </head>
 <body>
-<!-- TODO:come se mettono i maledetti path??-->
 <aside class="sidebar">
   <div class="logo">
-    <img src=".../media/PAINT.png" alt="Logo">
+    <img src="<%= request.getContextPath() %>/media/PAINT.png" alt="Logo">
   </div>
   <nav>
-    <a href="home-page.jsp">
-      <img src="../..//media/home_icon.png" alt="Home"> Home
+    <a href="<%= request.getContextPath() %>/jsp/user/home-page.jsp">
+      <img src="<%= request.getContextPath() %>/media/home_icon.png" alt="Home"> Home
     </a>
-    <a href="notifications.html">
-      <img src=".../media/notifications_icon.png" alt="Notifications"> Notifications
+    <a href="<%= request.getContextPath() %>/notifications.html">
+      <img src="<%= request.getContextPath() %>/media/notifications_icon.png" alt="Notifications"> Notifications
     </a>
-    <a href="settings.html">
-      <img src=".../media/settings_icon.png" alt="Settings"> Settings
+    <a href="<%= request.getContextPath() %>/settings.html">
+      <img src="<%= request.getContextPath() %>/media/settings_icon.png" alt="Settings"> Settings
     </a>
   </nav>
   <div class="user-info">
-    <a href="user-profile.jsp?userId=<%= session.getAttribute("userID") %>" style="text-decoration: none; color: inherit;">
+    <a href="<%= request.getContextPath() %>/user-profile.jsp?userId=<%= session.getAttribute("userID") %>" style="text-decoration: none; color: inherit;">
       <img src="profile.jpg" alt="User Image" id="user-profile">
       <p id="user-name">Name Surname</p>
       <p id="user-username">@username</p>

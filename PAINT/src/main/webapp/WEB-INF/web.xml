@@ -34,6 +34,26 @@
     <servlet-name>LoginServlet</servlet-name>
     <servlet-class>it.unipd.dei.webapp.servlet.LoginServlet</servlet-class>
   </servlet>
+  
+  <servlet>
+    <servlet-name>SearchUserServlet</servlet-name>
+    <servlet-class>it.unipd.dei.webapp.servlet.SearchUserServlet</servlet-class>
+  </servlet>
+  
+  <servlet>
+    <servlet-name>SearchPopupServlet</servlet-name>
+    <servlet-class>it.unipd.dei.webapp.servlet.SearchPopupServlet</servlet-class>
+  </servlet>
+  
+  <servlet>
+    <servlet-name>HomeContentServlet</servlet-name>
+    <servlet-class>it.unipd.dei.webapp.servlet.HomeContentServlet</servlet-class>
+  </servlet>
+  
+  <servlet>
+    <servlet-name>RecommendedArtistServlet</servlet-name>
+    <servlet-class>it.unipd.dei.webapp.servlet.RecommendedArtistServlet</servlet-class>
+  </servlet>
 
   <servlet-mapping>
     <servlet-name>ProcessSignUpPersonalInformations</servlet-name>
@@ -53,6 +73,26 @@
   <servlet-mapping>
     <servlet-name>LoginServlet</servlet-name>
     <url-pattern>/loginServlet</url-pattern>
+  </servlet-mapping>
+  
+  <servlet-mapping>
+    <servlet-name>SearchUserServlet</servlet-name>
+    <url-pattern>/search-users</url-pattern>
+  </servlet-mapping>
+  
+  <servlet-mapping>
+    <servlet-name>SearchPopupServlet</servlet-name>
+    <url-pattern>/search-popup</url-pattern>
+  </servlet-mapping>
+  
+  <servlet-mapping>
+    <servlet-name>HomeContentServlet</servlet-name>
+    <url-pattern>/home-content</url-pattern>
+  </servlet-mapping>
+  
+  <servlet-mapping>
+    <servlet-name>RecommendedArtistServlet</servlet-name>
+    <url-pattern>/recommended-artists</url-pattern>
   </servlet-mapping>
 
   <resource-ref>

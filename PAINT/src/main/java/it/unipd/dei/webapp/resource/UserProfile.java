@@ -56,6 +56,37 @@ public class UserProfile implements Validatable {
         this.locationPostalCode = locationPostalCode;
         this.locationAddress = locationAddress;
     }
+    public UserProfile(final UUID id, final byte[] profilePicture, ImageExtensions pictureExtension, final String name, 
+                       final String surname, final String brandName) {
+        this.id = id;
+        this.profilePicture = profilePicture;
+        this.pictureExtension = pictureExtension;
+        this.name = name;
+        this.surname = surname;
+        this.brandName = brandName;
+        this.birthDate = null;
+        this.registrationDate = null;
+        this.locationCountry = null;
+        this.locationCity = null;
+        this.locationPostalCode = null;
+        this.locationAddress = null;
+    }
+
+    public UserProfile(final UUID id, final byte[] profilePicture, final ImageExtensions pictureExtension, 
+                      final String name, final String surname, final String brandName, final String username) {
+        this.id = id;
+        this.profilePicture = profilePicture;
+        this.pictureExtension = pictureExtension;
+        this.name = name;
+        this.surname = surname;
+        this.brandName = brandName;
+        this.birthDate = null;
+        this.registrationDate = null;
+        this.locationCountry = null;
+        this.locationCity = null;
+        this.locationPostalCode = null;
+        this.locationAddress = null;
+    }
 
     public final UUID getId() {
         return id;
