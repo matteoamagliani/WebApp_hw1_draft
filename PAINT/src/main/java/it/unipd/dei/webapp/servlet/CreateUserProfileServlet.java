@@ -24,7 +24,7 @@ import jakarta.servlet.http.HttpSession;
 import jakarta.servlet.http.Part;
 
 
-public class CreateUserProfileWithCredentialsServlet extends AbstractDatabaseServlet {
+public class CreateUserProfileServlet extends AbstractDatabaseServlet {
 
     public void doPost(HttpServletRequest req, HttpServletResponse res) throws IOException {
         // TODO logger

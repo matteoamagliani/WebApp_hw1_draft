@@ -2,8 +2,15 @@ package it.unipd.dei.webapp.resource;
 
 import java.util.UUID;
 import java.time.LocalDate;
-
-public class ArtPiece {
+/**
+ * Represents an art piece uploaded by an artist.
+ * <p>
+ * The {@link ArtPiece} class holds details about an art piece, including its ID, artistic user ID,
+ * description, weight, title, creation date, dimensions, and upload date.
+ * </p>
+ *
+ */
+ public class ArtPiece {
 
     public static final String TABLE_NAME = "ArtPiece";
     public static final String ID_NAME = "id";

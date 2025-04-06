@@ -10,10 +10,21 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.UUID;
-
+/**
+ * Retrieves a {@link Credentials} object from the database based on the provided username.
+ * <p>
+ * This DAO performs a SELECT query on the {@code paint.credentials} table.
+ * </p>
+ *
+ */
 public class GetCredentialsByUsernameDAO {
     private final static Logger logger = LogManager.getLogger(GetCredentialsByUsernameDAO.class, StringFormatterMessageFactory.INSTANCE);
-    private static final String STATEMENT = "SELECT * FROM paint.Credentials WHERE Username = ?";
+
+    private static final String STATEMENT = String.format(
+        "SELECT * FROM paint.%s WHERE %s = ?",
+        Credentials.TABLE_NAME, 
+        Credentials.USERNAME_NAME
+    );
 
     private final Connection con;
     private final String username;
@@ -35,13 +46,12 @@ public class GetCredentialsByUsernameDAO {
             
             Credentials new_credentials = null;
             if(rs.next()){
-                UUID id = rs.getObject("id", UUID.class);
-                String email = rs.getString("Email");
-                String password = rs.getString("Password");
-                String username = rs.getString("Username");
+                UUID id = rs.getObject(Credentials.USER_ID_NAME, UUID.class);
+                String email = rs.getString(Credentials.EMAIL_NAME);
+                String password = rs.getString(Credentials.PASSWORD_NAME_CLEAN);
+                String username = rs.getString(Credentials.USERNAME_NAME);
 
                 new_credentials = new Credentials(id, email, password, username);
-
                 logger.info("Credentials found for the user.");
             }
             return new_credentials;

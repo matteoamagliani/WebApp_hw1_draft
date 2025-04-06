@@ -10,10 +10,16 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.time.LocalDate;
-
+/**
+ * Creates a new {@link UserProfile} entry in the database.
+ * <p>
+ * This DAO handles the insertion of a user profile into the {@code paint.user_profile} table,
+ * including information such as personal data, profile picture, brand name, registration and birth date, and location.
+ * </p>
+ *
+ */
 public final class CreateUserProfileDAO {
     private final static Logger logger = LogManager.getLogger(CreateUserProfileDAO.class, StringFormatterMessageFactory.INSTANCE);
-
     private static final String STATEMENT = String.format(
         "INSERT INTO paint.%s (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s) VALUES (?, ?, ?::paint.imageExtension, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
         UserProfile.TABLE_NAME, 
@@ -36,7 +42,6 @@ public final class CreateUserProfileDAO {
 
     public CreateUserProfileDAO(Connection con, UserProfile userProfile) {
         if(userProfile == null) {
-            // TODO Logger
             logger.error("UserProfile is null");
             throw new NullPointerException("The user profile cannot be null");
         }

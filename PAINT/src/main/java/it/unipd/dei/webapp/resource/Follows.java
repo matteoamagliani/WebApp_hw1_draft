@@ -3,7 +3,15 @@ package it.unipd.dei.webapp.resource;
 import java.util.UUID;
 import java.time.LocalDate;
 
-public class Follows {
+/**
+ * Represents a relationship where a user follows an artistic profile.
+ * <p>
+ * The {@link Follows} class encapsulates the details of a following action, including the ID of the follower,
+ * the ID of the artistic user being followed, and the date when the follow occurred.
+ * </p>
+ *
+ */
+ public class Follows {
 
     public static final String TABLE_NAME = "Follows";
     public static final String USER_ID_FOLLOWER_NAME = "userIdFollower";

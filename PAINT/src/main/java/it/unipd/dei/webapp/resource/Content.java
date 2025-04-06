@@ -2,8 +2,16 @@ package it.unipd.dei.webapp.resource;
 
 import java.time.LocalDate;
 import java.util.UUID;
+/**
+ * Represents the content (either art piece or event) shared by a user.
+ * <p>
+ * The {@link Content} class encapsulates the basic details of content, including its type,
+ * title, description, upload date, associated image data, and file extension.
+ * </p>
+ *
+ */
 
-public final class Content {
+ public final class Content {
     private final String type;
     private final UUID id;
     private final String title;

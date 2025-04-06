@@ -2,7 +2,18 @@ package it.unipd.dei.webapp.resource;
 
 import java.util.UUID;
 
-public class ClientProfile {
+import it.unipd.dei.webapp.validation.Validatable;
+import it.unipd.dei.webapp.validation.ValidationHashMap;
+import it.unipd.dei.webapp.validation.Validator;
+/**
+ * Represents the profile of a client in the system.
+ * <p>
+ * The {@link ClientProfile} class holds information about the client, including the user ID
+ * and the role associated with the client.
+ * </p>
+ *
+ */
+ public class ClientProfile implements Validatable {
 
     public static final String TABLE_NAME = "ClientProfile";
     public static final String USER_ID_NAME = "userId";
@@ -24,4 +35,15 @@ public class ClientProfile {
     public UserRole getRole() {
         return role;
     }
+    public ValidationHashMap validateFields() {
+        ValidationHashMap output = new ValidationHashMap();
+
+        // TODO: UserId validation
+        /*String result = Validator.validateUserRole(userId);
+        output.put(ROLE_NAME, result);
+        */
+
+        return output;
+    }
+
 }

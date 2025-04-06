@@ -2,7 +2,14 @@ package it.unipd.dei.webapp.resource;
 
 import java.util.UUID;
 import java.time.LocalDate;
-
+/**
+ * Represents an event organized by an artistic user.
+ * <p>
+ * The {@link Event} class encapsulates the details of an event, including its start and end dates,
+ * the organizer's artistic user ID, title, description, and upload date.
+ * </p>
+ *
+ */
 public class Event {
 
     public static final String TABLE_NAME = "Event";

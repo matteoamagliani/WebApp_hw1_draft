@@ -1,8 +1,14 @@
 package it.unipd.dei.webapp.resource;
 
 import java.util.UUID;
+/**
+ * Represents the relationship between an event and an artistic user who participates in it.
+ * <p>
+ * This class is used to store information about which artistic user is participating in which event.
+ * </p>
+ */
 
-public class Participates {
+ public class Participates {
 
     public static final String TABLE_NAME = "Participates";
     public static final String EVENT_ID_NAME = "eventId";

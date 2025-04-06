@@ -2,7 +2,14 @@ package it.unipd.dei.webapp.resource;
 
 import java.util.UUID;
 import java.time.LocalDate;
-
+/**
+ * Represents an advertisement for an art piece.
+ * <p>
+ * This class contains the information related to an advertisement, including the art piece's ID,
+ * the price for the advertisement, and the publication date of the advertisement.
+ * </p>
+ *
+ */
 public class Advertisement {
 
     public static final String TABLE_NAME = "Advertisement";

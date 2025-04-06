@@ -10,6 +10,15 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+/**
+ * Retrieves a {@link Location} object from the database based on the provided country, city, postal code, and address.
+ * <p>
+ * This DAO performs a SELECT query on the {@code paint.location} table.
+ * </p>
+ *
+ * <p>If a location matching all the provided attributes is found, the corresponding {@link Location} object is returned.</p>
+ *
+ */
 public class GetLocationDAO {
     private static final Logger logger = LogManager.getLogger(GetLocationDAO.class, StringFormatterMessageFactory.INSTANCE );
 

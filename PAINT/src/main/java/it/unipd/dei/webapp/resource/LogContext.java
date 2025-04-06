@@ -1,7 +1,19 @@
 package it.unipd.dei.webapp.resource;
 
 import org.apache.logging.log4j.ThreadContext;
+/**
+ * A utility class for managing log context information related to user actions in the system.
+ * <p>
+ * This class provides methods for setting and removing user-related context information such as:
+ * </p>
+ * <ul>
+ *   <li>The user performing actions</li>
+ *   <li>The IP address of the user</li>
+ *   <li>The action being performed</li>
+ *   <li>The resource being processed</li>
+ * </ul>
 
+ */
 public final class LogContext {
 
     /**

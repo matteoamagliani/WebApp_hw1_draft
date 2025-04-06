@@ -1,5 +1,6 @@
 package it.unipd.dei.webapp.dao;
 
+import it.unipd.dei.webapp.resource.Credentials;
 import it.unipd.dei.webapp.resource.ImageExtensions;
 import it.unipd.dei.webapp.resource.UserProfile;
 import org.apache.logging.log4j.LogManager;
@@ -12,11 +13,27 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.UUID;
-
+/**
+ * Retrieves a user's profile based on the provided email address.
+ * <p>
+ * This DAO queries the {@code paint.user_profile} table and joins it with the {@code paint.credentials} table
+ * to find the profile associated with a specific email.
+ * </p>
+ *
+ * <p>The result is a {@link UserProfile} object containing the user's profile details.</p>
+ *
+ */
 public class GetUserProfileByEmailDAO {
     private static final Logger logger = LogManager.getLogger(GetUserProfileByEmailDAO.class, StringFormatterMessageFactory.INSTANCE);
 
-    private static final String STATEMENT = "SELECT up.* FROM paint.UserProfile up JOIN paint.Credentials c ON up.\"id\" = c.UserId WHERE c.Email = ?";
+    private static final String STATEMENT = String.format(
+        "SELECT up.* FROM paint.%s up JOIN paint.%s c ON up.%s = c.%s WHERE c.%s = ?",
+        UserProfile.TABLE_NAME,
+        Credentials.TABLE_NAME,
+        UserProfile.ID_NAME,
+        Credentials.USER_ID_NAME,
+        Credentials.EMAIL_NAME
+    );
 
     private final Connection con;
     private final String email;
@@ -38,18 +55,18 @@ public class GetUserProfileByEmailDAO {
             
             UserProfile new_userProfile = null;
             if(rs.next()){
-                UUID id = rs.getObject("id", UUID.class);
-                byte[] profilePicture = rs.getBytes("ProfilePicture");
-                ImageExtensions pictureExtension = ImageExtensions.fromString(rs.getString("PictureExtension"));
-                String name = rs.getString("Name");
-                String surname = rs.getString("Surname");
-                String brandName = rs.getString("BrandName");
-                LocalDate birthDate = rs.getDate("BirthDate").toLocalDate();
-                LocalDate registrationDate = rs.getDate("RegistrationDate").toLocalDate();
-                String locationCountry = rs.getString("LocationCountry");
-                String locationCity = rs.getString("LocationCity");
-                String locationPostalCode = rs.getString("LocationPostalCode");
-                String locationAddress = rs.getString("LocationAddress");
+                UUID id = rs.getObject(UserProfile.ID_NAME, UUID.class);
+                byte[] profilePicture = rs.getBytes(UserProfile.PROFILE_PICTURE_NAME);
+                ImageExtensions pictureExtension = ImageExtensions.fromString(rs.getString(UserProfile.PICTURE_EXTENSION_NAME));
+                String name = rs.getString(UserProfile.NAME_NAME_CLEAN);
+                String surname = rs.getString(UserProfile.SURNAME_NAME);
+                String brandName = rs.getString(UserProfile.BRAND_NAME_NAME);
+                LocalDate birthDate = rs.getDate(UserProfile.BIRTH_DATE_NAME).toLocalDate();
+                LocalDate registrationDate = rs.getDate(UserProfile.REGISTRATION_DATE_NAME).toLocalDate();
+                String locationCountry = rs.getString(UserProfile.LOCATION_COUNTRY_NAME);
+                String locationCity = rs.getString(UserProfile.LOCATION_CITY_NAME);
+                String locationPostalCode = rs.getString(UserProfile.LOCATION_POSTAL_CODE_NAME);
+                String locationAddress = rs.getString(UserProfile.LOCATION_ADDRESS_NAME);
 
                 new_userProfile = new UserProfile(id, profilePicture, pictureExtension, name, surname, brandName, birthDate, registrationDate, locationCountry, locationCity, locationPostalCode, locationAddress);
                 logger.info("User profile found for the user given the email.");

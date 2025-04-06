@@ -3,7 +3,18 @@ package it.unipd.dei.webapp.resource;
 import java.util.UUID;
 import java.time.LocalDate;
 
-public class ArtisticProfile {
+import it.unipd.dei.webapp.validation.Validatable;
+import it.unipd.dei.webapp.validation.ValidationHashMap;
+import it.unipd.dei.webapp.validation.Validator;
+/**
+ * Represents an artistic profile associated with a user.
+ * <p>
+ * The {@link ArtisticProfile} class holds the details of an artist's profile, including the role,
+ * biography, follower count, the number of published and sold art pieces, and the date of the last publication.
+ * </p>
+ */
+
+ public class ArtisticProfile implements Validatable {
 
     public static final String TABLE_NAME = "ArtisticProfile";
     public static final String USER_ID_NAME = "userId";
@@ -70,5 +81,47 @@ public class ArtisticProfile {
 
     public LocalDate getLastPubDate() {
         return lastPubDate;
+    }
+
+    public ValidationHashMap validateFields() {
+        ValidationHashMap output = new ValidationHashMap();
+
+        // Role validation
+        /*String result = Validator.validateUserRole(role);
+        output.put(ROLE_NAME, result);*/
+
+        // Biography validation
+        String result = Validator.validateString(biography, 10000);
+        output.put(BIOGRAPHY_NAME, result);
+
+        // Follower count validation
+        result = Validator.validateObject(followerCount);
+        if (followerCount < 0) {
+            result = "Follower count cannot be negative";
+        }
+        output.put(FOLLOWER_COUNT_NAME, result);
+
+        // Number of published art pieces validation
+        result = Validator.validateObject(numPublishedArtPieces);
+        if (numPublishedArtPieces < 0) {
+            result = "Number of published art pieces cannot be negative";
+        }
+        output.put(NUM_PUBLISHED_ART_PIECES_NAME, result);
+
+        // Number of sold art pieces validation
+        result = Validator.validateObject(numSoldArtPieces);
+        if (numSoldArtPieces < 0) {
+            result = "Number of sold art pieces cannot be negative";
+        }
+        output.put(NUM_SOLD_ART_PIECES_NAME, result);
+
+        // Last published date validation, TODO: finire con check preciso sulla data
+        result = Validator.validateObject(lastPubDate);
+        if (lastPubDate != null && lastPubDate.isAfter(LocalDate.now())) {
+            result = "Last published date cannot be in the future";
+        }
+        output.put(LAST_PUB_DATE_NAME, result);
+
+        return output;
     }
 }

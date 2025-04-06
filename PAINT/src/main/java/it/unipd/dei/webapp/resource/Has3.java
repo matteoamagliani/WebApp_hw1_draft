@@ -1,7 +1,13 @@
 package it.unipd.dei.webapp.resource;
 
 import java.util.UUID;
-
+/**
+ * Represents a relationship where a tag is associated with a specific artistic user.
+ * <p>
+ * The {@link Has3} class encapsulates the relationship between a tag and an artistic user.
+ * Each tag is associated with a unique artistic user.
+ * </p>
+ */
 public class Has3 {
 
     public static final String TABLE_NAME = "Has3";
