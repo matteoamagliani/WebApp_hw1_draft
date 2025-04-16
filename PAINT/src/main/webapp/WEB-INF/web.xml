@@ -7,13 +7,33 @@
   <description>The project aims to develop a full-stack web application for a virtual art gallery. Users (artists, galleries, regular users) can interact, create profiles, showcase or buy artwork, and commission pieces. Galleries can invite artists and showcase events. The back-end is built on the previously designed database (“ArtBase” - FDB course).</description>
 
   <welcome-file-list>
-    <welcome-file>index.jsp</welcome-file>
+    <welcome-file>jsp/index.jsp</welcome-file>
   </welcome-file-list>
 
   <servlet>
     <servlet-name>CreateUserProfileAndCredentials</servlet-name>
     <servlet-class>it.unipd.dei.webapp.servlet.CreateUserProfileWithCredentialsServlet</servlet-class>
   </servlet>
+
+  <servlet>
+    <servlet-name>ProcessSignUpPersonalInformations</servlet-name>
+    <servlet-class>it.unipd.dei.webapp.servlet.SignUpPersonalInformations</servlet-class>
+  </servlet>
+
+ <servlet>
+    <servlet-name>ProcessSignUpAddressInformations</servlet-name>
+    <servlet-class>it.unipd.dei.webapp.servlet.SignUpAddressInformations</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>ProcessSignUpPersonalInformations</servlet-name>
+    <url-pattern>/process_signup_personal_informations</url-pattern>
+  </servlet-mapping>
+
+  <servlet-mapping>
+    <servlet-name>ProcessSignUpAddressInformations</servlet-name>
+    <url-pattern>/process_signup_address_informations</url-pattern>
+  </servlet-mapping>
 
   <servlet-mapping>
     <servlet-name>CreateUserProfileAndCredentials</servlet-name>
