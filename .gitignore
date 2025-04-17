@@ -61,6 +61,8 @@ Thumbs.db
 !REPORT/logos/*.pdf
 !REPORT/images/*.pdf
 !REPORT/images/interface_mockups/*.pdf
+!REPORT/images/class_diagrams/*.pdf
+!REPORT/images/sequence_diagrams/*.pdf
 
 
 ### OSX ###
