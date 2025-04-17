@@ -1,8 +1,9 @@
 \subsection{Class Diagram}
 
-%\includegraphics[]{ClassDiagram.pdf}
-
-%Describe here the class diagram of your project
+In the following we describe the class diagrams of the main features of the application. 
+All the other features are similar to the ones described in this section, and they follow the same design principles.
+Each jsp page is associated with a servlet, which is responsible for handling the requests and responses.
+The servlet then interacts with the data access layer (DAOs) to perform the necessary operations on the database, using a series of well-defined methods.
 
 \subsubsection{Login}
 \begin{figure}[H]
@@ -30,7 +31,7 @@ Supporting this flow are four smaller utility classes:
 \subsubsection{Settings}
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.9\textwidth]{images/class_diagrams/Settings_classdiagram.pdf}
+    \includegraphics[width=\textwidth]{images/class_diagrams/Settings_classdiagram.pdf}
     \caption{Settings Class Diagram}
 \end{figure}
 
@@ -48,7 +49,7 @@ SettingsServlet:
 
 Data‐Access Objects (DAOs):
 \begin{itemize}
-    \item GetCredentialsByEmailDAO / GetUserRoleDAO / GetUserProfileByEmailDAO / GetArtisticProfileDAO each wrap the SQL needed to fetch one resource by key. They expose a getXxx() method (e.g. getCredentials(), getUserRole(), getUserProfile(), getArtisticProfile()) and, where applicable, a getUniqueResource(): Validatable for shared validation logic.
+    \item GetCredentialsByEmailDAO/GetUserRoleDAO/GetUserProfileByEmailDAO/GetArtisticProfileDAO each\\ wrap the SQL needed to fetch one resource by key. They expose a getXxx() method (e.g. getCredentials(), getUserRole(), getUserProfile(), getArtisticProfile()) and, where applicable, a getUniqueResource(): Validatable for shared validation logic.
     \item ChangeCredentialsDAO additionally provides verifyPassword(String) and updatePassword() along with a generic updateCredentials().
 \end{itemize}
 
@@ -69,7 +70,7 @@ Utilities and Enumeration:
 \subsubsection{Upload Art Piece}
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.9\textwidth]{images/class_diagrams/UploadArtPiece_classdiagram.pdf}
+    \includegraphics[width=\textwidth]{images/class_diagrams/UploadArtPiece_classdiagram.pdf}
     \caption{Upload Art Piece Class Diagram}
 \end{figure}
 
@@ -94,7 +95,7 @@ This clear separation keeps SQL details out of the servlet and ensures each DAO 
 
 The domain model is composed of four main classes, each with constructors, getters, a toString(), and a validateFields(): ValidationHashMap method for business‐rule enforcement:
 \begin{itemize}
-    \item ArtPiece: encapsulates an art work’s core metadata—UUID id, UUID artisticUserId, title (SanitizedString), price (double), description (SanitizedString), creationDate (LocalDate), weight (double), dimensionHeight/dimensionWidth/dimensionLength (double), and uploadDate (LocalDate).
+    \item ArtPiece: encapsulates an art work’s core metadata—UUID id, UUID artisticUserId, title (SanitizedString), price (double), description (SanitizedString), creationDate (LocalDate), weight (double), dimensionHeight\\/dimensionWidth/dimensionLength (double), and uploadDate (LocalDate).
     \item ArtPieceImage: represents each image file for an art piece, storing UUID artPieceId, an imageIndex (int), the raw byte[] imageData, and its ImageExtensions.
     \item Advertisement: links a piece to a marketplace listing via UUID artPieceId, a price (double), and publicationDate (LocalDate).
     \item Has1: models the association between an art piece and a tag, with fields tagName (AllTags enum) and UUID artPieceId.
