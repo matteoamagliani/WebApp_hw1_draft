@@ -2,20 +2,71 @@
 
 %List here a few resources retrievable via REST API
 
-\subsubsection*{A resource}
+\subsubsection*{ArtisticProfileRestServlet}
 
 % the description of the resource
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
 
 
 \begin{itemize}
-    \item URL: \texttt{the URL to retrieve it}
-    \item Method: \texttt{Method to retrieve it}
+    \item URL: \texttt{REST/artisticprofile}
+    \item Method: \texttt{GET}
     \item URL Parameters:
-    \item Data Parameters: 
+    \begin{itemize}
+        \item \texttt{tags} a list of tags to filter the ArtisticProfile, separated by commas
+        \item \texttt{followers} the minimum number of followers an ArtisticProfile must have to be included in the result
+        \item \texttt{artPieceSold} the minimum number of art pieces sold by an ArtisticProfile to be included in the result
+        \item \texttt{username} the username of the ArtisticProfile to be included in the result
+        \item \texttt{posts} the minimum number of published ArtPiece by the ArtisticProfile to be included in the result
+    \end{itemize}
+    \item Data Parameters: not used
     \item Success Response:
-    \item Error Response:
+    \begin{itemize}
+        \item Code: 200
+        \item Content: \texttt{JSON} containing the ArtisticProfiles corresponding to all the applied filters
+    \end{itemize}
+    \item  Error Response:
+    \begin{itemize}
+        \item Code: 500
+        \item Content: \texttt{JSON} containing the HTTP Code of the error and the message produced by the server;
+        \item Code: 400
+        \item Content: \texttt{JSON} containing the HTTP Code of the error and a description of the error
+    \end{itemize}
     
+\end{itemize}
+
+\subsubsection*{ArtPieceRestServlet}
+
+% the description of the resource
+
+
+
+\begin{itemize}
+    \item URL: \texttt{REST/artpiece}
+    \item Method: \texttt{GET}
+    \item URL Parameters:
+    \begin{itemize}
+        \item \texttt{tags} a list of tags to filter the ArtPiece, separated by commas
+        \item \texttt{id} the id of an ArtPiece, the unique identifier of the ArtPiece
+        \item \texttt{price} the price of the ArtPiece must be equal to this parameter, if the priceOperator is not specified
+        \item \texttt{priceOperator} the comparison operator between price parameter and the price of the ArtPiece
+        \item \texttt{publicationDate} the publication date of the ArtPiece must be equal to this parameter, if the dateOperator is not specified
+        \item \texttt{dateOperator} the comparison operator between publicationDate parameter and the publication date of the ArtPiece
+    \end{itemize}
+    \item Data Parameters: not used
+    \item Success Response:
+    \begin{itemize}
+        \item Code: 200
+        \item Content: \texttt{JSON} containing the ArtPieces corresponding to all the applied filters
+    \end{itemize}
+    \item  Error Response:
+    \begin{itemize}
+        \item Code: 500
+        \item Content: \texttt{JSON} containing the HTTP Code of the error and the message produced by the server;
+        \item Code: 400
+        \item Content: \texttt{JSON} containing the HTTP Code of the error and a description of the error
+    \end{itemize}
+
+
 \end{itemize}
 
